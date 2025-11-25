@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+// 사이즈 지정
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+// 가운데지정
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin transition {
+  transition: all ease .2s;
+}
+
+// 말줄임
+@mixin ellipsis {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// 말줄임여러줄
+@mixin ellipsis-multi($line-clamp: 2) {
+  display: block;
+  display: -webkit-box;
+  display: -ms-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line-clamp;
+  overflow: hidden;
+  max-width: 100%;
+  word-wrap: break-word;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+}
+
+// float 영역 clear
+@mixin clearAfter {
+  content: "";
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+
+// 반응형 사이즈
+@mixin responsive($media) {
+  $pc: "(min-width: 1025px)";
+  $tablet: "(max-width: 1024px)";
+  $mob: "(max-width: 768px)";
+  $mob-small: "(max-width: 375px)";
+
+  @if $media == pc {
+    @media only screen and #{$pc} {
+      @content;
+    }
+  } @else if $media == tablet {
+    @media only screen and #{$tablet} {
+      @content;
+    }
+  } @else if $media == mob {
+    @media only screen and #{$mob} {
+      @content;
+    }
+  } @else if $media == mob-small {
+    @media only screen and #{$mob-small} {
+      @content;
+    }
+  }
+}
+
+/* 이미지 URL */
+$imgLxpUrl: "@/assets/images/lxp/common"; //관리자
+
+$imgUserUrl: "@/assets/images/user/common/pc"; //학습자
+$imgUserUrlMob: "@/assets/images/user/common/mob"; //학습자모바일
+
+$imgServiceUrl: "@/assets/images/service/pc"; //서비스
+$imgServiceUrlMob: "@/assets/images/service/mob"; //서비스모바일

@@ -1,0 +1,181 @@
+@charset "utf-8";
+
+@keyframes moveBtnList {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-10px);
+  }
+}
+
+@keyframes moveBtnDown {
+  from {
+    top: 0;
+  }
+  to {
+    top: -5px;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/*** <transition>용 animation ***/
+.slideToLeft-enter-active {
+  transition: transform 0.3s ease-in;
+}
+
+.slideToLeft-leave-active {
+  transition: transform 0.3s ease-in;
+}
+
+.slideToLeft-enter-to,
+.slideToLeft-leave-from {
+  transform: translateX(0);
+  overflow: hidden;
+}
+
+.slideToLeft-enter-from,
+.slideToLeft-leave-to {
+  transform: translateX(-100%);
+  overflow: hidden;
+}
+
+.slideToRight-enter-active {
+  transition: transform 0.3s ease-in;
+}
+
+.slideToRight-leave-active {
+  transition: transform 0.2s cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slideToRight-enter-to,
+.slideToRight-leave-from {
+  transform: translateX(0);
+  overflow: hidden;
+}
+
+.slideToRight-enter-from,
+.slideToRight-leave-to {
+  transform: translateX(100%);
+  overflow: hidden;
+}
+
+//슬라이드 상하
+.slide-enter-active {
+  transition: max-height 0.3s ease-in;
+}
+
+.slide-leave-active {
+  transition: max-height 0.1s cubic-bezier(0, 1, 0.5, 1);
+}
+
+.slide-enter-to,
+.slide-leave-from {
+  max-height: 1000px;
+  overflow: hidden;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  overflow: hidden;
+  max-height: 0;
+}
+
+//페이드
+.fade-enter-from, .fade-leave-to {
+  opacity: 0.1;
+}
+
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
+}
+
+.fade-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+//페이드 + 슬라이드 (상하로움직임)
+.slide-fade-enter-from {
+  transform: translateY(-15%);
+  opacity: 0;
+}
+
+.slide-fade-enter-to {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-fade-leave-from {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-fade-leave-to {
+  transform: translateY(-15%);
+  opacity: 0;
+}
+
+.slide-fade-enter-active {
+  transition: transform 0.25s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s ease-out;
+}
+
+.slide-fade-x-enter-from {
+  transform: translateX(-20%);
+  opacity: 0;
+}
+
+.slide-fade-x-enter-to {
+  transform: translateX(0);
+  opacity: .6;
+}
+
+.slide-fade-x-leave-from {
+  opacity: 0;
+}
+
+.slide-fade-x-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-x-enter-active {
+  transition: transform 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+//우측슬라이드(mobile 메뉴)
+.slide-left-enter-from, .slide-left-leave-to {
+  transform: translateX(100%);
+}
+
+.slide-left-enter-to, .slide-left-leave-from {
+  transform: translateX(0);
+}
+
+.slide-left-enter-active {
+  transition: transform 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-left-leave-active {
+  transition: transform 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}

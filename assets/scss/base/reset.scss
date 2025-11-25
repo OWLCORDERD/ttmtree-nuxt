@@ -1,0 +1,249 @@
+html,
+body {
+  height: 100%;
+  font-family: 'khnpHanulim';
+
+  font-weight: normal;
+  font-display: swap;
+  color: #333;
+  letter-spacing: 0.2px;
+  line-height: 1;
+
+  // 2025.06.16 [mhlim]: 웹 렌더링 환경 폰트 최적화
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+//2025.04.14[ygpark]: body 최소크기 설정(375px)
+body {
+  min-width: 375px;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+
+  .lxp {
+    font-size: var(--font-adm-base);
+  }
+
+  // 2025.03.17[ygpark]: 모달 활성화 시 스크롤 바 비활성화
+  &.is-fixed {
+    overflow-y: hidden;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  &:after,
+  &:before {
+    box-sizing: border-box;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+ol,
+ul,
+li {
+  list-style: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:focus,
+  &:focus-visible,
+  &:active,
+  &:hover {
+    outline: 0;
+  }
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+}
+
+input,
+textarea {
+  touch-action: manipulation;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+
+  caption {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  // 2025.07.24[hglee]: toastEditor 내의 테이블 css 주석으로 임시추가
+  // border: 1px solid rgba(0, 0, 0, 0.1);
+  // margin: 12px 0 14px;
+  // color: #222;
+  // width: auto;
+  // max-width: 100%;
+  // border-collapse: collapse;
+  // -webkit-box-sizing: border-box;
+  // box-sizing: border-box;
+
+  // thead {
+  //   th {
+  //     height: 32px;
+  //     font-weight: 300;
+  //     color: #fff;
+  //     border: 1px solid rgba(0, 0, 0, 0.1);
+  //     padding: 5px 14px 5px 12px;
+  //     background-color: #555;
+  //   }
+  // }
+  // tbody {
+  //   td {
+  //     border: 1px solid rgba(0, 0, 0, 0.1);
+  //     padding: 5px 14px 5px 12px;
+  //     height: 32px;
+  //     font-weight: 400;
+  //   }
+  // }
+}
+
+// 2025.06.12 [mhlim]: 자격검정 학습자 전용 전역 디자인 테마 변수 셋팅
+:root {
+    /* Brand Colors */
+    --color-primary: #667eea;
+    --color-primary-dark: #764ba2;
+
+    /* Framework Colors */
+    --color-comp: #3eaa5e;
+    --color-comp-dark: #2d8a4a;
+    --color-job: #7c6bce;
+    --color-job-dark: #5e4dae;
+    --color-edu: #22a5b8;
+    --color-edu-dark: #1a8599;
+
+    /* Type Colors */
+    --type-competency: #1abc9c;
+    --type-behavioral-indicator: #16a085;
+    --type-job-family: #e74c3c;
+    --type-job-series: #f39c12;
+    --type-job: #3498db;
+    --type-task: #2ecc71;
+    --type-kst: #9b59b6;
+    --type-course: #d35400;
+    --type-lesson: #e74c3c;
+    --type-learning-object: #c0392b;
+
+    /* UI Colors */
+    --color-bg: #f5f5f5;
+    --color-white: #fff;
+    --color-dark: #333;
+    --color-gray: #999;
+    --color-gray-light: #ddd;
+    --color-gray-medium: #666;
+    --color-gray-dark: #4a4a4a;
+    --color-gray-darker: #5a5a5a;
+    --color-gray-hover: #6a6a6a;
+    --color-gray-bg: #f0f0f0;
+    --color-error: #e74c3c;
+    --color-error-bg: #fadbd8;
+    --color-link: #4a90e2;
+    --color-link-hover: #667eea;
+    --color-hover-bg: #f5f5f5;
+
+    /* Selection & Mapping Colors */
+    --color-selected-bg: #e3f2fd;
+    --color-selected-border: #2196f3;
+    --color-selected-text: #1976d2;
+    --color-mapped-bg: #fff3e0;
+    --color-mapped-border: #ff9800;
+    --color-mapped-text: #f57c00;
+
+    /* Layout */
+    --panel-min-width: 450px;
+    --panel-max-width: 550px;
+    --node-height: 30px;
+    --tree-max-height: 70vh;
+
+    /* Spacing */
+    --spacing-xs: 0.3rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 2.5rem;
+    --spacing-xxxl: 3rem;
+
+    /* Border Radius */
+    --radius-sm: 3px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --radius-xxl: 16px;
+    --radius-circle: 50%;
+
+    /* Animation */
+    --duration-fast: 0.3s;
+    --duration-normal: 0.5s;
+    --duration-slow: 0.8s;
+    --duration-very-slow: 1.5s;
+
+    /* Font Sizes */
+    --font-xs: 0.75rem;
+    --font-sm: 0.8rem;
+    --font-md: 0.85rem;
+    --font-base: 0.9rem;
+    --font-normal: 0.95rem;
+    --font-lg: 1rem;
+    --font-xl: 1.3rem;
+    --font-xxl: 1.8rem;
+    --font-xxxl: 2rem;
+
+    /* Sizes */
+    --toggle-radius: 8px;
+    --button-size-sm: 28px;
+    --button-size-md: 36px;
+    --spinner-size: 18px;
+}
+
+@mixin responsive($media) {
+  @if $media == tablet {
+    --font-xxl: 18px;
+    --font-xl: 18px;
+    --font-lg: 16px;
+    --font-base: 13px;
+    --font-sm: 12px;
+    --font-xs: 11px;
+  }
+}
