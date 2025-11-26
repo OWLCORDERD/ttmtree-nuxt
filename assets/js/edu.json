@@ -1,0 +1,3529 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 2,
+      "parentId": null,
+      "name": "PSA 전문",
+      "type": "COURSE",
+      "sortOrder": 0,
+      "depth": 0,
+      "metadata": {
+        "version": 0
+      },
+      "children": [
+        {
+          "id": 24,
+          "parentId": 2,
+          "name": "PSA/RIMS 모델검토",
+          "type": "LESSON",
+          "sortOrder": 1,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 3,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 96,
+              "parentId": 24,
+              "name": "PSA/RIMS 모델검토 개요에 대해 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 98,
+              "parentId": 24,
+              "name": "PSA/RIMS 모델검토 배경에 대해 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 100,
+              "parentId": 24,
+              "name": ".PSA./RIMS 모델검토 관련 규제현황에 대해 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 102,
+              "parentId": 24,
+              "name": "PSA/RIMS 모델검토 방법에 대해 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 26,
+          "parentId": 2,
+          "name": "초기사건빈도 분석",
+          "type": "LESSON",
+          "sortOrder": 2,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 104,
+              "parentId": 26,
+              "name": "국내원전 PSA 개발현황과 주요 이슈에 대해서 살펴본다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 106,
+              "parentId": 26,
+              "name": "초기사건의 정의 및 종류에 대해서 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 108,
+              "parentId": 26,
+              "name": "초기사건의 선정절차에 대해서 알아본다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 110,
+              "parentId": 26,
+              "name": "초기사건 식별 방법인 경험적 평가, 논리적 평가, 발전소 고유평가에 대해서 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 112,
+              "parentId": 26,
+              "name": "초기사건 그룹화 과정에 대해서 알아본다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 114,
+              "parentId": 26,
+              "name": "초기사건 빈도평가 방법을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 28,
+          "parentId": 2,
+          "name": "PSA 최신기술",
+          "type": "LESSON",
+          "sortOrder": 3,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 116,
+              "parentId": 28,
+              "name": "PSA 수행범위별 분석 내용 및 최신기술을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 118,
+              "parentId": 28,
+              "name": "다수기 부지에 대한 PSA 분석 방법을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 120,
+              "parentId": 28,
+              "name": "사고관리계획서 PSA와 관련된 신규 요건과 평가 내용을 이행한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 122,
+              "parentId": 28,
+              "name": "최신기술을 통해 확인된 원전의 리스크에 대해 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "parentId": 2,
+          "name": "PSA/RIA 추진현황",
+          "type": "LESSON",
+          "sortOrder": 4,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 124,
+              "parentId": 30,
+              "name": "PSA 이행 이유를 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 126,
+              "parentId": 30,
+              "name": "PSA 수행 현황을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 128,
+              "parentId": 30,
+              "name": "사고관리계획서 이행 현황을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 130,
+              "parentId": 30,
+              "name": "PSA 역할을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 132,
+              "parentId": 30,
+              "name": "RIA 개념 및 추진방식을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 134,
+              "parentId": 30,
+              "name": "RIA 요건변경 기본원칙을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 136,
+              "parentId": 30,
+              "name": "RIA 추진현황 및 기타 현안을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 7,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "parentId": 2,
+          "name": "PSA LEVEL 1",
+          "type": "LESSON",
+          "sortOrder": 5,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 4,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 138,
+              "parentId": 32,
+              "name": "PSA의 결과와 활용목적을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 140,
+              "parentId": 32,
+              "name": "Level 1 PSA 수행 과정을 파악한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 142,
+              "parentId": 32,
+              "name": "Level 1 PSA 정량화 결과를 검토할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 144,
+              "parentId": 32,
+              "name": "PSA 중요도와 안전성 향상방안을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 146,
+              "parentId": 32,
+              "name": "발전소 PSA 모델을 정량화 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 148,
+              "parentId": 32,
+              "name": "정량화 결과에 대한 활용이 가능하다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 34,
+          "parentId": 2,
+          "name": "최적사고해석 및 사건수목",
+          "type": "LESSON",
+          "sortOrder": 6,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 150,
+              "parentId": 34,
+              "name": "PSA 수행시 열수력학 분석의 목적을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 152,
+              "parentId": 34,
+              "name": "사고종료 기준 및 노심손상 정의할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 154,
+              "parentId": 34,
+              "name": "열수력학적 분석 예시를 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 156,
+              "parentId": 34,
+              "name": "사건수목 분석의 정의할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 158,
+              "parentId": 34,
+              "name": "사건수목 개발과정의 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 160,
+              "parentId": 34,
+              "name": "사고경위 분석의 가정사항 및 사건수목 개발결과를 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 36,
+          "parentId": 2,
+          "name": "계통분석 및 고장수목",
+          "type": "LESSON",
+          "sortOrder": 7,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 3,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 162,
+              "parentId": 36,
+              "name": "PSA 의 결과와 활용목적을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 164,
+              "parentId": 36,
+              "name": "계통분석의 목적을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 166,
+              "parentId": 36,
+              "name": "고장수목 분석의 정의에 대해서 살펴본다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 168,
+              "parentId": 36,
+              "name": "고장수목 개발과정을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 170,
+              "parentId": 36,
+              "name": "고장수목 분석의 가정사항을 살펴보고, 고장수목 개발결과를 알아본다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 38,
+          "parentId": 2,
+          "name": "PSA LEVEL 2",
+          "type": "LESSON",
+          "sortOrder": 8,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 3,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 172,
+              "parentId": 38,
+              "name": "PSA 의 결과와 활용목적을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 174,
+              "parentId": 38,
+              "name": "Level 1 PSA 수행 과정을 파악한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 176,
+              "parentId": 38,
+              "name": "Level 1 PSA 정량화 결과를 검토할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 178,
+              "parentId": 38,
+              "name": "PSA 중요도와 안전성 향상방안을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 180,
+              "parentId": 38,
+              "name": "발전소 PSA 모델을 정량화 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 182,
+              "parentId": 38,
+              "name": "정량화 결과에 대한 활용이 가능하다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 40,
+          "parentId": 2,
+          "name": "PSA LEVEL 1(실습)",
+          "type": "LESSON",
+          "sortOrder": 9,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "PRACTICE"
+          },
+          "children": [
+            {
+              "id": 184,
+              "parentId": 40,
+              "name": "PSA Level1 모델링 예제",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 42,
+          "parentId": 2,
+          "name": "PSA LEVEL 2(실습)",
+          "type": "LESSON",
+          "sortOrder": 10,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "PRACTICE"
+          },
+          "children": [
+            {
+              "id": 186,
+              "parentId": 42,
+              "name": "PSA Level2 모델링 예제",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 44,
+          "parentId": 2,
+          "name": "PSA LEVEL 3",
+          "type": "LESSON",
+          "sortOrder": 11,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 188,
+              "parentId": 44,
+              "name": "PSA 의 결과와 활용목적을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 190,
+              "parentId": 44,
+              "name": "Level 3 PSA 수행 과정을 파악한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 192,
+              "parentId": 44,
+              "name": "Level 3 PSA 정량화 결과를 검토할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 46,
+          "parentId": 2,
+          "name": "공통원인 고장",
+          "type": "LESSON",
+          "sortOrder": 12,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 194,
+              "parentId": 46,
+              "name": "공통원인기기 Grouping을 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 196,
+              "parentId": 46,
+              "name": "CCF 기본사건 모델링 방법을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 198,
+              "parentId": 46,
+              "name": "CCF 기본사건 확률 추정 방법을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 200,
+              "parentId": 46,
+              "name": "CCF 저감방안을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 48,
+          "parentId": 2,
+          "name": "기기고장 및 DB개발",
+          "type": "LESSON",
+          "sortOrder": 13,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 202,
+              "parentId": 48,
+              "name": "신뢰도DB시스템의 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 204,
+              "parentId": 48,
+              "name": "기기신뢰도분석 방법 습득을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 206,
+              "parentId": 48,
+              "name": "실제 PRinS 운영능력 확보를 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 50,
+          "parentId": 2,
+          "name": "기기고장 및 DB개발(실습)",
+          "type": "LESSON",
+          "sortOrder": 14,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 208,
+              "parentId": 50,
+              "name": "실제 PRinS를 사용할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 52,
+          "parentId": 2,
+          "name": "인간신뢰도 분석",
+          "type": "LESSON",
+          "sortOrder": 15,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 210,
+              "parentId": 52,
+              "name": "인적오류의 정의에 대해 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 212,
+              "parentId": 52,
+              "name": "PSA와 HRA와의 관계를 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 214,
+              "parentId": 52,
+              "name": "HRA 수행 절차 및 방법에 대해 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 216,
+              "parentId": 52,
+              "name": "표준 HRA 방법을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 218,
+              "parentId": 52,
+              "name": "인적오류 유형을 이해하고 계산할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 220,
+              "parentId": 52,
+              "name": "특정 직무의 인적오류확률을 평가할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "parentId": null,
+      "name": "PSA-PSR 일반",
+      "type": "COURSE",
+      "sortOrder": 0,
+      "depth": 0,
+      "metadata": {
+        "version": 0
+      },
+      "children": [
+        {
+          "id": 72,
+          "parentId": 4,
+          "name": "확률론적안전성 평가(PSA)",
+          "type": "LESSON",
+          "sortOrder": 1,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 5,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 264,
+              "parentId": 72,
+              "name": "확률론적안전성평가의 개념 파악할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 266,
+              "parentId": 72,
+              "name": "PSA의 역사 및 추진현황을 파악할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 268,
+              "parentId": 72,
+              "name": "Level 1 PSA 수행방법 및 Risk Measure 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 270,
+              "parentId": 72,
+              "name": "Level 2 PSA 수행방법 및 Risk Measure 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 272,
+              "parentId": 72,
+              "name": "Level 3 PSA 수행방법 및 Risk Measure 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 74,
+          "parentId": 4,
+          "name": "PSR 개요",
+          "type": "LESSON",
+          "sortOrder": 2,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 274,
+              "parentId": 74,
+              "name": "PSR 추진 배경을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 276,
+              "parentId": 74,
+              "name": "PSR 개념을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 278,
+              "parentId": 74,
+              "name": "PSR 관련 관계법령을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 280,
+              "parentId": 74,
+              "name": "PSR 평가 범위를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 282,
+              "parentId": 74,
+              "name": "적용 기술기준을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 284,
+              "parentId": 74,
+              "name": "PSR 추진체계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 286,
+              "parentId": 74,
+              "name": "전 원전 PSR 추진현황을 파악할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 7,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 76,
+          "parentId": 4,
+          "name": "PSR 적용",
+          "type": "LESSON",
+          "sortOrder": 3,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 288,
+              "parentId": 76,
+              "name": "원자력 안전기준강화대책을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 290,
+              "parentId": 76,
+              "name": "기술기준 개념을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 292,
+              "parentId": 76,
+              "name": "PSR 기술기준 관련 관계법령을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 294,
+              "parentId": 76,
+              "name": "해외원전 PSR 최신기술기준 개요를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 296,
+              "parentId": 76,
+              "name": "PSR 최신기술기준 적용 Gap 분석을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 298,
+              "parentId": 76,
+              "name": "PSR Gap Resolution 방향을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 78,
+          "parentId": 4,
+          "name": "PSR 인자별 평가 방법",
+          "type": "LESSON",
+          "sortOrder": 4,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 300,
+              "parentId": 78,
+              "name": "주기적안전성평가의 ‘발전소 설계’ 평가취지와 평가내용을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 302,
+              "parentId": 78,
+              "name": "주기적안전성평가의 ‘실제상태’ 평가취지와 평가내용을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 304,
+              "parentId": 78,
+              "name": "주기적안전성평가의 ‘경년열화’ 평가취지와 평가내용을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 306,
+              "parentId": 78,
+              "name": "주기적안전성평가의 ‘안전성 평가분야’ 평가취지와 평가내용을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 308,
+              "parentId": 78,
+              "name": "주기적안전성평가의 ‘발전소운영분야’ 평가취지와 평가내용을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 310,
+              "parentId": 78,
+              "name": "주기적안전성평가의 ‘방사선안전분야’ 평가취지와 평가내용을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 80,
+          "parentId": 4,
+          "name": "원전 안전성평가 기본개념",
+          "type": "LESSON",
+          "sortOrder": 5,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 312,
+              "parentId": 80,
+              "name": "안전성 평가 변화의 개념을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 314,
+              "parentId": 80,
+              "name": "원전 중요사고를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 316,
+              "parentId": 80,
+              "name": "원자력 안전목표를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 318,
+              "parentId": 80,
+              "name": "원자력 안전평가 변화를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 82,
+          "parentId": 4,
+          "name": "리스크 감시 및 RIR 개요",
+          "type": "LESSON",
+          "sortOrder": 6,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 320,
+              "parentId": 82,
+              "name": "RISK 감시 목적 및 현황을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 322,
+              "parentId": 82,
+              "name": "RISK 분석 방법 및 관리 개요를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 324,
+              "parentId": 82,
+              "name": "RIA 추진 방법 및 현황을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 326,
+              "parentId": 82,
+              "name": "RIR 규제요건을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 328,
+              "parentId": 82,
+              "name": "정비규정/품질보증등급화를 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 330,
+              "parentId": 82,
+              "name": "리스크 감시 전산시스템을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 84,
+          "parentId": 4,
+          "name": "주요기기 수명평가",
+          "type": "LESSON",
+          "sortOrder": 7,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 332,
+              "parentId": 84,
+              "name": "평가 대상의 구조물, 계통 및 기기의 경년열화에 대한 내용을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 334,
+              "parentId": 84,
+              "name": "평가 대상 구조물, 계통 및 기기의 분류 및 선정을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 336,
+              "parentId": 84,
+              "name": "평가 대상 구조물, 계통 및 기기의 경년열화 현상을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 338,
+              "parentId": 84,
+              "name": "평가대상 SSC의 경년열화 완화대책 및 관리계획을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 340,
+              "parentId": 84,
+              "name": "평가 대상 구조물, 계통 및 기기의 경년열화관리 프로그램을 관리한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 86,
+          "parentId": 4,
+          "name": "주요기기 수명평가(실습)",
+          "type": "LESSON",
+          "sortOrder": 8,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 342,
+              "parentId": 86,
+              "name": "주요기기 수명평가를 수행할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "parentId": null,
+      "name": "경년열화 관리",
+      "type": "COURSE",
+      "sortOrder": 0,
+      "depth": 0,
+      "metadata": {
+        "version": 0
+      },
+      "children": [
+        {
+          "id": 88,
+          "parentId": 5,
+          "name": "AMP 개요 및 운영현황",
+          "type": "LESSON",
+          "sortOrder": 1,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 344,
+              "parentId": 88,
+              "name": "경년열화관리(AMP) 개념을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 346,
+              "parentId": 88,
+              "name": "경년열화관리 추진배경을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 348,
+              "parentId": 88,
+              "name": "경년열화관리 현황 및 문제점 파악할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 350,
+              "parentId": 88,
+              "name": "추진체계 및 정착방안에 대해서 이해하고, 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 90,
+          "parentId": 5,
+          "name": "AMP 통합시스템 활용",
+          "type": "LESSON",
+          "sortOrder": 2,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 352,
+              "parentId": 90,
+              "name": "경년열화통합관리시스템 구축 목적 및 이력을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 354,
+              "parentId": 90,
+              "name": "경년열화통합관리시스템 구성을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 356,
+              "parentId": 90,
+              "name": "업무 흐름과 경년열화통합관리시스템 활용할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 92,
+          "parentId": 5,
+          "name": "기계분야 AMP 절차",
+          "type": "LESSON",
+          "sortOrder": 3,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 358,
+              "parentId": 92,
+              "name": "전사 경년열화관리 프로그램(절차서) 목록을 분류하고 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 360,
+              "parentId": 92,
+              "name": "계속운전과 가동원전에 적용하는 경년열화관리 프로그램을 구분 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 362,
+              "parentId": 92,
+              "name": "기계분야 경년열화관리 프로그램(절차서) 구성 및 주요 내용을 이해할 수 있다 ",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 94,
+          "parentId": 5,
+          "name": "전기분야 AMP 절차",
+          "type": "LESSON",
+          "sortOrder": 4,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 364,
+              "parentId": 94,
+              "name": "전기분야 AMP의 종류와 특성을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 366,
+              "parentId": 94,
+              "name": "전기분야 AMP의 적용범위와 검사방법을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 368,
+              "parentId": 94,
+              "name": "전기분야 AMP의 검사판정 절차를 정비 업무에 적용할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 370,
+              "parentId": 94,
+              "name": "전기분야 AMP의 검사판정 절차를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 96,
+          "parentId": 5,
+          "name": "경년열화 평가기준 및 방법",
+          "type": "LESSON",
+          "sortOrder": 5,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 372,
+              "parentId": 96,
+              "name": "경년열화관리 평가기준 및 방법을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 98,
+          "parentId": 5,
+          "name": "경년열화 완화대책 수립",
+          "type": "LESSON",
+          "sortOrder": 6,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 374,
+              "parentId": 98,
+              "name": "경년열화관리 완화방안을 이해하고, 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 100,
+          "parentId": 5,
+          "name": "경년열화관리 유효성 평가",
+          "type": "LESSON",
+          "sortOrder": 7,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 376,
+              "parentId": 100,
+              "name": "경년열화관리 유효성평가 의미와 방법을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 378,
+              "parentId": 100,
+              "name": "최근 유효성평가 결과를 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 102,
+          "parentId": 5,
+          "name": "비파괴검사 및 가동중검사 일반",
+          "type": "LESSON",
+          "sortOrder": 8,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 380,
+              "parentId": 102,
+              "name": "다양한 비파괴검사 방법을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 382,
+              "parentId": 102,
+              "name": "가동중검사 개요 및 일반요건을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 384,
+              "parentId": 102,
+              "name": "가동중 검사관련 기술기준 등을 파악한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 386,
+              "parentId": 102,
+              "name": "가동중 검사관련 원안위 고시내용을 확인한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 104,
+          "parentId": 5,
+          "name": "설비별 경년열화 탐지 특성",
+          "type": "LESSON",
+          "sortOrder": 9,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 388,
+              "parentId": 104,
+              "name": "경년열화 결함 종류를 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 390,
+              "parentId": 104,
+              "name": "국내외 결함 발생사례를 통해 결함 발생 가능부위를 파악한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 392,
+              "parentId": 104,
+              "name": "누설 및 열화탐지 비파괴검사 방법을 알 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 106,
+          "parentId": 5,
+          "name": "AMP 적용 기술기준",
+          "type": "LESSON",
+          "sortOrder": 10,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 394,
+              "parentId": 106,
+              "name": "경년열화관리프로그램(AMP)의 시행배경을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 396,
+              "parentId": 106,
+              "name": "AMP의 규제요건 및 관련법령을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 398,
+              "parentId": 106,
+              "name": "AMP의 기술기준에 대해 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 108,
+          "parentId": 5,
+          "name": "경년열화 기구",
+          "type": "LESSON",
+          "sortOrder": 11,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 3,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 400,
+              "parentId": 108,
+              "name": "원자력발전소에서 발생 가능한 경년열화에 대해 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 110,
+          "parentId": 5,
+          "name": "구조분야 AMP 절차",
+          "type": "LESSON",
+          "sortOrder": 12,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 402,
+              "parentId": 110,
+              "name": "AMP 일반적인 절차에 대해 설명 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 404,
+              "parentId": 110,
+              "name": "구조물 AMP를 분류할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 406,
+              "parentId": 110,
+              "name": "원전 구조물 AMP에 대해 설명 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 408,
+              "parentId": 110,
+              "name": "원전구조물 수명관리시스템을 활용할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 112,
+          "parentId": 5,
+          "name": "화학분야 AMP절차",
+          "type": "LESSON",
+          "sortOrder": 13,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 410,
+              "parentId": 112,
+              "name": "경년열화관리와 화학분야 개념 연계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 412,
+              "parentId": 112,
+              "name": "경년열화관리 중 화학분야 추진배경 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 414,
+              "parentId": 112,
+              "name": "경년열화관리 화학분야 현황 및 문제점 파악할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 416,
+              "parentId": 112,
+              "name": "화학분야와 관련된 계통의 경년열화 평가절차를 이해하고 평가 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "parentId": null,
+      "name": "기술현안관리",
+      "type": "COURSE",
+      "sortOrder": 0,
+      "depth": 0,
+      "metadata": {
+        "version": 0
+      },
+      "children": [
+        {
+          "id": 2,
+          "parentId": 1,
+          "name": "설계변경",
+          "type": "LESSON",
+          "sortOrder": 1,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 2,
+              "parentId": 2,
+              "name": "설계변경 관련 절차서 및 지침서를 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 4,
+              "parentId": 2,
+              "name": "설계변경 주요절차를 순서대로 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 6,
+              "parentId": 2,
+              "name": "설계변경 제안서의 주요항목의 의미를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 8,
+              "parentId": 2,
+              "name": "설계변경심의위원회의 구성과 심의내용 및 심의결과를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 10,
+              "parentId": 2,
+              "name": "설계변경서 번호체계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 12,
+              "parentId": 2,
+              "name": "설계변경서의 구성요소를 나열하고 세부 내용을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 14,
+              "parentId": 2,
+              "name": "설계변경 각 단계별 문서의 주요사항을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 7,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 16,
+              "parentId": 2,
+              "name": "설계기술검증위원회 검증대상 범위를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 8,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 18,
+              "parentId": 2,
+              "name": "설계변경서(시공용) 인수확인서 작성방법과 등록시기를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 9,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 20,
+              "parentId": 2,
+              "name": "설계변경 시공 사전 점검표 항목별 착안사항을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 10,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 22,
+              "parentId": 2,
+              "name": "임시도면 발행대상 도면종류를 나열 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 11,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 24,
+              "parentId": 2,
+              "name": "설계변경 시공완료 후 준공 업무절차를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 12,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 26,
+              "parentId": 2,
+              "name": "임시변경의 정의 및 설계변경과의 차이점을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 13,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 28,
+              "parentId": 2,
+              "name": "임시변경서의 주요내용을 설명하고 신청할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 14,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 30,
+              "parentId": 2,
+              "name": "임시변경 주요단계 및 내용을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 15,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "parentId": 1,
+          "name": "사고∙고장 후속조치",
+          "type": "LESSON",
+          "sortOrder": 2,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 32,
+              "parentId": 4,
+              "name": "원전 운영보고 및 정보공개 절차에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 34,
+              "parentId": 4,
+              "name": "보고대상사건에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 36,
+              "parentId": 4,
+              "name": "보고대상사건의 재발방지대책에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "parentId": 1,
+          "name": "안전기준",
+          "type": "LESSON",
+          "sortOrder": 3,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 38,
+              "parentId": 6,
+              "name": "안전기준이 무엇인지 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 40,
+              "parentId": 6,
+              "name": "국내 안전기준 체계를 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 42,
+              "parentId": 6,
+              "name": "국내 안전기준 제·개정 절차를 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 44,
+              "parentId": 6,
+              "name": "국내∙외 안전기준 현황을 알 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "parentId": 1,
+          "name": "규제체계 및 KINS 심/검사 지침",
+          "type": "LESSON",
+          "sortOrder": 4,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 46,
+              "parentId": 8,
+              "name": "원자력 규제 감독체계를 이해하고 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 48,
+              "parentId": 8,
+              "name": "규제검사 검사 체계를 이해하고 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 50,
+              "parentId": 8,
+              "name": "KINS 규제 검사 체계를 이해하고 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 52,
+              "parentId": 8,
+              "name": "발전용원자로 정기검사 예시를 이해하고 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "parentId": 1,
+          "name": "정기검사 지적 사례",
+          "type": "LESSON",
+          "sortOrder": 5,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 54,
+              "parentId": 10,
+              "name": "정기검사 개요를 이해하고 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 56,
+              "parentId": 10,
+              "name": "현안관련 정기검사를 이해하고 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 58,
+              "parentId": 10,
+              "name": "검사지적사항 경향 분석결과를 이해하고 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "parentId": 1,
+          "name": "가동원전 인허가",
+          "type": "LESSON",
+          "sortOrder": 6,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 60,
+              "parentId": 12,
+              "name": "인허가 관련 법령체계를 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 62,
+              "parentId": 12,
+              "name": "운영변경허가와 경미한사항 변경신고를 이해하고 구분할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 64,
+              "parentId": 12,
+              "name": "가동원전 인허가 처리 프로세스 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "parentId": 1,
+          "name": "기술현안 대응 사례",
+          "type": "LESSON",
+          "sortOrder": 7,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 66,
+              "parentId": 14,
+              "name": "기술현안 담당자의 필요역량을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 68,
+              "parentId": 14,
+              "name": "원안법 위반에 따른 영향 및 예방을 위한 개선 필요사항을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 70,
+              "parentId": 14,
+              "name": "합리적 안전기준 적용을 위한 대응전략을 수립할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 72,
+              "parentId": 14,
+              "name": "안전개선대책 수립∙이행 시 중점사항을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "parentId": 1,
+          "name": "기술현안 관리 프로세스",
+          "type": "LESSON",
+          "sortOrder": 8,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 74,
+              "parentId": 16,
+              "name": "기술현안의 의미를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 76,
+              "parentId": 16,
+              "name": "기술현안 회의체를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 78,
+              "parentId": 16,
+              "name": "기술현안관리시스템를 사용할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "parentId": 1,
+          "name": "FAIR 시스템",
+          "type": "LESSON",
+          "sortOrder": 9,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 80,
+              "parentId": 18,
+              "name": "FAIR 시스템을 활용할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "parentId": 1,
+          "name": "부적합사항 및 불일치품목",
+          "type": "LESSON",
+          "sortOrder": 10,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 82,
+              "parentId": 20,
+              "name": "불일치품목의 정의 및 관리 프로세스를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 84,
+              "parentId": 20,
+              "name": "부적합사항의 정의 및 보고 프로세스를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 86,
+              "parentId": 20,
+              "name": "부적합사항 관련 규제요건을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 88,
+              "parentId": 20,
+              "name": "불일치품목-부적합사항간 연계사항을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "parentId": 1,
+          "name": "정기∙수시 검사∙",
+          "type": "LESSON",
+          "sortOrder": 11,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 1,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 90,
+              "parentId": 22,
+              "name": "정기/수시검사 개요를 설명 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 92,
+              "parentId": 22,
+              "name": ".지적/권고 분류기준을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 94,
+              "parentId": 22,
+              "name": "지적/권고사항 처리절차를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "parentId": null,
+      "name": "리크스감시 일반",
+      "type": "COURSE",
+      "sortOrder": 0,
+      "depth": 0,
+      "metadata": {
+        "version": 0
+      },
+      "children": [
+        {
+          "id": 54,
+          "parentId": 3,
+          "name": "리스크관리 개요",
+          "type": "LESSON",
+          "sortOrder": 1,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 222,
+              "parentId": 54,
+              "name": "리스크 관리 개요를 파악한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 224,
+              "parentId": 54,
+              "name": "초기사건의 정의와 발생빈도 산출 방법을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 56,
+          "parentId": 3,
+          "name": "리스크관리 개요(실습)",
+          "type": "LESSON",
+          "sortOrder": 2,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 226,
+              "parentId": 56,
+              "name": "리스크관리 시스템을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 58,
+          "parentId": 3,
+          "name": "원전 신뢰도 DB",
+          "type": "LESSON",
+          "sortOrder": 3,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 228,
+              "parentId": 58,
+              "name": "원전 신뢰도 DB의 구조를 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 230,
+              "parentId": 58,
+              "name": "원전 신뢰도 DB의 활용 방법을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 232,
+              "parentId": 58,
+              "name": "초기사건 빈도와 원전 신뢰도 DB가 PSA에 미치는 영향을 이해한다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 60,
+          "parentId": 3,
+          "name": "ORION 개요",
+          "type": "LESSON",
+          "sortOrder": 4,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 234,
+              "parentId": 60,
+              "name": "ORION 개념을 이해하고 사용할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 62,
+          "parentId": 3,
+          "name": "ORION 사용방법",
+          "type": "LESSON",
+          "sortOrder": 5,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 236,
+              "parentId": 62,
+              "name": "ORION 시스템을 사용 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 64,
+          "parentId": 3,
+          "name": "RIMS 운영",
+          "type": "LESSON",
+          "sortOrder": 6,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 3,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 238,
+              "parentId": 64,
+              "name": "RIMS의 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 240,
+              "parentId": 64,
+              "name": "PSA와 RIMS의 차이점을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 242,
+              "parentId": 64,
+              "name": "RIMS를 실제 운영할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 66,
+          "parentId": 3,
+          "name": "RIMS 운영(실습)",
+          "type": "LESSON",
+          "sortOrder": 7,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 244,
+              "parentId": 66,
+              "name": "OPERATOR INTERFACE 주요 기능을 사용 할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 246,
+              "parentId": 66,
+              "name": "Scheduler Interface 주요기능을 사용할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 68,
+          "parentId": 3,
+          "name": "리스크관리 및 RIA 추진현황",
+          "type": "LESSON",
+          "sortOrder": 8,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 248,
+              "parentId": 68,
+              "name": "PSA 이행 이유 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 250,
+              "parentId": 68,
+              "name": "PSA 수행 현황을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 252,
+              "parentId": 68,
+              "name": "사고관리계획서 이행 현황을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 254,
+              "parentId": 68,
+              "name": "PSA 역할을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 256,
+              "parentId": 68,
+              "name": "RIA 개념 및 추진방식을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 258,
+              "parentId": 68,
+              "name": "RIA 요건변경 기본원칙을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 260,
+              "parentId": 68,
+              "name": "RIA 추진현황 및 기타 현안을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 7,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 70,
+          "parentId": 3,
+          "name": "리스크감시와 규제현황",
+          "type": "LESSON",
+          "sortOrder": 9,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 262,
+              "parentId": 70,
+              "name": "리스크감시와 규제현황을 이해하고, 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "parentId": null,
+      "name": "원자력계통실무",
+      "type": "COURSE",
+      "sortOrder": 0,
+      "depth": 0,
+      "metadata": {
+        "version": 0
+      },
+      "children": [
+        {
+          "id": 114,
+          "parentId": 6,
+          "name": "원자로냉각재계통",
+          "type": "LESSON",
+          "sortOrder": 1,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 418,
+              "parentId": 114,
+              "name": "원자로냉각재계통의 개요 및 기능과 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 420,
+              "parentId": 114,
+              "name": "원자로냉각재계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 422,
+              "parentId": 114,
+              "name": "원자로냉각재계통과 타 계통, 기기간의 상관 관계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 424,
+              "parentId": 114,
+              "name": "원자로냉각재계통 주요 구성품의 부속기기, 연동, 자동 동작, 제어 등의 설계적 특성을 이해할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 116,
+          "parentId": 6,
+          "name": "화학 및 체적제어계통",
+          "type": "LESSON",
+          "sortOrder": 2,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 426,
+              "parentId": 116,
+              "name": "화학 및 체적제어계통 개요 및 기능과 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 428,
+              "parentId": 116,
+              "name": "화학 및 체적제어계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 430,
+              "parentId": 116,
+              "name": "화학 및 체적제어계통과 타 계통, 기기간의 상관 관계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 432,
+              "parentId": 116,
+              "name": "화학 및 체적제어계통의 주요구성기기에 대해서 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 434,
+              "parentId": 116,
+              "name": "화학 및 체적제어계통의 충전유로 비정상 조치에 대해서 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 436,
+              "parentId": 116,
+              "name": "화학 및 체적제어계통의 유출유로 비정상 조치에 대해서 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 6,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 118,
+          "parentId": 6,
+          "name": "주증기계통",
+          "type": "LESSON",
+          "sortOrder": 3,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 438,
+              "parentId": 118,
+              "name": "주증기계통의 개요 및 기능과 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 440,
+              "parentId": 118,
+              "name": "주증기계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 442,
+              "parentId": 118,
+              "name": "주증기계통과 타 계통, 기기간의 상관 관계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 444,
+              "parentId": 118,
+              "name": "주증기계통 주요 기기의 정상 공급전원과 대체 공급전원을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 120,
+          "parentId": 6,
+          "name": "복수계통",
+          "type": "LESSON",
+          "sortOrder": 4,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 446,
+              "parentId": 120,
+              "name": "복수계통의 개요 및 기능과 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 448,
+              "parentId": 120,
+              "name": "복수계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 450,
+              "parentId": 120,
+              "name": "복수계통과 타 계통, 기기간의 상관 관계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 452,
+              "parentId": 120,
+              "name": "복수계통 주요 기기의 정상 공급전원과 대체 공급전원을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 122,
+          "parentId": 6,
+          "name": "주급수계통",
+          "type": "LESSON",
+          "sortOrder": 5,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 454,
+              "parentId": 122,
+              "name": "주급수계통의 개요 및 기능과 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 456,
+              "parentId": 122,
+              "name": "주급수계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 458,
+              "parentId": 122,
+              "name": "주급수계통과 타 계통, 기기간의 상관 관계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 460,
+              "parentId": 122,
+              "name": "주급수계통 주요 기기의 정상 공급전원과 대체 공급전원을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 124,
+          "parentId": 6,
+          "name": "보조급수계통",
+          "type": "LESSON",
+          "sortOrder": 6,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 462,
+              "parentId": 124,
+              "name": "보조급수계통의 개요 및 기능과 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 464,
+              "parentId": 124,
+              "name": "보조급수계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 466,
+              "parentId": 124,
+              "name": "보조급수계통 주요 구성품의 작동신호, 연동, 제어 등의 설계적 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 468,
+              "parentId": 124,
+              "name": "보조급수계통 주요 기기의 정상 공급전원과 대체 공급전원을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 126,
+          "parentId": 6,
+          "name": "1차측 기기냉각수계통",
+          "type": "LESSON",
+          "sortOrder": 7,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 470,
+              "parentId": 126,
+              "name": "1차측 기기냉각수계통의 개요 및 기능에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 472,
+              "parentId": 126,
+              "name": "1차측 기기냉각수계통의 설계기준에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 474,
+              "parentId": 126,
+              "name": "1차측 기기냉각수계통의 구성기기 및 기능 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 476,
+              "parentId": 126,
+              "name": "1차측 기기냉각수계통의 계통유로에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 478,
+              "parentId": 126,
+              "name": "1차측 기기냉각수계통의 계통운전, 연동사항에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 128,
+          "parentId": 6,
+          "name": "1차측 기기냉각해수계통",
+          "type": "LESSON",
+          "sortOrder": 8,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 480,
+              "parentId": 128,
+              "name": "1차측 기기냉각해수계통의 개요 및 기능에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 482,
+              "parentId": 128,
+              "name": "1차측 기기냉각해수계통의 설계기준에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 484,
+              "parentId": 128,
+              "name": "1차측 기기냉각해수계통의 구성기기 및 기능 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 486,
+              "parentId": 128,
+              "name": "1차측 기기냉각해수계통의 계통유로에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 488,
+              "parentId": 128,
+              "name": "1차측 기기냉각해수계통의 계통운전, 연동사항에 대해 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 5,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 130,
+          "parentId": 6,
+          "name": "비상디젤발전기계통",
+          "type": "LESSON",
+          "sortOrder": 9,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 490,
+              "parentId": 130,
+              "name": "비상디젤발전기의 개요 및 기능과 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 492,
+              "parentId": 130,
+              "name": "비상디젤발전기의 구성, 기능, 설계 요구사항, 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 494,
+              "parentId": 130,
+              "name": "비상디젤발전기와 타 계통, 기기간의 상관 관계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 496,
+              "parentId": 130,
+              "name": "비상디젤발전기의 기동, 정지 등의 등의 설계적 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": 132,
+          "parentId": 6,
+          "name": "순환수냉방수계통",
+          "type": "LESSON",
+          "sortOrder": 10,
+          "depth": 1,
+          "metadata": {
+            "durationHours": 2,
+            "lessonType": "LECTURE"
+          },
+          "children": [
+            {
+              "id": 498,
+              "parentId": 132,
+              "name": "순환수계통의 개요 및 기능과 목적을 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 1,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 500,
+              "parentId": 132,
+              "name": "순환수계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 2,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 502,
+              "parentId": 132,
+              "name": "순환수계통과 타 계통, 기기간의 상관 관계를 설명할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 3,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            },
+            {
+              "id": 504,
+              "parentId": 132,
+              "name": "순환수계통 주요 기기의 정상 공급전원을 나열할 수 있다",
+              "type": "LEARNING_OBJECT",
+              "sortOrder": 4,
+              "depth": 2,
+              "metadata": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "message": "교육체계 트리 조회 완료",
+  "timestamp": "2025-10-22T14:00:30"
+}

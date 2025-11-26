@@ -1,0 +1,3230 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "parentId": null,
+      "name": "엔지니어링",
+      "type": "JOB_FAMILY",
+      "sortOrder": 0,
+      "depth": 0,
+      "metadata": {},
+      "children": [
+        {
+          "id": 1,
+          "parentId": 1,
+          "name": "프로그램엔지니어링(PE)",
+          "type": "JOB_SERIES",
+          "sortOrder": 0,
+          "depth": 1,
+          "metadata": {},
+          "children": [
+            {
+              "id": 1,
+              "parentId": 1,
+              "name": "안전프로그램",
+              "type": "JOB",
+              "sortOrder": 0,
+              "depth": 2,
+              "metadata": {},
+              "children": [
+                {
+                  "id": 1,
+                  "parentId": 1,
+                  "name": "안전성평가 보고서에 대한 발전소 검토",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 3,
+                    "importance": 4,
+                    "frequency": 4
+                  },
+                  "children": [
+                    {
+                      "id": 1,
+                      "parentId": 1,
+                      "name": "설계변경 관련 절차서 및 지침서",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 2,
+                      "parentId": 1,
+                      "name": "설계변경 주요절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 3,
+                      "parentId": 1,
+                      "name": "설계변경 제안서의 주요항목",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 4,
+                      "parentId": 1,
+                      "name": "설계변경심의위원회의 구성과 심의내용 및 심의결과",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 5,
+                      "parentId": 1,
+                      "name": "설계변경서 번호체계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 6,
+                      "parentId": 1,
+                      "name": "설계변경서의 구성요소",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 7,
+                      "parentId": 1,
+                      "name": "설계변경 각 단계별 문서 주요사항",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 8,
+                      "parentId": 1,
+                      "name": "설계기술검증위원회 검증대상 범위",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 9,
+                      "parentId": 1,
+                      "name": "설계변경서(시공용) 인수확인서 작성방법과 등록시기",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 10,
+                      "parentId": 1,
+                      "name": "설계변경 시공 사전 점검표 항목별 착안사항",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 11,
+                      "parentId": 1,
+                      "name": "임시도면 발행대상 도면종류",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 12,
+                      "parentId": 1,
+                      "name": "설계변경 시공완료 후 준공 업무절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 13,
+                      "parentId": 1,
+                      "name": "임시변경의 정의 및 설계변경과의 차이점",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 14,
+                      "parentId": 1,
+                      "name": "임시변경서의 주요내용을 설명하고 신청할 수 있다",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 15,
+                      "parentId": 1,
+                      "name": "임시변경 주요단계 및 내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 16,
+                      "parentId": 1,
+                      "name": "원전 운영보고 및 정보공개 절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 17,
+                      "parentId": 1,
+                      "name": "보고대상사건",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 18,
+                      "parentId": 1,
+                      "name": "보고대상사건의 재발방지대책",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 19,
+                      "parentId": 1,
+                      "name": "안전기준",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 20,
+                      "parentId": 1,
+                      "name": "국내 안전기준 체계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 21,
+                      "parentId": 1,
+                      "name": "국내 안전기준 제·개정 절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 22,
+                      "parentId": 1,
+                      "name": "국내∙외 안전기준 현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 23,
+                      "parentId": 1,
+                      "name": "원자력 규제 감독체계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 24,
+                      "parentId": 1,
+                      "name": "규제검사 검사 체계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 25,
+                      "parentId": 1,
+                      "name": "KINS 규제 검사 체계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 26,
+                      "parentId": 1,
+                      "name": "발전용원자로 정기검사",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 27,
+                      "parentId": 1,
+                      "name": "정기검사 개요",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 28,
+                      "parentId": 1,
+                      "name": "현안관련 정기검사",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 29,
+                      "parentId": 1,
+                      "name": "검사지적사항 경향 분석결과",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 30,
+                      "parentId": 1,
+                      "name": "인허가 관련 법령체계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 31,
+                      "parentId": 1,
+                      "name": "운영변경허가와 경미한사항 변경신고",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 32,
+                      "parentId": 1,
+                      "name": "가동원전 인허가 처리 프로세스",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 33,
+                      "parentId": 1,
+                      "name": "기술현안 담당자의 필요역량",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 34,
+                      "parentId": 1,
+                      "name": "원안법 위반에 따른 영향 및 예방을 위한 개선 필요사항",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 35,
+                      "parentId": 1,
+                      "name": "합리적 안전기준 적용을 위한 대응전략",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 36,
+                      "parentId": 1,
+                      "name": "안전개선대책 수립∙이행 시 중점사항을 설명할 수 있다",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 37,
+                      "parentId": 1,
+                      "name": "기술현안의 의미",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 38,
+                      "parentId": 1,
+                      "name": "기술현안 회의체",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 39,
+                      "parentId": 1,
+                      "name": "기술현안관리시스템",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 40,
+                      "parentId": 1,
+                      "name": "FAIR 시스템을 활용할 수 있다",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 41,
+                      "parentId": 1,
+                      "name": "불일치품목의 정의 및 관리 프로세스",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 42,
+                      "parentId": 1,
+                      "name": "부적합사항의 정의 및 보고 프로세스",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 43,
+                      "parentId": 1,
+                      "name": "부적합사항 관련 규제요건",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 44,
+                      "parentId": 1,
+                      "name": "불일치품목-부적합사항간 연계사항",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 45,
+                      "parentId": 1,
+                      "name": "정기/수시검사 개요",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 46,
+                      "parentId": 1,
+                      "name": ".지적/권고 분류기준",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 47,
+                      "parentId": 1,
+                      "name": "지적/권고사항 처리절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 59,
+                      "parentId": 1,
+                      "name": "다수기 부지에 대한 PSA 분석 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 60,
+                      "parentId": 1,
+                      "name": "사고관리계획서 PSA 관련 신규요건 및 평가내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 61,
+                      "parentId": 1,
+                      "name": "최신기술을 통한 원전의 리스크 이해",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 62,
+                      "parentId": 1,
+                      "name": "PSA 이행 이유",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 154,
+                      "parentId": 1,
+                      "name": "안전성 평가 변화의 개념",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 155,
+                      "parentId": 1,
+                      "name": "원전 중요사고",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 156,
+                      "parentId": 1,
+                      "name": "원자력 안전목표",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 157,
+                      "parentId": 1,
+                      "name": "원자력 안전평가 변화",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 2,
+                  "parentId": 1,
+                  "name": "발전소 변경사항에 의한 PSA/RIMS 영향검토 및 관리",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 48,
+                      "parentId": 2,
+                      "name": "PSA/RIMS 모델검토 개요",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 49,
+                      "parentId": 2,
+                      "name": "PSA/RIMS 모델검토 배경",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 50,
+                      "parentId": 2,
+                      "name": "PSA/RIMS 모델검토 규제현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 51,
+                      "parentId": 2,
+                      "name": "PSA/RIMS 모델검토 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 52,
+                      "parentId": 2,
+                      "name": "국내원전 PSA 개발현황과 주요 이슈",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 53,
+                      "parentId": 2,
+                      "name": "초기사건의 정의 및 종류",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 54,
+                      "parentId": 2,
+                      "name": "초기사건의 선정절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 55,
+                      "parentId": 2,
+                      "name": "초기사건의 식별 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 56,
+                      "parentId": 2,
+                      "name": "초기사건 그룹화 과정",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 57,
+                      "parentId": 2,
+                      "name": "초기사건 빈도평가 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 58,
+                      "parentId": 2,
+                      "name": "PSA 수행범위별 분석 내용 및 최신기술",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 63,
+                      "parentId": 2,
+                      "name": "PSA 수행 현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 64,
+                      "parentId": 2,
+                      "name": "사고관리계획서 이행 현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 65,
+                      "parentId": 2,
+                      "name": "PSA 역할",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 66,
+                      "parentId": 2,
+                      "name": "RIA 개념 및 추진방식",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 67,
+                      "parentId": 2,
+                      "name": "RIA 요건변경 기본원칙",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 68,
+                      "parentId": 2,
+                      "name": "RIA 추진형황 및 기타 현안",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 69,
+                      "parentId": 2,
+                      "name": "PSA 결과와 활용목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 70,
+                      "parentId": 2,
+                      "name": "Level 1 PSA 수행 과정",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 71,
+                      "parentId": 2,
+                      "name": "Level 1 PSA 정량화 결과 검토",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 72,
+                      "parentId": 2,
+                      "name": "PSA 중요도와 안전성 향상 방안",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 73,
+                      "parentId": 2,
+                      "name": "발전소 PSA 모델 정량화",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 74,
+                      "parentId": 2,
+                      "name": "정량화 결과 활용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 75,
+                      "parentId": 2,
+                      "name": "PSA 수행시 열수력학 분석 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 76,
+                      "parentId": 2,
+                      "name": "사고종료 기준 및 노심손상 정의",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 77,
+                      "parentId": 2,
+                      "name": "열수력학적 분석 예시",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 78,
+                      "parentId": 2,
+                      "name": "사건수목 분석 정의",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 79,
+                      "parentId": 2,
+                      "name": "사건수목 개발과정",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 80,
+                      "parentId": 2,
+                      "name": "사고경위 분석의 가정사항 및 사건수목 개발결과 이해",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 81,
+                      "parentId": 2,
+                      "name": "PSA 결과와 활용목적 이해",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 82,
+                      "parentId": 2,
+                      "name": "계통분석 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 83,
+                      "parentId": 2,
+                      "name": "고장수목 분석 정의",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 84,
+                      "parentId": 2,
+                      "name": "고장수목 개발과정",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 85,
+                      "parentId": 2,
+                      "name": "고장수목 분석의 가정사항",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 86,
+                      "parentId": 2,
+                      "name": "Level 1 PSA 정량화 결과",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 87,
+                      "parentId": 2,
+                      "name": "PSA 중요도와 안전성 향상방",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 88,
+                      "parentId": 2,
+                      "name": "발전소 PSA 모델을 정량화",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 89,
+                      "parentId": 2,
+                      "name": "PSA Level1 모델링",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "SKILL"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 90,
+                      "parentId": 2,
+                      "name": "PSA Level2 모델링",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "SKILL"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 91,
+                      "parentId": 2,
+                      "name": "PSA Level 3 수행 과정",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 92,
+                      "parentId": 2,
+                      "name": "PSA Level 3 정량화 결과 검토",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 93,
+                      "parentId": 2,
+                      "name": "공통원인기기 Grouping",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 94,
+                      "parentId": 2,
+                      "name": "CCF 기본사건 모델링",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 95,
+                      "parentId": 2,
+                      "name": "CCF 기본사건 확률 추정 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 96,
+                      "parentId": 2,
+                      "name": "CCF 저감방안",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 97,
+                      "parentId": 2,
+                      "name": "신뢰도DB시스템의 이해",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 98,
+                      "parentId": 2,
+                      "name": "기기신뢰도분석 방법 습득",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 99,
+                      "parentId": 2,
+                      "name": "PRinS 운영능력 확보",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 100,
+                      "parentId": 2,
+                      "name": "PRinS 실습",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 101,
+                      "parentId": 2,
+                      "name": "인적오류 정의",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 102,
+                      "parentId": 2,
+                      "name": "PSA와 HRA 관계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 103,
+                      "parentId": 2,
+                      "name": "HRA 수행 절차 및 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 104,
+                      "parentId": 2,
+                      "name": "표준 HRA 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 105,
+                      "parentId": 2,
+                      "name": "인적오류 유형",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 106,
+                      "parentId": 2,
+                      "name": "특정 직무의 인적오류확률",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 158,
+                      "parentId": 2,
+                      "name": "RISK 감시 목적 및 현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 159,
+                      "parentId": 2,
+                      "name": "RISK 분석 방법 및 관리 개요",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 160,
+                      "parentId": 2,
+                      "name": "RIA 추진 방법 및 현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 161,
+                      "parentId": 2,
+                      "name": "RIR 규제요건",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 162,
+                      "parentId": 2,
+                      "name": "정비규정 및 품질보증등급화 이해",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 163,
+                      "parentId": 2,
+                      "name": "리스크 감시 전산시스템",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 164,
+                      "parentId": 2,
+                      "name": "평가 대상의 구조물, 계통 및 기기의 경년열화",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 165,
+                      "parentId": 2,
+                      "name": "평가 대상의 구조물, 계통 및 기기의 분류 및 선정",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 166,
+                      "parentId": 2,
+                      "name": "평가 대상 구조물, 계통 및 기기의 경년열화 현상",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 167,
+                      "parentId": 2,
+                      "name": "평가대상 SSC의 경년열화 완화대책 및 관리계획",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 168,
+                      "parentId": 2,
+                      "name": "평가 대상 구조물, 계통 및 기기의 경년열화 프로그램",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 169,
+                      "parentId": 2,
+                      "name": "주요기기 수명평가",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "SKILL"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 3,
+                  "parentId": 1,
+                  "name": "발전소 PSR 안전성증진사항 이행",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 130,
+                      "parentId": 3,
+                      "name": "확률론적안전성평가 개념",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 131,
+                      "parentId": 3,
+                      "name": "PSA 역사 및 추진현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 132,
+                      "parentId": 3,
+                      "name": "Level 1 PSA 수행방법 및 Risk Measure",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 133,
+                      "parentId": 3,
+                      "name": "Level 2 PSA 수행방법 및 Risk Measure",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 134,
+                      "parentId": 3,
+                      "name": "Level 3 PSA 수행방법 및 Risk Measure",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 135,
+                      "parentId": 3,
+                      "name": "PSR 추진 배경",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 136,
+                      "parentId": 3,
+                      "name": "PSR 개념",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 137,
+                      "parentId": 3,
+                      "name": "PSR 관련 관계법령",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 138,
+                      "parentId": 3,
+                      "name": "PSR 평가 범위",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 139,
+                      "parentId": 3,
+                      "name": "적용 기술기준",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 140,
+                      "parentId": 3,
+                      "name": "PSR 추진체계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 141,
+                      "parentId": 3,
+                      "name": "전 원전 PSR 추진현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 142,
+                      "parentId": 3,
+                      "name": "원자력 안전기준강화대책",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 143,
+                      "parentId": 3,
+                      "name": "기술기준 개념",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 144,
+                      "parentId": 3,
+                      "name": "PSR 기술기준 관계법령",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 145,
+                      "parentId": 3,
+                      "name": "해외원전 PSR 최신기술기준 개요",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 146,
+                      "parentId": 3,
+                      "name": "PSR 최신기술기준 Gap 분석",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 147,
+                      "parentId": 3,
+                      "name": "PSR Gap Resolution 방향",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 4,
+                  "parentId": 1,
+                  "name": "발전소 PSR 주관부서는 평가자료 제공을 위해 발전소 각 부서로 자료 요청",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 3,
+                    "importance": 4,
+                    "frequency": 4
+                  },
+                  "children": [
+                    {
+                      "id": 148,
+                      "parentId": 4,
+                      "name": "주기적안전성평가의 발전소 설계 평가취지 및 내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 149,
+                      "parentId": 4,
+                      "name": "주기적안전성평가의 실제상태 평가취지 및 내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 150,
+                      "parentId": 4,
+                      "name": "주기적안전성평가 경년열화 평가취지 및 내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 151,
+                      "parentId": 4,
+                      "name": "주기적안전성평가 안전성평가분야 평가취지 및 내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 152,
+                      "parentId": 4,
+                      "name": "주기적안전성평가 발전소운영분야 평가취지 및 내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 153,
+                      "parentId": 4,
+                      "name": "주기적안전성평가의 방사선안전부야 평가취지 및 내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 5,
+                  "parentId": 1,
+                  "name": "리스크 평가",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 107,
+                      "parentId": 5,
+                      "name": "리스크 관리 개요",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 108,
+                      "parentId": 5,
+                      "name": "초기사건의 정의 및 발생빈도 산출방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 109,
+                      "parentId": 5,
+                      "name": "리스크관리 시스템",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 110,
+                      "parentId": 5,
+                      "name": "원전 신뢰도 DB 구조",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 111,
+                      "parentId": 5,
+                      "name": "원전 신뢰도 DB 활용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 112,
+                      "parentId": 5,
+                      "name": "초기사건 빈도와 원전 신뢰도 DB",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 113,
+                      "parentId": 5,
+                      "name": "RIMS 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 114,
+                      "parentId": 5,
+                      "name": "PSA와 RIMS의 차이점",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 115,
+                      "parentId": 5,
+                      "name": "RIMS 운영",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 116,
+                      "parentId": 5,
+                      "name": "OPERATOR INTERFACE 주요 기능",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 117,
+                      "parentId": 5,
+                      "name": "Scheduler Interface 주요기능",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 118,
+                      "parentId": 5,
+                      "name": "PSA 이행 이유",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 119,
+                      "parentId": 5,
+                      "name": "PSA 역할",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 120,
+                      "parentId": 5,
+                      "name": "RIA 추진현황 및 기타 현안 이해",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 121,
+                      "parentId": 5,
+                      "name": "리스크감시와 규제현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 6,
+                  "parentId": 1,
+                  "name": "ORION평가 프로그램을 통한 OH 예상작업 ORION 리스크평가",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 122,
+                      "parentId": 6,
+                      "name": "ORION 개념",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 123,
+                      "parentId": 6,
+                      "name": "ORION 시스템",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 124,
+                      "parentId": 6,
+                      "name": "PSA 이행 이유",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 125,
+                      "parentId": 6,
+                      "name": "사고관리계획서 이행 현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 126,
+                      "parentId": 6,
+                      "name": "RIA 개념 및 추진방식",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 127,
+                      "parentId": 6,
+                      "name": "RIA 요건변경 기본원칙",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 128,
+                      "parentId": 6,
+                      "name": "RIA 추진현황 및 기타 현안",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 129,
+                      "parentId": 6,
+                      "name": "리스크감시와 규제현황",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 7,
+                  "parentId": 1,
+                  "name": "AMP 운영현황 종합관리",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 170,
+                      "parentId": 7,
+                      "name": "경년열화관리(AMP) 개념",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 171,
+                      "parentId": 7,
+                      "name": "경년열화관리 추진배경",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 172,
+                      "parentId": 7,
+                      "name": "경년열화관리 현황 및 문제점",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 173,
+                      "parentId": 7,
+                      "name": "추진체계 및 정착방안",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 190,
+                      "parentId": 7,
+                      "name": "경년열화관리프로그램(AMP) 시행배경",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 191,
+                      "parentId": 7,
+                      "name": "AMP 규제요건",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 192,
+                      "parentId": 7,
+                      "name": "AMP 기술기준",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 8,
+                  "parentId": 1,
+                  "name": "경년열화관리시스템(AMPS)운영",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 174,
+                      "parentId": 8,
+                      "name": "경년열화통합관리스시스템 구축 목적 및 이력",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 175,
+                      "parentId": 8,
+                      "name": "경년열화통합관리시스템 구성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 176,
+                      "parentId": 8,
+                      "name": "업무 흐름과 경년열화통합관리시스템",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 9,
+                  "parentId": 1,
+                  "name": "AMP운영지침서 작성, 관리 및 개별절차서 관리 종합",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 177,
+                      "parentId": 9,
+                      "name": "전사 경년열화관리 프로그램(절차서) 목록",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 178,
+                      "parentId": 9,
+                      "name": "계속운전과 가동원전 경년열화관리 프로그램",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 179,
+                      "parentId": 9,
+                      "name": "기계분야 경년열화관리 프로그램(절차서)",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 180,
+                      "parentId": 9,
+                      "name": "전기분야 AMO 종류와 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 181,
+                      "parentId": 9,
+                      "name": "전기분야 AMP 적용범위와 검사방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 182,
+                      "parentId": 9,
+                      "name": "전기분야 AMP 검사판정 절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 183,
+                      "parentId": 9,
+                      "name": "다양한 비파괴검사 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 184,
+                      "parentId": 9,
+                      "name": "가동중검사 개요 및 일반요건",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 185,
+                      "parentId": 9,
+                      "name": "가동중 검사 기술기준",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 186,
+                      "parentId": 9,
+                      "name": "가동중 검사 원안위 고시내용",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 187,
+                      "parentId": 9,
+                      "name": "경년열화 겸함 종류",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 188,
+                      "parentId": 9,
+                      "name": "국내외 결함 발생사례",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 189,
+                      "parentId": 9,
+                      "name": "누설 및 열화탐지 비파괴검사 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 193,
+                      "parentId": 9,
+                      "name": "AMP 일반적인 절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 194,
+                      "parentId": 9,
+                      "name": "구조물 AMP 분류",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 195,
+                      "parentId": 9,
+                      "name": "원전 구조물 AMP",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 196,
+                      "parentId": 9,
+                      "name": "원전구조물 수명관리시스템",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 197,
+                      "parentId": 9,
+                      "name": "경년열화관리와 화학분야 개념 연계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 198,
+                      "parentId": 9,
+                      "name": "경년열화관리 화학분야 추진배경",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 199,
+                      "parentId": 9,
+                      "name": "경년열화관리 화학분야 현황 및 문제점",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 200,
+                      "parentId": 9,
+                      "name": "화학분야 경년열화 평가절차",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 10,
+                  "parentId": 1,
+                  "name": "AMP 후속조치 관리",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 3,
+                    "importance": 4,
+                    "frequency": 4
+                  },
+                  "children": [
+                    {
+                      "id": 202,
+                      "parentId": 10,
+                      "name": "경년열화관리 평가기준 및 방법",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 203,
+                      "parentId": 10,
+                      "name": "경년열화관리 완화방안",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 204,
+                      "parentId": 10,
+                      "name": "경년열화관리 유효성평가",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 205,
+                      "parentId": 10,
+                      "name": "최근 유효성평가 결과",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "id": 11,
+                  "parentId": 1,
+                  "name": "AMP 대상 선정",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 201,
+                      "parentId": 11,
+                      "name": "원자력발전소 경년열화",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "parentId": 1,
+          "name": "시스템엔지니어링(SE)",
+          "type": "JOB_SERIES",
+          "sortOrder": 0,
+          "depth": 1,
+          "metadata": {},
+          "children": [
+            {
+              "id": 2,
+              "parentId": 2,
+              "name": "원자로터빈시스템",
+              "type": "JOB",
+              "sortOrder": 0,
+              "depth": 2,
+              "metadata": {},
+              "children": [
+                {
+                  "id": 12,
+                  "parentId": 2,
+                  "name": "성능감시 수행",
+                  "type": "TASK",
+                  "sortOrder": 0,
+                  "depth": 3,
+                  "metadata": {
+                    "difficulty": 4,
+                    "importance": 3,
+                    "frequency": 2
+                  },
+                  "children": [
+                    {
+                      "id": 206,
+                      "parentId": 12,
+                      "name": "원자로냉각재계통 개요 및 기능",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 207,
+                      "parentId": 12,
+                      "name": "원자로냉각재계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 208,
+                      "parentId": 12,
+                      "name": "원자로냉각재계통 및 타 계통, 기기간의 상관관계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 209,
+                      "parentId": 12,
+                      "name": "원자로냉각재계통 주요 구성품 부속기기, 연동, 자동 동작, 제어 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 210,
+                      "parentId": 12,
+                      "name": "화학 및 체적제어계통 개요 및 기능과 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 211,
+                      "parentId": 12,
+                      "name": "화학 및 체적제어계통 주요 및 보조기기 설계특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 212,
+                      "parentId": 12,
+                      "name": "화학 및 체적제어계통과 타 계통 상관 관계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 213,
+                      "parentId": 12,
+                      "name": "화학 및 체적제어계통 주요구성기기",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 214,
+                      "parentId": 12,
+                      "name": "화학 및 체적제어계통 충전유로 비정산 조치",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 215,
+                      "parentId": 12,
+                      "name": "화학 및 체적제어계통 유출유로 비정상 조치",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 216,
+                      "parentId": 12,
+                      "name": "주증기계통의 개요 및 기능과 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 217,
+                      "parentId": 12,
+                      "name": "주증기계통 주요 및 보조 기기의 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 218,
+                      "parentId": 12,
+                      "name": "주증기계통과 타 계통, 기기간의 상관 관계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 219,
+                      "parentId": 12,
+                      "name": "주증기계통 주요 기기 정상 공급전원과 대체 공급전원",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 220,
+                      "parentId": 12,
+                      "name": "북수계통의 개요 및 기능과 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 221,
+                      "parentId": 12,
+                      "name": "복수계통 주요 및 보조 기기의 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 222,
+                      "parentId": 12,
+                      "name": "복수계통과 타 계통, 기기간의 상관 관계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 223,
+                      "parentId": 12,
+                      "name": "복수계통 주요 기기의 정상 공급전원과 대체 공급전원",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 224,
+                      "parentId": 12,
+                      "name": "주급수계통의 개요 및 기능과 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 225,
+                      "parentId": 12,
+                      "name": "주급수계통 주요 및 보조 기기의 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 226,
+                      "parentId": 12,
+                      "name": "주급수계통과 타 계통 기기간의 상관 관계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 227,
+                      "parentId": 12,
+                      "name": "주급수계통 정상 공급전원와 대체 공급전원",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 228,
+                      "parentId": 12,
+                      "name": "보조급수계통의 개요 및 기능과 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 229,
+                      "parentId": 12,
+                      "name": "보조급수계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 230,
+                      "parentId": 12,
+                      "name": "보조급수계통 주요 구성품 설계적 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 231,
+                      "parentId": 12,
+                      "name": "보조급수계통 정상 공급전원 및 대체 공급전원",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 232,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각수계통의 개요 및 기능",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 233,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각수계통의 설계기준",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 234,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각수계통 구성기기 및 기능",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 235,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각수계통의 계통유로",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 236,
+                      "parentId": 12,
+                      "name": "1차측 기기냉가수계통의 계통운전, 연동사항",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 237,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각해수계통의 개요 및 기능",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 238,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각해수계통의 설계기준",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 239,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각해수계통 구성기기 및 기능",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 240,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각해수계통의 계통유로",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 241,
+                      "parentId": 12,
+                      "name": "1차측 기기냉각해수계통 계통운전, 연동사항",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 242,
+                      "parentId": 12,
+                      "name": "비상디젤발전기의 개요 및 기능과 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 243,
+                      "parentId": 12,
+                      "name": "비상디젤발전기의 구성, 기능, 설계 요구사항, 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 244,
+                      "parentId": 12,
+                      "name": "비상디젤발전기와 타 계통, 기기간의 상관 관계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 245,
+                      "parentId": 12,
+                      "name": "비상디젤발전기의 설계적 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 246,
+                      "parentId": 12,
+                      "name": "순환수계통의 개요 및 기능과 목적",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 247,
+                      "parentId": 12,
+                      "name": "순환수계통 주요 및 보조 기기의 기능, 설계 요구사항, 특성",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 248,
+                      "parentId": 12,
+                      "name": "순환수계통과 타 계통, 기기간의 상관 관계",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    },
+                    {
+                      "id": 249,
+                      "parentId": 12,
+                      "name": "순환수계통 정상 공급전원",
+                      "type": "KST",
+                      "sortOrder": 0,
+                      "depth": 4,
+                      "metadata": {
+                        "kstType": "KNOWLEDGE"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "message": "직무체계 트리 조회 완료",
+  "timestamp": "2025-10-22T14:00:17"
+}

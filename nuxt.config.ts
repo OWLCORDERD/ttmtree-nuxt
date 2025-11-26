@@ -21,6 +21,7 @@ export default defineNuxtConfig({
   },
   modules: [
     'nuxt-font-loader',
+    '@pinia/nuxt',
   ],
   // // 전역 css 선언
   // css: [

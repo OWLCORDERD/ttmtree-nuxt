@@ -11,10 +11,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.11.3",
+    "@types/fs-promise": "^2.0.2",
     "d3": "^7.9.0",
     "dotenv": "^17.2.3",
     "nuxt": "^4.2.1",
     "nuxt-font-loader": "^2.3.5",
+    "pinia": "^3.0.4",
     "scss": "^0.2.4",
     "vue": "^3.5.25",
     "vue-router": "^4.6.3"

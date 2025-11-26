@@ -27,7 +27,7 @@
                     <button class="depth-btn" data-depth="5">5</button>
                 </div>
             </div>
-            <div id="tree1" class="tree"></div>
+            <div id="comp-tree" class="tree"></div>
         </div>
 
         <div class="tree-panel">
@@ -57,7 +57,7 @@
                     <button class="depth-btn" data-depth="5">5</button>
                 </div>
             </div>
-            <div id="tree2" class="tree"></div>
+            <div id="job-tree" class="tree"></div>
         </div>
 
         <div class="tree-panel">
@@ -87,13 +87,20 @@
                     <button class="depth-btn" data-depth="5">5</button>
                 </div>
             </div>
-            <div id="tree3" class="tree"></div>
+            <div id="edu-tree" class="tree"></div>
         </div>
     </div>
 </template>
 
 <script setup>
-import * as d3 from 'd3';
+const { $treeInstance: treeInstance, $ttmController: ttmController } = useNuxtApp();
+
+/* DOM 트리 구조 생성 이후 백터 그래픽 렌더링 시작 */
+onBeforeMount(() => {
+    treeInstance.forEach(instance => {
+        ttmController(instance.containerId, instance.dataUrl, instance.checkboxContainerId);
+    });
+})
 
 definePageMeta({
   layout: 'default',
