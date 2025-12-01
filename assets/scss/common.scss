@@ -23,26 +23,36 @@
         
         /* Panel Header */
         .panel-header {
-            padding: var(--spacing-lg);
+            padding: 13.5px;
             color: var(--color-white);
-        }
-        
-        .panel-header h2 {
-            font-size: var(--font-xl);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-        }
-        
-        .panel-header .icon {
-            font-size: var(--spacing-lg);
-        }
-        
-        .panel-header .subtitle {
-            font-size: var(--font-xs);
-            font-weight: 400;
-            margin-left: auto;
-            opacity: 0.9;
+
+            .index-title {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                width: max-content;
+                margin: 0 auto;
+
+                .nuxt-icon {
+                    width: 25px;
+                    height: 25px;
+                    margin-bottom: 0;
+                }
+
+                .title {
+                    font-size: 24px;
+                    font-weight: 700;
+                }
+            }
+
+            .sub-title {
+                display: block;
+                width: 100%;
+                font-size: 14px;
+                font-weight: 500;
+                text-align: center;
+                margin: 6px auto 0;
+            }
         }
         
         .comp-header {
@@ -60,150 +70,189 @@
         /* Filter Section */
         .filter-section {
             background: var(--color-gray-dark);
-            padding: 0.8rem;
+            padding: 14px 20px;
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-sm);
-        }
-        
-        .filter-controls {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            flex-wrap: wrap;
-        }
-        
-        .filter-toggle {
-            background: var(--color-gray-darker);
-            color: var(--color-white);
-            border: none;
-            padding: 0.4rem 0.8rem;
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            font-size: var(--font-md);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-        }
-        
-        .filter-toggle:hover {
-            background: var(--color-gray-hover);
-        }
-        
-        .type-checkboxes {
-            display: flex;
-            gap: var(--spacing-sm);
-            flex-wrap: wrap;
-        }
-        
-        .type-checkbox {
-            background: var(--color-gray-darker);
-            color: var(--color-white);
-            padding: var(--spacing-xs) 0.6rem;
-            border-radius: var(--radius-sm);
-            font-size: var(--font-sm);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xs);
-            user-select: none;
-        }
-        
-        .type-checkbox:hover {
-            background: var(--color-gray-hover);
-        }
-        
-        .type-checkbox input[type="checkbox"] {
-            cursor: pointer;
-        }
-        
-        .search-controls {
-            display: flex;
-            gap: var(--spacing-sm);
-            align-items: center;
-        }
-        
-        .search-box {
-            flex: 1;
-            display: flex;
-            background: var(--color-white);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-        
-        .search-box input {
-            flex: 1;
-            border: none;
-            padding: var(--spacing-sm);
-            font-size: var(--font-md);
-            outline: none;
-        }
-        
-        .search-btn {
-            background: transparent;
-            border: none;
-            padding: var(--spacing-sm);
-            cursor: pointer;
-            font-size: var(--font-lg);
-        }
-        
-        .refresh-btn {
-            background: var(--color-gray-darker);
-            color: var(--color-white);
-            border: none;
-            padding: var(--spacing-sm);
-            border-radius: var(--radius-md);
-            cursor: pointer;
-            font-size: var(--font-lg);
-            width: var(--button-size-md);
-            height: var(--button-size-md);
-        }
-        
-        .refresh-btn:hover {
-            background: var(--color-gray-hover);
-        }
-        
-        .depth-controls {
-            display: flex;
-            gap: var(--spacing-xs);
-            align-items: center;
-        }
-        
-        .depth-label {
-            color: var(--color-white);
-            font-size: var(--font-md);
-            margin-right: var(--spacing-xs);
-        }
-        
-        .depth-btn {
-            background: var(--color-white);
-            border: 1px solid var(--color-gray-light);
-            color: var(--color-dark);
-            padding: var(--spacing-xs) 0.6rem;
-            border-radius: var(--radius-circle);
-            cursor: pointer;
-            font-size: var(--font-sm);
-            min-width: var(--button-size-sm);
-            height: var(--button-size-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .depth-btn:hover {
-            background: var(--color-gray-bg);
-        }
-        
-        .depth-btn.expand-all,
-        .depth-btn.collapse-all {
-            border-radius: var(--radius-md);
-        }
-        
-        .depth-btn.active {
-            background: var(--color-link);
-            color: var(--color-white);
-            border-color: var(--color-link);
-            font-weight: 600;
+
+            .filter-controls {
+                display: flex;
+                align-items: center;
+                gap: var(--spacing-sm);
+                flex-wrap: wrap;
+
+                .filter-toggle {
+                    color: var(--color-white);
+                    border: none;
+                    border-radius: var(--radius-md);
+                    font-size: var(--font-md);
+                    display: flex;
+                    align-items: center;
+                    gap: var(--spacing-xs);
+                }
+
+                .type-checkboxes {
+                    display: flex;
+                    gap: 8px;
+                    flex-wrap: wrap;
+
+                    .type-checkbox {
+                        color: var(--color-white);
+                        border-radius: var(--radius-sm);
+                        font-size: var(--font-sm);
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        gap: var(--spacing-xs);
+                        user-select: none;
+
+                        input[type="checkbox"] {
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+
+            .search-controls {
+                display: flex;
+                gap: var(--spacing-sm);
+                align-items: center;
+                margin-top: 10px;
+                padding-bottom: 14px;
+                border-bottom: 1px solid var(--color-gray-medium);
+
+                .search-box {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    padding-right: 20px;
+                    background: var(--color-white);
+                    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+                    border-radius: var(--radius-rectangle);
+                    overflow: hidden;
+
+                    input {
+                        flex: 1;
+                        border: none;
+                        padding: 10px 0 10px 20px;
+                        font-size: var(--font-md);
+                        outline: none;
+                        max-height: 32px;
+                    }
+
+                    .search-btn {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: transparent;
+                        border: none;
+                        width: 17px;
+                        height: 17px;
+                        cursor: pointer;
+
+                        .nuxt-icon {
+                            width: 17px;
+                            height: 17px;
+                        }
+                    }
+                }
+
+                .refresh-btn {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: var(--color-dark);
+                    color: var(--color-white);
+                    border: none;
+                    border-radius: var(--radius-circle);
+                    cursor: pointer;
+                    width: 32px;
+                    height: 32px;
+
+                    &:hover {
+                        background: var(--color-gray-hover);
+                    }
+
+                    .nuxt-icon {
+                        width: 16px;
+                        height: 16px;
+                    }
+                }
+            }
+
+            .depth-controls {
+                display: flex;
+                gap: var(--spacing-xs);
+                align-items: center;
+                margin-top: 10px;
+
+                .depth-label {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    color: var(--color-white);
+                    font-size: var(--font-md);
+                    margin-right: var(--spacing-xs);
+                }
+
+                .depth-btn {
+                    background: var(--color-white);
+                    border: 1px solid var(--color-gray-light);
+                    color: var(--color-dark);
+                    padding: var(--spacing-xs) 0.6rem;
+                    border-radius: var(--radius-rectangle);
+                    cursor: pointer;
+                    font-size: var(--font-sm);
+                    min-width: var(--button-size-lg);
+                    height: 24px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &:hover {
+                        background: var(--color-gray-bg);
+                    }
+
+                    &.expand-all,
+                    &.collapse-all {
+                        border-radius: var(--radius-md);
+                    }
+
+                    &.active {
+                        background: var(--color-link);
+                        color: var(--color-white);
+                        border-color: var(--color-link);
+                        font-weight: 600;
+                    }
+                }
+
+                .all-control {
+                    display: flex;
+                    align-items: center;
+                    gap: 5px;
+                    margin-left: 10px;
+
+                    & > button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 24px;
+                        height: 24px;
+                        background: var(--color-white);
+                        border-radius: var(--radius-md);
+                        border: 1px solid #d7d7d7;
+                        cursor: pointer;
+
+                        .nuxt-icon {
+                            width: 12px;
+                            height: 12px;
+                        }
+
+                        &:hover {
+                            background: var(--color-gray-bg);
+                        }
+                    }
+                }
+            }
         }
         
         /* Tree Container */
@@ -217,7 +266,6 @@
         /* Tree Nodes */
         .node-group {
             font-size: 13px;
-            font-family: 'Segoe UI', sans-serif;
         }
         
         .node-bg {
@@ -241,16 +289,19 @@
         }
         
         .type-tag-bg {
-            fill: var(--color-link);
+            fill: #fff;
+            stroke: #d7d7d7;
         }
         
         .node-name {
             fill: var(--color-dark);
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 500;
         }
         
         .node-name:hover {
             fill: var(--color-link);
+            text-decoration: underline;
         }
         
         .node-count {
@@ -267,46 +318,46 @@
             font-weight: bold;
         }
         
-        /* Type specific colors */
-        .type-COMPETENCY .type-tag-bg {
-            fill: var(--type-competency);
-        }
+        /* 타입에 따른 라벨 색상 (디자인 변경으로 인한 비활성화) */
+        // .type-COMPETENCY .type-tag-bg {
+        //     fill: var(--type-competency);
+        // }
         
-        .type-BEHAVIORAL_INDICATOR .type-tag-bg {
-            fill: var(--type-behavioral-indicator);
-        }
+        // .type-BEHAVIORAL_INDICATOR .type-tag-bg {
+        //     fill: var(--type-behavioral-indicator);
+        // }
         
-        .type-JOB_FAMILY .type-tag-bg {
-            fill: var(--type-job-family);
-        }
+        // .type-JOB_FAMILY .type-tag-bg {
+        //     fill: var(--type-job-family);
+        // }
         
-        .type-JOB_SERIES .type-tag-bg {
-            fill: var(--type-job-series);
-        }
+        // .type-JOB_SERIES .type-tag-bg {
+        //     fill: var(--type-job-series);
+        // }
         
-        .type-JOB .type-tag-bg {
-            fill: var(--type-job);
-        }
+        // .type-JOB .type-tag-bg {
+        //     fill: var(--type-job);
+        // }
         
-        .type-TASK .type-tag-bg {
-            fill: var(--type-task);
-        }
+        // .type-TASK .type-tag-bg {
+        //     fill: var(--type-task);
+        // }
         
-        .type-KST .type-tag-bg {
-            fill: var(--type-kst);
-        }
+        // .type-KST .type-tag-bg {
+        //     fill: var(--type-kst);
+        // }
         
-        .type-COURSE .type-tag-bg {
-            fill: var(--type-course);
-        }
+        // .type-COURSE .type-tag-bg {
+        //     fill: var(--type-course);
+        // }
         
-        .type-LESSON .type-tag-bg {
-            fill: var(--type-lesson);
-        }
+        // .type-LESSON .type-tag-bg {
+        //     fill: var(--type-lesson);
+        // }
         
-        .type-LEARNING_OBJECT .type-tag-bg {
-            fill: var(--type-learning-object);
-        }
+        // .type-LEARNING_OBJECT .type-tag-bg {
+        //     fill: var(--type-learning-object);
+        // }
         
         /* Loading indicator */
         .loading {
@@ -359,12 +410,10 @@
         /* Clickable nodes */
         .node-clickable .node-name {
             cursor: pointer;
-            font-weight: 500;
         }
         
         .node-clickable .node-name:hover {
             fill: var(--color-link-hover);
-            text-decoration: underline;
         }
         
         /* Selected node */

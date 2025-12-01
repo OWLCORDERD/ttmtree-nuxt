@@ -35,7 +35,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     const designConfig = {
         tree: {
             indentSize: 30,          // 들여쓰기 크기 (px)
-            nodeHeight: 30,          // 노드 높이 (px)
+            nodeHeight: 40,          // 노드 높이 (px)
             duration: 300,           // 애니메이션 지속 시간 (ms)
             initialDepth: 1,         // 초기 펼침 depth
             margin: {
@@ -101,7 +101,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     // 2025.11.26[mhlim]: 트리 데이터 상태관리 매니저
     const dataManager = useMyTTMDataManagerStore();
 
-    // Helper function to check if type is clickable
+    // 해당 노드가 클릭 가능한 타입인지 확인하는 헬퍼 함수
     const isClickableType = (type) => {
         return designConfig.types.clickable.includes(type);
     }
@@ -133,8 +133,28 @@ export default defineNuxtPlugin((nuxtApp) => {
         Renderer.init();
 
         try {
-            // 현재 트리 유형 데이터 조회 이후 d3 트리 계층 데이터 구조화
-            const root = await getD3HierarchyData(dataUrl, checkboxContainerId);
+            let root = null;
+
+            // 트리 데이터 매니저 상태관리에 트리 데이터 조회 요청 
+            await dataManager.fetchTreeDepth(dataUrl);
+            
+            // 2025.12.01[mhlim]: 상태관리 업데이트 이후 해당 컨테이너에 맞는 데이터 추출
+            switch (dataUrl) {
+                case '/edu':
+                    root = dataManager.$state.eduTree;
+
+                    console.log('dataManager.$state.eduTree', dataManager.$state.eduTree);
+                    break;
+                case '/job':
+                    root = dataManager.$state.jobTree;
+                    break;
+                case '/comp':
+                    root = dataManager.$state.compTree;
+                    break;
+            }
+
+            // 각 트리 컨테이너에 맞는  구조 타입별 체크박스 생성
+            createTypeCheckboxes(root, checkboxContainerId);
 
             // 해당 트리 계층 데이터 구조로 업데이트
             Renderer.update(root);
@@ -153,31 +173,6 @@ export default defineNuxtPlugin((nuxtApp) => {
                 .attr('class', 'error')
                 .text('데이터 로딩 실패: ' + error.message);
         }
-    }
-
-    // 2025.11.26[mhlim]: TTM 트리 데이터 조회 (d3 계층 구조화 + 타입 체크박스 생성) 함수
-    const getD3HierarchyData = async (dataUrl, checkboxContainerId) => {
-        // 현재 컨테이너에 해당하는 트리 데이터 조회
-        await dataManager.fetchTreeDepth(dataUrl);
-
-        // 트리 데이터 > d3 계층 구조 데이터 변환
-        let currentD3Node;
-
-        switch(dataUrl) {
-            case '/edu':
-                currentD3Node = d3.hierarchy(dataManager.$state.eduTree);
-                break;
-            case '/job':
-                currentD3Node = d3.hierarchy(dataManager.$state.jobTree);
-                break;
-            case '/comp':
-                currentD3Node = d3.hierarchy(dataManager.$state.compTree);
-        }
-
-        // 각 트리 컨테이너에 맞는  구조 타입별 체크박스 생성
-        createTypeCheckboxes(currentD3Node, checkboxContainerId);
-
-        return currentD3Node;
     }
 
     // 2025.11.26[mhlim]: 현재 타겟 컨테이너 트리 > 필터 체크박스 생성 함수

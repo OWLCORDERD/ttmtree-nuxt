@@ -54,20 +54,19 @@ export class TTMTreeRenderer {
      * Recalculate type tag positions (after visibility changes)
      */
     recalculateTypeTagPositions() {
-        this.g.selectAll('.type-tag').each((d) => {
-          console.log('d', d);
-          console.log('this', this.designConfig.ui);
+        this.g.selectAll('.type-tag').each(function(d) {
             const hasToggle = d.data.children && d.data.children.length > 0;
-            const typeTagStartX = hasToggle ? this.designConfig.ui.typeTagOffset.withToggle : this.designConfig.ui.typeTagOffset.withoutToggle;
+            const typeTagStartX = hasToggle ? 21 : 5;
 
             // Update type tag position
             d3.select(this).attr('transform', `translate(${typeTagStartX}, 0)`);
 
             // Recalculate text width
             const textElement = this.querySelector('text');
+
             if (textElement) {
                 const textWidth = textElement.getComputedTextLength();
-                const rectWidth = textWidth + 10;
+                const rectWidth = textWidth + 20;
                 d3.select(this).select('rect').attr('width', rectWidth);
 
                 // Update node name position
@@ -169,7 +168,7 @@ export class TTMTreeRenderer {
             .attr('x', 0)
             .attr('y', -this.nodeHeight / 2 + 3)
             .attr('width', '100%')
-            .attr('height', this.nodeHeight - 6)
+            .attr('height', this.nodeHeight)
             .attr('fill', 'transparent')
             .on('mouseenter', function() {
                 d3.select(this).attr('fill', '#f5f5f5');
@@ -217,9 +216,9 @@ export class TTMTreeRenderer {
             });
 
         toggleGroup.append('circle')
-            .attr('r', this.designConfig.ui.toggleRadius)
+            .attr('r', 8)
             .attr('cx', 0)
-            .attr('cy', 0)
+            .attr('cy', 2)
             .attr('class', d => d.children ? 'toggle-open' : 'toggle-closed')
             .style('display', d => (d.data.children && d.data.children.length > 0) ? 'block' : 'none');
 
@@ -244,34 +243,33 @@ export class TTMTreeRenderer {
             .attr('class', 'type-tag')
             .attr('transform', d => {
                 const hasToggle = d.data.children && d.data.children.length > 0;
-                const xPos = hasToggle ? this.designConfig.ui.typeTagOffset.withToggle : this.designConfig.ui.typeTagOffset.withoutToggle;
+                const xPos = hasToggle ? 21 : 5;
                 return `translate(${xPos}, 0)`;
             });
 
         typeTag.append('rect')
             .attr('x', 0)
             .attr('y', -8)
-            .attr('rx', 3)
-            .attr('ry', 3)
-            .attr('height', 16)
+            .attr('rx', 10)
+            .attr('ry', 10)
+            .attr('height', 22)
             .attr('class', 'type-tag-bg');
 
         typeTag.append('text')
-            .attr('x', 5)
-            .attr('y', 0)
-            .attr('dominant-baseline', 'central')
-            .style('font-size', '11px')
-            .style('fill', '#fff')
+            .attr('x', 10)
+            .attr('y', 8)
+            .style('font-size', '14px')
+            .style('fill', '#0065CD')
             .text(d => this.getTypeDisplayName(d.data.type, d.data));
 
         // Calculate width and adjust
         typeTag.each(function(d) {
             const textWidth = this.querySelector('text').getComputedTextLength();
-            const rectWidth = textWidth + 10;
+            const rectWidth = textWidth + 20;
             d3.select(this).select('rect').attr('width', rectWidth);
 
             const hasToggle = d.data.children && d.data.children.length > 0;
-            const typeTagStartX = hasToggle ? this.designConfig.ui.typeTagOffset.withToggle : this.designConfig.ui.typeTagOffset.withoutToggle;
+            const typeTagStartX = hasToggle ? 21 : 5;
             const nodeNameElement = d3.select(this.parentNode).select('.node-name');
             nodeNameElement.attr('x', typeTagStartX + rectWidth + 5);
         });
@@ -285,8 +283,7 @@ export class TTMTreeRenderer {
         nodeContent.append('text')
             .attr('class', 'node-name')
             .attr('x', 100) // Temporary, will be adjusted
-            .attr('y', 0)
-            .attr('dominant-baseline', 'central')
+            .attr('y', 7)
             .style('cursor', 'pointer')
             .text(d => d.data.name)
             .on('click', (event, d) => {
@@ -295,9 +292,9 @@ export class TTMTreeRenderer {
                     event.stopPropagation();
                     this.onNodeClick(event, d);
                 }
-            });
+        });
     }
-
+ 
     /**
      * Create right info section
      * @param {Selection} nodeEnter - Node enter selection
@@ -305,13 +302,12 @@ export class TTMTreeRenderer {
     createRightInfo(nodeEnter) {
         const rightInfo = nodeEnter.append('g')
             .attr('class', 'right-info')
-            .attr('transform', `translate(${this.designConfig.ui.rightInfoOffset}, 0)`);
+            .attr('transform', `translate(450, 0)`);
 
         rightInfo.append('text')
             .attr('class', 'node-count')
             .attr('x', 0)
-            .attr('y', 0)
-            .attr('dominant-baseline', 'central')
+            .attr('y', 5)
             .style('font-size', '11px')
             .style('fill', '#999')
             .style('cursor', 'pointer')
@@ -349,7 +345,7 @@ export class TTMTreeRenderer {
         // Update type tag positions
         nodeUpdate.select('.type-tag').each(function(d) {
             const hasToggle = d.data.children && d.data.children.length > 0;
-            const typeTagStartX = hasToggle ? this.designConfig.ui.typeTagOffset.withToggle : this.designConfig.ui.typeTagOffset.withoutToggle;
+            const typeTagStartX = hasToggle ? 21 : 5;
 
             d3.select(this).attr('transform', `translate(${typeTagStartX}, 0)`);
 

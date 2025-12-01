@@ -10,27 +10,29 @@ export default defineNuxtConfig({
     }
   },
   // 공통 전역 변수 scss 지정
-  vite: {
-    css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: '@use "~/assets/scss/base/variables.scss" as *;',
-        },
-      },
-    }
-  },
+  // variables.scss는 css 배열에서만 로드하여 중복/루프 방지
+  // vite: {
+  //   css: {
+  //     preprocessorOptions: {
+  //       scss: {
+  //         additionalData: '@use "~/assets/scss/base/variables.scss" as *;',
+  //       },
+  //     },
+  //   }
+  // },
   modules: [
     'nuxt-font-loader',
     '@pinia/nuxt',
+    'nuxt-svgo'
   ],
   // // 전역 css 선언
-  // css: [
-  //   '~/assets/scss/base/reset.scss',
-  //   '~/assets/scss/base/iconfont.scss',
-  //   '~/assets/scss/base/variables.scss',
-  //   '~/assets/scss/base/animation.scss',
-  //   '~/assets/scss/common.scss',
-  // ],
+  css: [
+    '~/assets/scss/base/reset.scss',
+    '~/assets/scss/base/iconfont.scss',
+    '~/assets/scss/base/variables.scss',
+    '~/assets/scss/base/animation.scss',
+    '~/assets/scss/common.scss',
+  ],
   // @ts-ignore - nuxt-font-loader 모듈 타입 정의 없음
   fontLoader: {
     local: [
