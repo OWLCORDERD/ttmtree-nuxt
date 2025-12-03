@@ -14,10 +14,10 @@ export class TTMTreeRenderer {
         this.svg = null;
         this.g = null;
         this.onNodeClick = null; // Callback for node click (detail modal)
-        this.onToggleClick = null; // Callback for toggle click
         this.onMappingClick = null; // Callback for mapping icon click
         this.getTypeDisplayName = null;
         this.isClickableType = null;
+        this.nodeUpdate = null;
     }
 
     /**
@@ -182,21 +182,24 @@ export class TTMTreeRenderer {
             .attr('class', 'node-content')
             .attr('transform', d => `translate(${d.y}, 0)`);
 
-        // Toggle button
+        // 하위 뎁스 펼침/닫기 토글 버튼 생성
         this.createToggleButton(nodeContent);
 
-        // Type tag
+        // 각 노드 타입 태그 생성
         this.createTypeTag(nodeContent);
 
-        // Node name
+        // 각 트리 아이템 노드 제목 생성
         this.createNodeName(nodeContent);
 
-        // Right info (count)
+        // 각 트리 아이템 노드 우측 맵핑 정보 생성
         this.createRightInfo(nodeEnter);
 
         // Tooltip
         nodeEnter.append('title')
             .text(d => `${d.data.type}: ${d.data.name}`);
+
+        
+        this.ellipsisNodeName();
 
         return nodeEnter;
     }
@@ -211,27 +214,24 @@ export class TTMTreeRenderer {
             .style('cursor', 'pointer')
             .on('click', (event, d) => {
                 if (this.onToggleClick) {
+                    console.log('createToggleButton', d);
                     this.onToggleClick(event, d);
                 }
             });
 
-        toggleGroup.append('circle')
+        const circle = toggleGroup.append('circle')
             .attr('r', 8)
             .attr('cx', 0)
             .attr('cy', 2)
             .attr('class', d => d.children ? 'toggle-open' : 'toggle-closed')
             .style('display', d => (d.data.children && d.data.children.length > 0) ? 'block' : 'none');
 
-        toggleGroup.append('text')
+        toggleGroup.append('path')
             .attr('x', 0)
             .attr('y', 0)
-            .attr('text-anchor', 'middle')
-            .attr('dominant-baseline', 'central')
-            .style('font-size', '10px')
-            .style('fill', '#fff')
-            .style('pointer-events', 'none')
+            .attr('d', d => d.children ? 'M -4 0 L 4 0 L 0 5 Z' : 'M -4 0 L 4 0 L 0 5 Z')
+            .attr('fill', '#fff')
             .style('display', d => (d.data.children && d.data.children.length > 0) ? 'block' : 'none')
-            .text(d => d.children ? '−' : '+');
     }
 
     /**
@@ -285,6 +285,10 @@ export class TTMTreeRenderer {
             .attr('x', 100) // Temporary, will be adjusted
             .attr('y', 7)
             .style('cursor', 'pointer')
+            .style('overflow', 'hidden')
+            .style('text-overflow', 'ellipsis')
+            .style('white-space', 'nowrap')
+            .style('max-width', '200px')
             .text(d => d.data.name)
             .on('click', (event, d) => {
                 // Node name click shows detail modal for all types
@@ -302,25 +306,28 @@ export class TTMTreeRenderer {
     createRightInfo(nodeEnter) {
         const rightInfo = nodeEnter.append('g')
             .attr('class', 'right-info')
-            .attr('transform', `translate(450, 0)`);
+            .attr('transform', `translate(450, 0)`)
+
+        rightInfo.append('rect')
+        .attr('class', 'right-info-rect')
+
+        // SVG image 요소 사용 (foreignObject 대신)
+        rightInfo.append('image')
+        .attr('href', '/_nuxt/assets/images/svg/ttm-connect.svg') // Nuxt 빌드 경로
+        .attr('x', 18)
+        .attr('y', -4)
+        .attr('width', 16)
+        .attr('height', 16)
+        .attr('preserveAspectRatio', 'xMidYMid meet');
 
         rightInfo.append('text')
-            .attr('class', 'node-count')
-            .attr('x', 0)
-            .attr('y', 5)
-            .style('font-size', '11px')
-            .style('fill', '#999')
-            .style('cursor', 'pointer')
-            .style('display', d => this.isClickableType(d.data.type) ? 'block' : 'none')
-            .text('↔ 99')
-            .on('click', (event, d) => {
-                if (this.isClickableType(d.data.type)) {
-                    event.stopPropagation();
-                    if (this.onMappingClick) {
-                        this.onMappingClick(event, d);
-                    }
-                }
-            });
+        .attr('x', 37)
+        .attr('y', 9)
+        .style('font-size', '14px')
+        .style('fill', '#000')
+        .text('99')
+        .style('cursor', 'pointer');
+        
     }
 
     /**
@@ -339,8 +346,8 @@ export class TTMTreeRenderer {
         nodeUpdate.select('.toggle-btn circle')
             .attr('class', d => d.children ? 'toggle-open' : 'toggle-closed');
 
-        nodeUpdate.select('.toggle-btn text')
-            .text(d => d.children ? '−' : '+');
+        nodeUpdate.select('.toggle-btn path')
+            .attr('d', d => d.children ? 'M -4 1 L 4 1 L 4 3 L -4 3 Z' : 'M -4 0 L 4 0 L 0 5 Z');
 
         // Update type tag positions
         nodeUpdate.select('.type-tag').each(function(d) {
@@ -352,7 +359,7 @@ export class TTMTreeRenderer {
             const textElement = this.querySelector('text');
             if (textElement) {
                 const textWidth = textElement.getComputedTextLength();
-                const rectWidth = textWidth + 10;
+                const rectWidth = textWidth + 20;
                 d3.select(this).select('rect').attr('width', rectWidth);
 
                 const nodeNameElement = d3.select(this.parentNode).select('.node-name');
@@ -417,5 +424,44 @@ export class TTMTreeRenderer {
             top: treeContainer.scrollTop + (nodeRect.top - containerRect.top) - containerRect.height / 3,
             behavior: 'smooth'
         });
+    }
+
+    /**
+     * Handle toggle button click
+     * @param {Event} event - Click event
+     * @param {Object} node - Node data
+     */
+    onToggleClick(event, node) {
+        event.stopPropagation();
+
+        if (node.children) {
+            node._children = node.children;
+            node.children = null;
+        } else if (node._children) {
+            node.children = node._children;
+            node._children = null;
+        }
+        
+        this.nodeUpdate(node);
+    }
+    
+    // 2025.12.03[mhlim]: 노드 제목 말줄임 처리
+    ellipsisNodeName() {
+        // 노드명 요소 전체 조회
+        const title = document.querySelectorAll('.node-name');
+
+        // 25자 제한
+        const maxLength = 25;
+
+        // 각 노드명 요소 텍스트 말줄임 처리
+        title.forEach((item) => {
+            const text = item.textContent;
+
+            // 텍스트 길이가 25자 이상인 경우 말줄임 처리
+            if (text.length > maxLength) {
+                const ellipsisTxt = text.substring(0, maxLength - 2) + '...';
+                item.textContent = ellipsisTxt;
+            }
+        })
     }
 }

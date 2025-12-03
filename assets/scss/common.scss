@@ -67,13 +67,14 @@
             background: linear-gradient(135deg, var(--color-edu) 0%, var(--color-edu-dark) 100%);
         }
         
-        /* Filter Section */
+        /* 필터 영역 */
         .filter-section {
             background: var(--color-gray-dark);
             padding: 14px 20px;
             display: flex;
             flex-direction: column;
 
+            // 필터 체크박스 목록
             .filter-controls {
                 display: flex;
                 align-items: center;
@@ -96,6 +97,7 @@
                     flex-wrap: wrap;
 
                     .type-checkbox {
+                        position: relative;
                         color: var(--color-white);
                         border-radius: var(--radius-sm);
                         font-size: var(--font-sm);
@@ -105,13 +107,43 @@
                         gap: var(--spacing-xs);
                         user-select: none;
 
-                        input[type="checkbox"] {
+                        // 2025.12.03[mhlim]: 커스텀 체크박스 버튼
+                        .custom-checkbox {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 16px;
+                            height: 16px;
+                            border: 1px solid #d7d7d7;
+                            border-radius: var(--radius-sm);
+                            background: var(--color-white);
                             cursor: pointer;
+
+                            .nuxt-icon {
+                                font-size: 9px;
+                                color: #d7d7d7;
+                            }
+                        }
+
+                        & > label {
+                            cursor: pointer;
+                        }
+                        
+                        input[type="checkbox"] {
+                            display: none;
+
+                            &:checked {
+                                + .custom-checkbox {
+                                    background: var(--color-link);
+                                    border-color: var(--color-link);
+                                }
+                            }
                         }
                     }
                 }
             }
 
+            // 검색 폼 영역
             .search-controls {
                 display: flex;
                 gap: var(--spacing-sm);
@@ -178,7 +210,9 @@
                     }
                 }
             }
+            
 
+            // 뎁스 컨트롤 버튼 목록
             .depth-controls {
                 display: flex;
                 gap: var(--spacing-xs);
@@ -216,15 +250,42 @@
                     &.collapse-all {
                         border-radius: var(--radius-md);
                     }
+                }
 
-                    &.active {
-                        background: var(--color-link);
-                        color: var(--color-white);
-                        border-color: var(--color-link);
-                        font-weight: 600;
+                &.competency {
+                    .depth-btn {
+                        &.active {
+                            background: var(--color-comp);
+                            color: var(--color-white);
+                            border-color: var(--color-comp);
+                            font-weight: 600;
+                        }
                     }
                 }
 
+                &.job {
+                    .depth-btn {
+                        &.active {
+                            background: var(--color-job);
+                            color: var(--color-white);
+                            border-color: var(--color-job);
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                &.edu {
+                    .depth-btn {
+                        &.active {
+                            background: var(--color-edu);
+                            color: var(--color-white);
+                            border-color: var(--color-edu);
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                // 전체 뎁스 펼침/닫기 버튼 목록
                 .all-control {
                     display: flex;
                     align-items: center;
@@ -278,14 +339,10 @@
         
         .toggle-open {
             fill: var(--color-dark);
-            stroke: var(--color-dark);
-            stroke-width: 1px;
         }
         
         .toggle-closed {
-            fill: var(--color-white);
-            stroke: var(--color-dark);
-            stroke-width: 1px;
+            fill: var(--color-dark);
         }
         
         .type-tag-bg {
@@ -307,6 +364,21 @@
         .node-count {
             font-size: 11px;
             fill: var(--color-gray);
+        }
+
+        .right-info {
+            &-rect {
+                display: block;
+                width: 50px;
+                height: 20px;
+                fill: transparent;
+                x: 10px;
+                y: -6px;
+                rx: 10px;
+                ry: 10px;
+                stroke: #d7d7d7;
+                stroke-width: 1px;
+            }
         }
         
         .node-clickable .node-count {

@@ -37,9 +37,6 @@ export const useMyTTMDataManagerStore = defineStore('TTMDataManager', {
             type: 'EMPTY',
             children: []
         };
-      } else if (originalData.length === 1) {
-        // 단일 루트인 경우 그대로 반환
-          originalData = originalData[0];
       } else {
         // 여러 루트가 있는 경우 가상 루트 생성
         originalData = {

@@ -13,7 +13,19 @@
                     <button class="filter-toggle">
                         <span class="icon"><TTMFilter /></span> Filter
                     </button>
-                    <div class="type-checkboxes" id="comp-checkboxes"></div>
+                    <div class="type-checkboxes" v-if="checkBoxTypes?.competency">
+                        <div class="type-checkbox" v-for="type in checkBoxTypes.competency" :key="type">
+                            <input type="checkbox"
+                                :id="'competency-' + type"
+                                :value="type"
+                                @change="handleCheckBoxChange($event, type, 'competency')"
+                                :checked="filterCheckedYn.competency[type]" />
+                            <button type="button" class="custom-checkbox" @change="handleCheckBoxChange($event, type, 'competency')">
+                                <CheckBox />
+                            </button>
+                            <label :for="'competency-' + type">{{ displayTypesName(type) }}</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="search-controls">
                     <div class="search-box">
@@ -26,12 +38,12 @@
                         <Refresh />
                     </button>
                 </div>
-                <div class="depth-controls">
+                <div class="depth-controls competency">
                     <div class="depth-label">
                         <TTMPlates />
                         <span>Depth</span>
                     </div>
-                    <button class="depth-btn" data-depth="1">1</button>
+                    <button class="depth-btn active" data-depth="1">1</button>
                     <button class="depth-btn" data-depth="2">2</button>
                     <button class="depth-btn" data-depth="3">3</button>
                     <button class="depth-btn" data-depth="4">4</button>
@@ -60,7 +72,19 @@
                     <button class="filter-toggle">
                         <span class="icon"><TTMFilter /></span> Filter
                     </button>
-                    <div class="type-checkboxes" id="job-checkboxes"></div>
+                    <div class="type-checkboxes" v-if="checkBoxTypes?.job">
+                        <div class="type-checkbox" v-for="type in checkBoxTypes.job" :key="type">
+                            <input type="checkbox"
+                                :id="'job-' + type"
+                                :value="type"
+                                @change="handleCheckBoxChange($event, type, 'competency')"
+                                :checked="filterCheckedYn.job[type]" />
+                            <button type="button" class="custom-checkbox" @change="handleCheckBoxChange($event, type, 'job')">
+                                <CheckBox />
+                            </button>
+                            <label :for="'job-' + type">{{ displayTypesName(type) }}</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="search-controls">
                     <div class="search-box">
@@ -69,12 +93,12 @@
                     </div>
                     <button class="refresh-btn"><Refresh /></button>
                 </div>
-                <div class="depth-controls">
+                <div class="depth-controls job">
                     <div class="depth-label">
                         <TTMPlates />
                         <span>Depth</span>
                     </div>
-                    <button class="depth-btn" data-depth="1">1</button>
+                    <button class="depth-btn active" data-depth="1">1</button>
                     <button class="depth-btn" data-depth="2">2</button>
                     <button class="depth-btn" data-depth="3">3</button>
                     <button class="depth-btn" data-depth="4">4</button>
@@ -103,7 +127,19 @@
                     <button class="filter-toggle">
                         <span class="icon"><TTMFilter /></span> Filter
                     </button>
-                    <div class="type-checkboxes" id="edu-checkboxes"></div>
+                    <div class="type-checkboxes" v-if="checkBoxTypes?.edu">
+                        <div class="type-checkbox" v-for="type in checkBoxTypes.edu" :key="type">
+                            <input type="checkbox"
+                                :id="'edu-' + type"
+                                :value="type"
+                                @change="handleCheckBoxChange($event, type, 'edu')"
+                                :checked="filterCheckedYn.edu[type]" />
+                            <button type="button" class="custom-checkbox" @change="handleCheckBoxChange($event, type, 'edu')">
+                                <CheckBox />
+                            </button>
+                            <label :for="'edu-' + type">{{ displayTypesName(type) }}</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="search-controls">
                     <div class="search-box">
@@ -112,12 +148,12 @@
                     </div>
                     <button class="refresh-btn"><Refresh /></button>
                 </div>
-                <div class="depth-controls">
+                <div class="depth-controls edu">
                     <div class="depth-label">
                         <TTMPlates />
                         <span>Depth</span>
                     </div>
-                    <button class="depth-btn" data-depth="1">1</button>
+                    <button class="depth-btn active" data-depth="1">1</button>
                     <button class="depth-btn" data-depth="2">2</button>
                     <button class="depth-btn" data-depth="3">3</button>
                     <button class="depth-btn" data-depth="4">4</button>
@@ -145,8 +181,12 @@ import PlusButton from '~/assets/images/svg/add.svg';
 import MinusButton from '~/assets/images/svg/minus.svg';
 import Search from '~/assets/images/svg/btn-search.svg';
 import Refresh from '~/assets/images/svg/btn-reset.svg';
+import CheckBox from '~/assets/images/svg/check.svg';
 
-const { $treeInstance: treeInstance, $ttmController: ttmController } = useNuxtApp();
+const { $treeInstance: treeInstance, 
+    $ttmController: ttmController,
+    $checkBoxTypes: checkBoxTypes,
+    $designConfig: designConfig } = useNuxtApp();
 
 /* DOM 트리 구조 생성 이후 백터 그래픽 렌더링 시작 */
 onBeforeMount(() => {
@@ -155,11 +195,53 @@ onBeforeMount(() => {
     });
 })
 
+onMounted(() => {
+    loading.value = false;
+})
+
+// 2025.12.03[mhlim]: 각 트리 컨테이너 체크박스 필터 상태관리
+const filterCheckedYn = ref({
+    // 역량 체계
+    competency: {
+        'COMPETENCY': true, // 역량
+        'BEHAVIORAL_INDICATOR': true, // 행동지표
+    },
+    // 직무 체계
+    job: {
+        'JOB_FAMILY': true, // 직계
+        'JOB_SERIES': true, // 직렬
+        'JOB': true, // 직무
+        'TASK': true, // Task
+        'KST': true, // K/S/T
+    },
+    // 교육 체계
+    edu: {
+        'COURSE': true, // 교육과정
+        'LESSON': true, // 교과목
+        'LEARNING_OBJECT': true, // 학습목표
+        'MODULE': true, // 모듈
+    }
+})
+
+const loading = ref(true);
+
+const displayTypesName = (type) => {
+    if (designConfig?.types?.displayNames[type]) {
+        return designConfig?.types?.displayNames?.[type];
+    } else {
+        return type;
+    }
+}
+
+const handleCheckBoxChange = (event, type, category) => {
+    event.preventDefault();
+
+    const currentContainer = filterCheckedYn.value[category];
+
+    currentContainer[type] = !currentContainer[type];
+}
+
 definePageMeta({
   layout: 'default',
 })
 </script>
-
-<style>
-
-</style>

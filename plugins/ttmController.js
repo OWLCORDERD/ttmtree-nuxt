@@ -14,22 +14,28 @@ export default defineNuxtPlugin((nuxtApp) => {
         {
             containerId: 'comp-tree',
             dataUrl: '/comp',
-            checkboxContainerId: 'comp-checkboxes',
             label: '역량체계'
         },
         {
             containerId: 'job-tree',
             dataUrl: '/job',
-            checkboxContainerId: 'job-checkboxes',
             label: '직무체계'
         },
         {
             containerId: 'edu-tree',
             dataUrl: '/edu',
-            checkboxContainerId: 'edu-checkboxes',
             label: '교육체계'
         }
     ];
+
+    // 2025.12.02[mhlim]: 각 트리 컨테이너 체크박스 필터 목록 상태관리
+    const checkBoxTypes = useState('checkBoxTypes', () => {
+        return {
+            competency: [],
+            job: [],
+            edu: [],
+        }
+    });
 
     // 2025.11.26[mhlim]: TTM 트리 백터 그래픽 디자인 설정
     const designConfig = {
@@ -101,24 +107,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     // 2025.11.26[mhlim]: 트리 데이터 상태관리 매니저
     const dataManager = useMyTTMDataManagerStore();
 
-    // 해당 노드가 클릭 가능한 타입인지 확인하는 헬퍼 함수
-    const isClickableType = (type) => {
-        return designConfig.types.clickable.includes(type);
-    }
-
-    // Helper function to get API URL for mappings
-    // const getMappingApiUrl = (itemType, itemId) => {
-    //     return `${CONFIG.api.baseUrl}${CONFIG.api.endpoints.mappings}/${itemType}/${itemId}`;
-    // }
-
     // 2025.11.26[mhlim]: TTM 메인 컨트롤러 함수
-    const TTMController = async (containerId, dataUrl, checkboxContainerId) => {
+    const TTMController = async (containerId, dataUrl) => {
         // 백터 그래픽 렌더링 생성자 인스턴스 생성
         const Renderer = new TTMTreeRenderer(containerId, designConfig);
-
-        // 렌더러 인스턴스 내부 이벤트 리스너 바인딩
-        Renderer.getTypeDisplayName = getTypeDisplayName;
-        Renderer.isClickableType = isClickableType;
 
         // 현재 트리 생성 대상자 컨테이너 선택
         const container = d3.select(`#${containerId}`);
@@ -153,8 +145,23 @@ export default defineNuxtPlugin((nuxtApp) => {
                     break;
             }
 
-            // 각 트리 컨테이너에 맞는  구조 타입별 체크박스 생성
-            createTypeCheckboxes(root, checkboxContainerId);
+            // 2025.12.02[mhlim]: 각 트리 컨테이너 필터링 체크박스 목록 셋팅
+            createTypeCheckboxList(root, dataUrl);
+
+            // 이벤트 리스너 실행 시, 업데이트된 트리 구조로 인터페이스 업데이트
+            const nodeUpdate = (source) => {
+                Renderer.update(root, source);
+            }
+
+            if (root.data.type === 'ROOT') {
+                collapseFromDepth(root, designConfig.tree.initialDepth);
+            } else {
+                collapseFromDepth(root, designConfig.tree.initialDepth);
+            }
+            // 렌더러 인스턴스 내부 이벤트 리스너 바인딩
+            Renderer.getTypeDisplayName = getTypeDisplayName;
+            Renderer.isClickableType = isClickableType;
+            Renderer.nodeUpdate = nodeUpdate;
 
             // 해당 트리 계층 데이터 구조로 업데이트
             Renderer.update(root);
@@ -166,6 +173,9 @@ export default defineNuxtPlugin((nuxtApp) => {
             requestAnimationFrame(() => {
                 Renderer.recalculateTypeTagPositions();
             });
+
+            // 뎁스 버튼 클릭 이벤트 셋팅
+            settingDepthBtnClickEvent(containerId, root, nodeUpdate);
         } catch (error) {
             loadingElement.remove();
             container
@@ -176,7 +186,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
 
     // 2025.11.26[mhlim]: 현재 타겟 컨테이너 트리 > 필터 체크박스 생성 함수
-    const createTypeCheckboxes = (currentD3Node, checkboxContainerId) => {
+    const createTypeCheckboxList = (currentD3Node, dataUrl) => {
         const types = new Set();
 
         // 현재 타겟 컨테이너 트리 내부 타입 조회
@@ -194,21 +204,24 @@ export default defineNuxtPlugin((nuxtApp) => {
 
         traverse(currentD3Node);
 
-        const container = d3.select(`#${checkboxContainerId}`);
-        container.selectAll('*').remove(); // Clear existing
-
         types.forEach(type => {
-            const label = container.append('label')
-                .attr('class', 'type-checkbox');
-
-            label.append('input')
-                .attr('type', 'checkbox')
-                .attr('checked', true)
-                .attr('value', type);
-
-            label.append('span')
-                .text(getTypeDisplayName(type));
+            switch (dataUrl) {
+                case '/comp':
+                    checkBoxTypes.value.competency.push(type);
+                    break;
+                case '/job':
+                    checkBoxTypes.value.job.push(type);
+                    break;
+                case '/edu':
+                    checkBoxTypes.value.edu.push(type);
+                    break;
+            }
         });
+    }
+
+    // 해당 트리 아이템 노드가 클릭 가능한 타입인지 확인하는 헬퍼 함수
+    const isClickableType = (type) => {
+        return designConfig.types.clickable.includes(type);
     }
 
     // 2025.11.26[mhlim]: 타입 라벨 표시명 필터링 함수
@@ -225,11 +238,126 @@ export default defineNuxtPlugin((nuxtApp) => {
         return designConfig.types.displayNames[type] || type;
     }
 
+    // 2025.12.03[mhlim]: 각 트리 컨테이너 뎁스 버튼 클릭 이벤트 바인딩 셋팅
+    const settingDepthBtnClickEvent = (containerId, root, nodeUpdate) => {
+        const container = document.querySelector(`#${containerId}`);
+        const treePanel = container.closest('.tree-panel');
+
+        const depthButtons = treePanel.querySelectorAll('.depth-btn[data-depth]');
+
+        depthButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const depth = parseInt(button.getAttribute('data-depth'));
+
+                treePanel.querySelectorAll('.depth-btn[data-depth]').forEach(button => {
+                    button.classList.remove('active');
+                });
+        
+                e.target.classList.add('active');
+        
+                expandToDepth(root, depth);
+
+                nodeUpdate(root);
+            })
+        })
+
+        const allDepthOpenButton = treePanel.querySelector('.open-all-depth');
+        const allDepthCloseButton = treePanel.querySelector('.close-all-depth');
+
+        allDepthOpenButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            expandAll(root);
+            nodeUpdate(root);
+        })
+
+        allDepthCloseButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            collapseFromDepth(root, 1);
+            nodeUpdate(root);
+        })
+
+        console.log(root);
+    }
+    
+    const collapseFromDepth = (node, minDepth) => {
+        if (node.children && node.depth >= minDepth) {
+            node._children = node.children;
+            node._children.forEach(child => collapseFromDepth(child, minDepth));
+            node.children = null;
+        } else if (node.children) {
+            node.children.forEach(child => collapseFromDepth(child, minDepth));
+        }
+    }
+
+    const expandToDepth = (node, targetDepth) => {
+        // Special handling for virtual ROOT node
+        if (node.data.type === 'ROOT') {
+            // Always expand ROOT itself
+            if (node._children) {
+                node.children = node._children;
+                node._children = null;
+            }
+            // Process children
+            if (node.children) {
+                node.children.forEach(child =>
+                    expandToDepth(child, targetDepth, true)
+                );
+            }
+            return;
+        }
+
+        // Check if root is virtual by traversing to root
+        let root = node;
+        while (root.parent) root = root.parent;
+        const hasVirtualRoot = root.data.type === 'ROOT';
+
+        // Calculate effective depth
+        // - With virtual root: depth is already correct (ROOT=0, first level=1, etc.)
+        // - Without virtual root: add 1 to match user expectation (first level depth 0 becomes user level 1)
+        const effectiveDepth = hasVirtualRoot ? node.depth : node.depth + 1;
+
+        if (effectiveDepth < targetDepth) {
+            // Below target depth: expand this node
+            if (node._children) {
+                node.children = node._children;
+                node._children = null;
+            }
+            // Continue recursing
+            if (node.children) {
+                node.children.forEach(child => expandToDepth(child, targetDepth));
+            }
+            if (node._children) {
+                node._children.forEach(child => expandToDepth(child, targetDepth));
+            }
+        } else {
+            // At or beyond target depth: collapse this node and all descendants
+            if (node.children) {
+                collapseAll(node);
+            }
+        }
+    }
+
+    const expandAll = (node) => {
+        if (node._children) {
+            node.children = node._children;
+            node._children = null;
+        }
+        if (node.children) {
+            node.children.forEach(child => expandAll(child));
+        }
+    }
+
     return {
         provide: {
-            ttmController: TTMController,
-            treeInstance: treeInstance,
-            designConfig: designConfig,
+            ttmController: TTMController, // TTM 메인 컨트롤러 함수
+            designConfig: designConfig, // 백터 그래픽 디자인 설정
+            treeInstance: treeInstance, // 트리 컨테이너 인스턴스 배열
+            checkBoxTypes: checkBoxTypes, // 각 컨테이너별 필터링 체크박스 목록
         }
     }
 })
