@@ -14,7 +14,6 @@ export class TTMTreeRenderer {
         this.svg = null;
         this.g = null;
         this.onNodeClick = null; // Callback for node click (detail modal)
-        this.onMappingClick = null; // Callback for mapping icon click
         this.getTypeDisplayName = null;
         this.isClickableType = null;
         this.nodeUpdate = null;
@@ -34,7 +33,7 @@ export class TTMTreeRenderer {
             .style('display', 'none'); // Hide until data is loaded
         // Create group with margin
         this.g = this.svg.append('g')
-            .attr('transform', `translate(${this.designConfig.tree.margin.left}, ${this.designConfig.tree.margin.top})`);
+            .attr('transform', `translate(0, ${this.designConfig.tree.margin.top})`);
 
         if (onReady) {
             onReady();
@@ -56,7 +55,7 @@ export class TTMTreeRenderer {
     recalculateTypeTagPositions() {
         this.g.selectAll('.type-tag').each(function(d) {
             const hasToggle = d.data.children && d.data.children.length > 0;
-            const typeTagStartX = hasToggle ? 21 : 5;
+            const typeTagStartX = hasToggle ? 50 : 30;
 
             // Update type tag position
             d3.select(this).attr('transform', `translate(${typeTagStartX}, 0)`);
@@ -221,15 +220,14 @@ export class TTMTreeRenderer {
 
         const circle = toggleGroup.append('circle')
             .attr('r', 8)
-            .attr('cx', 0)
+            .attr('cx', 30)
             .attr('cy', 2)
             .attr('class', d => d.children ? 'toggle-open' : 'toggle-closed')
             .style('display', d => (d.data.children && d.data.children.length > 0) ? 'block' : 'none');
 
         toggleGroup.append('path')
-            .attr('x', 0)
+            .attr('x', 30)
             .attr('y', 0)
-            .attr('d', d => d.children ? 'M -4 0 L 4 0 L 0 5 Z' : 'M -4 0 L 4 0 L 0 5 Z')
             .attr('fill', '#fff')
             .style('display', d => (d.data.children && d.data.children.length > 0) ? 'block' : 'none')
     }
@@ -243,7 +241,7 @@ export class TTMTreeRenderer {
             .attr('class', 'type-tag')
             .attr('transform', d => {
                 const hasToggle = d.data.children && d.data.children.length > 0;
-                const xPos = hasToggle ? 21 : 5;
+                const xPos = hasToggle ? 21 : 20;
                 return `translate(${xPos}, 0)`;
             });
 
@@ -286,9 +284,6 @@ export class TTMTreeRenderer {
             .attr('y', 7)
             .style('cursor', 'pointer')
             .style('overflow', 'hidden')
-            .style('text-overflow', 'ellipsis')
-            .style('white-space', 'nowrap')
-            .style('max-width', '200px')
             .text(d => d.data.name)
             .on('click', (event, d) => {
                 // Node name click shows detail modal for all types
@@ -310,6 +305,7 @@ export class TTMTreeRenderer {
 
         rightInfo.append('rect')
         .attr('class', 'right-info-rect')
+        .attr('cursor', 'pointer')
 
         // SVG image 요소 사용 (foreignObject 대신)
         rightInfo.append('image')
@@ -318,7 +314,19 @@ export class TTMTreeRenderer {
         .attr('y', -4)
         .attr('width', 16)
         .attr('height', 16)
-        .attr('preserveAspectRatio', 'xMidYMid meet');
+        .attr('cursor', 'pointer')
+        .attr('preserveAspectRatio', 'xMidYMid meet')
+        .on('click', (event, d) => {
+            console.log('createRightInfo', d);
+            if (this.isClickableType(d.data.type)) {
+                console.log('isClickableType', this.isClickableType(d.data.type));
+                console.log('createRightInfo', d);
+                if (this.onMappingClick) {
+                    event.stopPropagation();
+                    this.onMappingClick(event, d);
+                }
+            }
+        });
 
         rightInfo.append('text')
         .attr('x', 37)
@@ -326,7 +334,18 @@ export class TTMTreeRenderer {
         .style('font-size', '14px')
         .style('fill', '#000')
         .text('99')
-        .style('cursor', 'pointer');
+        .style('cursor', 'pointer')
+        .on('click', (event, d) => {
+            console.log('createRightInfo', d);
+            if (this.isClickableType(d.data.type)) {
+                console.log('isClickableType', this.isClickableType(d.data.type));
+                console.log('createRightInfo', d);
+                if (this.onMappingClick) {
+                    event.stopPropagation();
+                    this.onMappingClick(event, d);
+                }
+            }
+        })
         
     }
 
@@ -347,25 +366,9 @@ export class TTMTreeRenderer {
             .attr('class', d => d.children ? 'toggle-open' : 'toggle-closed');
 
         nodeUpdate.select('.toggle-btn path')
-            .attr('d', d => d.children ? 'M -4 1 L 4 1 L 4 3 L -4 3 Z' : 'M -4 0 L 4 0 L 0 5 Z');
+            .attr('d', d => d.children ? 'M 26 1 L 34 1 L 34 3 L 26 3 Z' : 'M 26 0 L 34 0 L 30 5 Z');
 
-        // Update type tag positions
-        nodeUpdate.select('.type-tag').each(function(d) {
-            const hasToggle = d.data.children && d.data.children.length > 0;
-            const typeTagStartX = hasToggle ? 21 : 5;
-
-            d3.select(this).attr('transform', `translate(${typeTagStartX}, 0)`);
-
-            const textElement = this.querySelector('text');
-            if (textElement) {
-                const textWidth = textElement.getComputedTextLength();
-                const rectWidth = textWidth + 20;
-                d3.select(this).select('rect').attr('width', rectWidth);
-
-                const nodeNameElement = d3.select(this.parentNode).select('.node-name');
-                nodeNameElement.attr('x', typeTagStartX + rectWidth + 5);
-            }
-        });
+        this.recalculateTypeTagPositions();
     }
 
     /**
@@ -424,6 +427,12 @@ export class TTMTreeRenderer {
             top: treeContainer.scrollTop + (nodeRect.top - containerRect.top) - containerRect.height / 3,
             behavior: 'smooth'
         });
+    }
+
+    getNodeElement(node) {
+        return this.g.selectAll('.node-group')
+            .filter(d => d === node)
+            .node();
     }
 
     /**

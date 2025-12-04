@@ -1,4 +1,5 @@
-import { useMyTTMDataManagerStore } from "~/stores/TTMDataManager";
+import { useMyTreeInstanceStore } from "~/stores/TreeInstanceStore";
+import { useMyTreeMappingStore } from "~/stores/TreeMappingStore";
 import * as d3 from 'd3';
 import { TTMTreeRenderer } from "~/components/customRenderer";
 
@@ -27,15 +28,6 @@ export default defineNuxtPlugin((nuxtApp) => {
             label: '교육체계'
         }
     ];
-
-    // 2025.12.02[mhlim]: 각 트리 컨테이너 체크박스 필터 목록 상태관리
-    const checkBoxTypes = useState('checkBoxTypes', () => {
-        return {
-            competency: [],
-            job: [],
-            edu: [],
-        }
-    });
 
     // 2025.11.26[mhlim]: TTM 트리 백터 그래픽 디자인 설정
     const designConfig = {
@@ -104,15 +96,15 @@ export default defineNuxtPlugin((nuxtApp) => {
         }
     };
 
-    // 2025.11.26[mhlim]: 트리 데이터 상태관리 매니저
-    const dataManager = useMyTTMDataManagerStore();
+    // 2025.11.26[mhlim]: 각 트리 인스턴스 상태관리 스토어
+    const treeInstanceStore = useMyTreeInstanceStore();
 
     // 2025.11.26[mhlim]: TTM 메인 컨트롤러 함수
-    const TTMController = async (containerId, dataUrl) => {
-        // 백터 그래픽 렌더링 생성자 인스턴스 생성
+    const TTMController = async (containerId) => {
+        // 현재 컨테이너에 대한 백터 그래픽 렌더링 생성자 인스턴스 생성
         const Renderer = new TTMTreeRenderer(containerId, designConfig);
 
-        // 현재 트리 생성 대상자 컨테이너 선택
+        // 현재 트리 생성 대상자 컨테이너 DOM 요소 선택
         const container = d3.select(`#${containerId}`);
 
         // 컨테이너 내부 로딩 인디케이터 추가
@@ -125,46 +117,66 @@ export default defineNuxtPlugin((nuxtApp) => {
         Renderer.init();
 
         try {
-            let root = null;
+            // 현재 트리 컨테이너에 대한 인스턴스 데이터
+            let currentTreeRoot = null;
 
             // 트리 데이터 매니저 상태관리에 트리 데이터 조회 요청 
-            await dataManager.fetchTreeDepth(dataUrl);
-            
-            // 2025.12.01[mhlim]: 상태관리 업데이트 이후 해당 컨테이너에 맞는 데이터 추출
-            switch (dataUrl) {
-                case '/edu':
-                    root = dataManager.$state.eduTree;
+            await treeInstanceStore.fetchTreeDepthData(containerId);
 
-                    console.log('dataManager.$state.eduTree', dataManager.$state.eduTree);
+            switch (containerId) {
+                case 'comp-tree':
+                    currentTreeRoot = treeInstanceStore.$state.Tree_competency.root;
+                    await treeInstanceStore.traverseTypeFilter(currentTreeRoot, 'competency');
                     break;
-                case '/job':
-                    root = dataManager.$state.jobTree;
-                    break;
-                case '/comp':
-                    root = dataManager.$state.compTree;
+                case 'job-tree':
+                    currentTreeRoot = treeInstanceStore.$state.Tree_job.root;
+                    await treeInstanceStore.traverseTypeFilter(currentTreeRoot, 'job');
+                break;
+                case 'edu-tree':
+                    currentTreeRoot = treeInstanceStore.$state.Tree_edu.root;
+                    await treeInstanceStore.traverseTypeFilter(currentTreeRoot, 'edu');
                     break;
             }
 
-            // 2025.12.02[mhlim]: 각 트리 컨테이너 필터링 체크박스 목록 셋팅
-            createTypeCheckboxList(root, dataUrl);
-
-            // 이벤트 리스너 실행 시, 업데이트된 트리 구조로 인터페이스 업데이트
+            // 현재 노드 데이터 구조 렌더러에서 변경사항 업데이트 시, 콜백 호출
             const nodeUpdate = (source) => {
-                Renderer.update(root, source);
+                Renderer.update(currentTreeRoot, source);
             }
 
-            if (root.data.type === 'ROOT') {
-                collapseFromDepth(root, designConfig.tree.initialDepth);
-            } else {
-                collapseFromDepth(root, designConfig.tree.initialDepth);
+            // 각 트리 렌더러에서 생성된 맵핑 버튼 클릭 이벤트 콜백
+            const handleMappingClick = (event, d) => {
+                // 현재 클릭한 노드의 컨테이너 아이디값과 함께 상태관리 맵핑 셋팅 함수 호출
+                useMyTreeMappingStore().handleMappingSetting(d, containerId);
             }
+
             // 렌더러 인스턴스 내부 이벤트 리스너 바인딩
             Renderer.getTypeDisplayName = getTypeDisplayName;
             Renderer.isClickableType = isClickableType;
             Renderer.nodeUpdate = nodeUpdate;
+            Renderer.onMappingClick = handleMappingClick;
+
+            // 2025.12.01[mhlim]: 1. 현재 컨트롤러 생성자의 계층 구조 데이터 셋팅
+            // 2. 현재 컨트롤러 생성자의 계층 구조 데이터들의 타입 조회
+            switch (containerId) {
+                case 'comp-tree':
+                    treeInstanceStore.$state.Tree_competency.renderer = Renderer;
+                    break;
+                case 'job-tree':
+                    treeInstanceStore.$state.Tree_job.renderer = Renderer;
+                break;
+                case 'edu-tree':
+                    treeInstanceStore.$state.Tree_edu.renderer = Renderer;
+                    break;
+            }
+
+            if (currentTreeRoot.data.type === 'ROOT') {
+                collapseFromDepth(currentTreeRoot, designConfig.tree.initialDepth);
+            } else {
+                collapseFromDepth(currentTreeRoot, designConfig.tree.initialDepth);
+            }
 
             // 해당 트리 계층 데이터 구조로 업데이트
-            Renderer.update(root);
+            Renderer.update(currentTreeRoot);
 
             // Remove loading indicator and show SVG
             loadingElement.remove();
@@ -175,7 +187,8 @@ export default defineNuxtPlugin((nuxtApp) => {
             });
 
             // 뎁스 버튼 클릭 이벤트 셋팅
-            settingDepthBtnClickEvent(containerId, root, nodeUpdate);
+            settingDepthBtnClickEvent(containerId, currentTreeRoot);
+
         } catch (error) {
             loadingElement.remove();
             container
@@ -183,40 +196,6 @@ export default defineNuxtPlugin((nuxtApp) => {
                 .attr('class', 'error')
                 .text('데이터 로딩 실패: ' + error.message);
         }
-    }
-
-    // 2025.11.26[mhlim]: 현재 타겟 컨테이너 트리 > 필터 체크박스 생성 함수
-    const createTypeCheckboxList = (currentD3Node, dataUrl) => {
-        const types = new Set();
-
-        // 현재 타겟 컨테이너 트리 내부 타입 조회
-        const traverse = (node) => {
-            if (node.data.type && node.data.type !== 'ROOT' && node.data.type !== 'EMPTY') {
-                types.add(node.data.type);
-            }
-            if (node.children) {
-                node.children.forEach(traverse);
-            }
-            if (node._children) {
-                node._children.forEach(traverse);
-            }
-        }
-
-        traverse(currentD3Node);
-
-        types.forEach(type => {
-            switch (dataUrl) {
-                case '/comp':
-                    checkBoxTypes.value.competency.push(type);
-                    break;
-                case '/job':
-                    checkBoxTypes.value.job.push(type);
-                    break;
-                case '/edu':
-                    checkBoxTypes.value.edu.push(type);
-                    break;
-            }
-        });
     }
 
     // 해당 트리 아이템 노드가 클릭 가능한 타입인지 확인하는 헬퍼 함수
@@ -239,7 +218,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
 
     // 2025.12.03[mhlim]: 각 트리 컨테이너 뎁스 버튼 클릭 이벤트 바인딩 셋팅
-    const settingDepthBtnClickEvent = (containerId, root, nodeUpdate) => {
+    const settingDepthBtnClickEvent = (containerId, root) => {
         const container = document.querySelector(`#${containerId}`);
         const treePanel = container.closest('.tree-panel');
 
@@ -260,7 +239,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         
                 expandToDepth(root, depth);
 
-                nodeUpdate(root);
+                treeInstanceStore.nodeUpdate(root);
             })
         })
 
@@ -280,10 +259,9 @@ export default defineNuxtPlugin((nuxtApp) => {
             collapseFromDepth(root, 1);
             nodeUpdate(root);
         })
-
-        console.log(root);
     }
     
+    // 2025.12.04[mhlim]: 첫 렌더링 시, 초기 트리 뎁스 값에 따라 펼침 셋팅
     const collapseFromDepth = (node, minDepth) => {
         if (node.children && node.depth >= minDepth) {
             node._children = node.children;
@@ -357,7 +335,6 @@ export default defineNuxtPlugin((nuxtApp) => {
             ttmController: TTMController, // TTM 메인 컨트롤러 함수
             designConfig: designConfig, // 백터 그래픽 디자인 설정
             treeInstance: treeInstance, // 트리 컨테이너 인스턴스 배열
-            checkBoxTypes: checkBoxTypes, // 각 컨테이너별 필터링 체크박스 목록
         }
     }
 })

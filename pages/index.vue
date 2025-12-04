@@ -185,8 +185,9 @@ import CheckBox from '~/assets/images/svg/check.svg';
 
 const { $treeInstance: treeInstance, 
     $ttmController: ttmController,
-    $checkBoxTypes: checkBoxTypes,
     $designConfig: designConfig } = useNuxtApp();
+
+const treeInstanceStore = useMyTreeInstanceStore();
 
 /* DOM 트리 구조 생성 이후 백터 그래픽 렌더링 시작 */
 onBeforeMount(() => {
@@ -197,6 +198,14 @@ onBeforeMount(() => {
 
 onMounted(() => {
     loading.value = false;
+})
+
+const checkBoxTypes = computed(() => {
+    return {
+        competency: Array.from(treeInstanceStore.$state.Tree_competency.types),
+        job: treeInstanceStore.$state.Tree_job.types,
+        edu: treeInstanceStore.$state.Tree_edu.types,
+    }
 })
 
 // 2025.12.03[mhlim]: 각 트리 컨테이너 체크박스 필터 상태관리
