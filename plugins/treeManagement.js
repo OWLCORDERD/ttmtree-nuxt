@@ -125,15 +125,15 @@ export default defineNuxtPlugin((nuxtApp) => {
 
             switch (containerId) {
                 case 'comp-tree':
-                    currentTreeRoot = treeInstanceStore.$state.Tree_competency.root;
-                    await treeInstanceStore.traverseTypeFilter(currentTreeRoot, 'competency');
+                    currentTreeRoot = treeInstanceStore.$state.comp.root;
+                    await treeInstanceStore.traverseTypeFilter(currentTreeRoot, 'comp');
                     break;
                 case 'job-tree':
-                    currentTreeRoot = treeInstanceStore.$state.Tree_job.root;
+                    currentTreeRoot = treeInstanceStore.$state.job.root;
                     await treeInstanceStore.traverseTypeFilter(currentTreeRoot, 'job');
                 break;
                 case 'edu-tree':
-                    currentTreeRoot = treeInstanceStore.$state.Tree_edu.root;
+                    currentTreeRoot = treeInstanceStore.$state.edu.root;
                     await treeInstanceStore.traverseTypeFilter(currentTreeRoot, 'edu');
                     break;
             }
@@ -141,6 +141,66 @@ export default defineNuxtPlugin((nuxtApp) => {
             // 현재 노드 데이터 구조 렌더러에서 변경사항 업데이트 시, 콜백 호출
             const nodeUpdate = (source) => {
                 Renderer.update(currentTreeRoot, source);
+            }
+
+            // 2025.12.05[mhlim]: 맵핑 타겟 노드의 상위 부모 폴더들을 순회하여
+            // 부모 폴더들 펼침 활성화하여 노드 업데이트하는 함수
+            const expandNodePath = (targetNode) => {
+                let needsUpdate = false;
+                
+                // Build path from root to target
+                const path = [];
+                let current = targetNode;
+        
+                while (current.parent) {
+                    path.unshift(current.parent);
+                    current = current.parent;
+                }
+            
+                path.forEach(node => {
+                    if (node._children) {
+                        node.children = node._children;
+                        node._children = null;
+                        needsUpdate = true;
+                    }
+                });
+        
+                if (needsUpdate) {
+                    nodeUpdate(currentTreeRoot);
+                }
+        
+                return needsUpdate;
+            }
+
+            // 2025.12.05[mhlim]: 현 컨테이너 트리 구조에서 
+            // 특정 타입과 아이디에 해당하는 노드 조회 함수
+            const findNodeByTypeAndId = (itemType, itemId) => {
+                let foundNode = null;
+        
+                const search = (node) => {
+                    if (node.data.type === itemType && node.data.id === itemId) {
+                        console.log('foundNode', node);
+                        foundNode = node;
+                        return true;
+                    }
+        
+                    if (node.children) {
+                        for (const child of node.children) {
+                            if (search(child)) return true;
+                        }
+                    }
+        
+                    if (node._children) {
+                        for (const child of node._children) {
+                            if (search(child)) return true;
+                        }
+                    }
+        
+                    return false;
+                };
+        
+                search(currentTreeRoot);
+                return foundNode;
             }
 
             // 각 트리 렌더러에서 생성된 맵핑 버튼 클릭 이벤트 콜백
@@ -154,18 +214,20 @@ export default defineNuxtPlugin((nuxtApp) => {
             Renderer.isClickableType = isClickableType;
             Renderer.nodeUpdate = nodeUpdate;
             Renderer.onMappingClick = handleMappingClick;
+            Renderer.findNodeByTypeAndId = findNodeByTypeAndId;
+            Renderer.expandNodePath = expandNodePath;
 
             // 2025.12.01[mhlim]: 1. 현재 컨트롤러 생성자의 계층 구조 데이터 셋팅
             // 2. 현재 컨트롤러 생성자의 계층 구조 데이터들의 타입 조회
             switch (containerId) {
                 case 'comp-tree':
-                    treeInstanceStore.$state.Tree_competency.renderer = Renderer;
+                    treeInstanceStore.$state.comp.renderer = Renderer;
                     break;
                 case 'job-tree':
-                    treeInstanceStore.$state.Tree_job.renderer = Renderer;
+                    treeInstanceStore.$state.job.renderer = Renderer;
                 break;
                 case 'edu-tree':
-                    treeInstanceStore.$state.Tree_edu.renderer = Renderer;
+                    treeInstanceStore.$state.edu.renderer = Renderer;
                     break;
             }
 

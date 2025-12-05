@@ -2,19 +2,19 @@ import { defineStore } from 'pinia'
 import * as d3 from 'd3';
 
 interface TreeInstanceStateType {
-  Tree_competency: {
+  comp: {
     types: Set<string>;
     root: d3.HierarchyNode<any> | null;
     containerId: string | null;
     renderer: Object | null;
   },
-  Tree_job: {
+  job: {
     types: Set<string>;
     root: d3.HierarchyNode<any> | null;
     containerId: string | null;
     renderer: Object | null;
   },
-  Tree_edu: {
+  edu: {
     types: Set<string>;
     root: d3.HierarchyNode<any> | null;
     containerId: string | null;
@@ -24,19 +24,19 @@ interface TreeInstanceStateType {
 
 export const useMyTreeInstanceStore = defineStore('TreeInstance', {
   state: (): TreeInstanceStateType => ({ 
-    Tree_competency: {
+    comp: {
       types: new Set(), // 체크박스 필터 목록 상태관리 (중복 저장 필터링)
       root: null, // 트리 루트 노드
       containerId: '', // 트리 컨테이너 ID
       renderer: null, // 트리 렌더러 인스턴스
     }, // 역량체계 트리 정보 인스턴스
-    Tree_job: {
+    job: {
       types: new Set(), // 체크박스 필터 목록 상태관리 (중복 저장 필터링)
       root: null, // 트리 루트 노드
       containerId: '', // 트리 컨테이너 ID
       renderer: null, // 트리 렌더러 인스턴스
     }, // 직무체계 트리 정보 인스턴스
-    Tree_edu: {
+    edu: {
       types: new Set(), // 체크박스 필터 목록 상태관리 (중복 저장 필터링)
       root: null, // 트리 루트 노드
       containerId: '', // 트리 컨테이너 ID
@@ -83,24 +83,25 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
 
       switch (containerId) {
         case 'edu-tree':
-          this.Tree_edu.containerId = containerId;
-          this.Tree_edu.root = treeData;
+          this.edu.containerId = containerId;
+          this.edu.root = treeData;
           break;
         case 'job-tree':
-          this.$state.Tree_job.containerId = containerId;
-          this.$state.Tree_job.root = treeData;
+          this.job.containerId = containerId;
+          this.job.root = treeData;
           break;
         case 'comp-tree':
-          this.$state.Tree_competency.containerId = containerId;
-          this.$state.Tree_competency.root = treeData;
+          this.comp.containerId = containerId;
+          this.comp.root = treeData;
           break;
       }
+
       // ---------------------------------------------------
     },
     // 현재 타겟 컨테이너 트리 내부 타입 조회 (Set 컬렉션 add 처리를 통한 중복 방지)
     async traverseTypeFilter(node: any, treeType: string) {
       if (node.data.type && node.data.type !== 'ROOT' && node.data.type !== 'EMPTY') {
-          this[`Tree_${treeType}` as keyof TreeInstanceStateType].types.add(node.data.type);
+          this[treeType as keyof TreeInstanceStateType].types.add(node.data.type);
       }
       if (node.children) {
           node.children.forEach((child: any) => this.traverseTypeFilter(child, treeType));

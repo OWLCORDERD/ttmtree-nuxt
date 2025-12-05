@@ -192,7 +192,7 @@ const treeInstanceStore = useMyTreeInstanceStore();
 /* DOM 트리 구조 생성 이후 백터 그래픽 렌더링 시작 */
 onBeforeMount(() => {
     treeInstance.forEach(instance => {
-        ttmController(instance.containerId, instance.dataUrl, instance.checkboxContainerId);
+        ttmController(instance.containerId, instance.dataUrl);
     });
 })
 
@@ -202,9 +202,9 @@ onMounted(() => {
 
 const checkBoxTypes = computed(() => {
     return {
-        competency: Array.from(treeInstanceStore.$state.Tree_competency.types),
-        job: treeInstanceStore.$state.Tree_job.types,
-        edu: treeInstanceStore.$state.Tree_edu.types,
+        competency: Array.from(treeInstanceStore.$state.comp.types),
+        job: treeInstanceStore.$state.job.types,
+        edu: treeInstanceStore.$state.edu.types,
     }
 })
 

@@ -4949,6 +4949,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"leader-line-new@npm:^1.1.9":
+  version: 1.1.9
+  resolution: "leader-line-new@npm:1.1.9"
+  checksum: 10c0/91d6cf11d2b6b070113a0c59d9637b01f7914792855d47019280771ecc594dad2e36577bb6e5c13b4584b09709e4ae2007859f751774e0f652ee4ab3c6f7e6b1
+  languageName: node
+  linkType: hard
+
+"leader-line-types@npm:1.0.5-2":
+  version: 1.0.5-2
+  resolution: "leader-line-types@npm:1.0.5-2"
+  checksum: 10c0/1efba3816751c41e3d90d3e50558ec12e8e508c3c479709470127b99332c4b8e8afd96d6f993e8937024e29ca85f79ff43ab4cacd97b5be34c1f87d5d3cf8f22
+  languageName: node
+  linkType: hard
+
 "lilconfig@npm:^3.1.3":
   version: 3.1.3
   resolution: "lilconfig@npm:3.1.3"
@@ -7780,6 +7794,8 @@ __metadata:
     "@types/fs-promise": "npm:^2.0.2"
     d3: "npm:^7.9.0"
     dotenv: "npm:^17.2.3"
+    leader-line-new: "npm:^1.1.9"
+    leader-line-types: "npm:1.0.5-2"
     nuxt: "npm:^4.2.1"
     nuxt-font-loader: "npm:^2.3.5"
     nuxt-svgo: "npm:^4.2.6"

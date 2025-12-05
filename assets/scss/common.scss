@@ -327,39 +327,41 @@
         /* Tree Nodes */
         .node-group {
             font-size: 13px;
-        }
-        
-        .node-bg {
-            cursor: pointer;
-        }
-        
-        .toggle-btn {
-            cursor: pointer;
-        }
-        
-        .toggle-open {
-            fill: var(--color-dark);
-        }
-        
-        .toggle-closed {
-            fill: var(--color-dark);
-        }
-        
-        .type-tag-bg {
-            fill: #fff;
-            stroke: #d7d7d7;
-        }
-        
-        .node-name {
-            fill: var(--color-dark);
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .node-name:hover {
-            fill: var(--color-link);
-            text-decoration: underline;
-        }
+
+            .node-bg {
+                cursor: pointer;
+            }
+
+            .toggle-btn {
+                cursor: pointer;
+
+                .toggle-open {
+                    fill: var(--color-dark);
+                }
+                
+                .toggle-closed {
+                    fill: var(--color-dark);
+                }
+            }
+
+            .type-tag {
+                &-bg {
+                    fill: #fff;
+                    stroke: #d7d7d7;
+                }
+            }
+                    
+                .node-name {
+                    fill: var(--color-dark);
+                    font-size: 14px;
+                    font-weight: 500;
+
+                    &:hover {
+                        fill: var(--color-link);
+                        text-decoration: underline;
+                    }
+                }
+            }
         
         .node-count {
             font-size: 11px;
@@ -367,7 +369,7 @@
         }
 
         .right-info {
-            &-rect {
+            .mapping-button {
                 display: block;
                 width: 50px;
                 height: 20px;
@@ -489,27 +491,43 @@
         }
         
         /* Selected node */
-        .node-selected .node-bg {
-            fill: var(--color-selected-bg) !important;
-            stroke: var(--color-selected-border);
-            stroke-width: 2px;
-        }
-        
-        .node-selected .node-name {
-            fill: var(--color-selected-text);
-            font-weight: 600;
+        .node-selected {
+            .node-bg {
+                fill: transparent; 
+                stroke: var(--color-selected-border);
+                stroke-width: 1px;
+            }
+
+            .right-info {
+                .mapping-button {
+                    fill: var(--color-selected-border);
+                    stroke: none;
+                }
+
+                .mapping-icon {
+                    & > path {
+                        fill: #fff;
+                    }
+                }
+
+                .mapping-count {
+                    fill: #fff;
+                }
+            }
         }
         
         /* Mapped target node */
-        .node-mapped-target .node-bg {
-            fill: var(--color-mapped-bg) !important;
-            stroke: var(--color-mapped-border);
-            stroke-width: 2px;
-        }
-        
-        .node-mapped-target .node-name {
-            fill: var(--color-mapped-text);
-            font-weight: 600;
+        .node-mapped-target {
+            .node-bg {
+                fill: transparent !important;
+                stroke: var(--color-selected-border);
+                stroke-width: 1px;
+            }
+
+            .node-name {
+                fill: var(--color-selected-border);
+                font-weight: 600;
+            }   
         }
         
         /* Mapping loading indicator */

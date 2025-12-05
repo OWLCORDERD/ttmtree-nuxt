@@ -164,9 +164,11 @@ export class TTMTreeRenderer {
         // Background box for hover effect
         nodeEnter.append('rect')
             .attr('class', 'node-bg')
-            .attr('x', 0)
+            .attr('rx', 5)
+            .attr('ry', 5)
+            .attr('x', 3)
             .attr('y', -this.nodeHeight / 2 + 3)
-            .attr('width', '100%')
+            .attr('width', 'calc(100% - 6px)')
             .attr('height', this.nodeHeight)
             .attr('fill', 'transparent')
             .on('mouseenter', function() {
@@ -304,37 +306,40 @@ export class TTMTreeRenderer {
             .attr('transform', `translate(450, 0)`)
 
         rightInfo.append('rect')
-        .attr('class', 'right-info-rect')
+        .attr('class', 'mapping-button')
         .attr('cursor', 'pointer')
 
         // SVG image 요소 사용 (foreignObject 대신)
-        rightInfo.append('image')
-        .attr('href', '/_nuxt/assets/images/svg/ttm-connect.svg') // Nuxt 빌드 경로
+        const mappingIcon = rightInfo.append('svg')
         .attr('x', 18)
         .attr('y', -4)
         .attr('width', 16)
         .attr('height', 16)
         .attr('cursor', 'pointer')
-        .attr('preserveAspectRatio', 'xMidYMid meet')
-        .on('click', (event, d) => {
-            console.log('createRightInfo', d);
-            if (this.isClickableType(d.data.type)) {
-                console.log('isClickableType', this.isClickableType(d.data.type));
-                console.log('createRightInfo', d);
-                if (this.onMappingClick) {
-                    event.stopPropagation();
-                    this.onMappingClick(event, d);
-                }
-            }
-        });
+        .attr('viewBox', '0 0 18 16')
+        .attr('class', 'mapping-icon');
+        // .on('click', (event, d) => {
+        //     console.log('createRightInfo', d);
+        //     if (this.isClickableType(d.data.type)) {
+        //         console.log('isClickableType', this.isClickableType(d.data.type));
+        //         console.log('createRightInfo', d);
+        //         if (this.onMappingClick) {
+        //             event.stopPropagation();
+        //             this.onMappingClick(event, d);
+        //         }
+        //     }
+        // });
+
+        mappingIcon.append('path')
+        .attr('d', 'M6.5459 3C7.07063 3 7.49998 3.38584 7.5 3.85742C7.5 4.32902 7.07064 4.71484 6.5459 4.71484H5.55762C3.54211 4.71484 1.9082 6.18376 1.9082 7.99512C1.90849 9.80626 3.54229 11.2744 5.55762 11.2744H6.5459V11.2852C7.07064 11.2852 7.5 11.671 7.5 12.1426C7.49998 12.6142 7.07063 13 6.5459 13H5.55762C2.49262 13 0 10.7594 0 8.00488C0.00028821 5.25055 2.4928 3.01072 5.55762 3H6.5459ZM12.998 3C15.7458 3 18 5.24249 18 8C18 10.7575 15.7565 13 12.998 13H11.3584C10.8863 12.9998 10.5 12.6136 10.5 12.1416C10.5 11.6696 10.8863 11.2834 11.3584 11.2832H12.998C14.812 11.2832 16.2822 9.8133 16.2822 8C16.2822 6.1867 14.812 4.7168 12.998 4.7168H11.3584C10.8863 4.71665 10.5 4.3304 10.5 3.8584C10.5 3.38639 10.8863 3.00015 11.3584 3H12.998ZM12.0898 7C12.5904 7 13 7.45 13 8C13 8.55 12.5904 9 12.0898 9H5.91016C5.40959 9 5 8.55 5 8C5 7.45 5.40959 7 5.91016 7H12.0898Z')
 
         rightInfo.append('text')
         .attr('x', 37)
         .attr('y', 9)
         .style('font-size', '14px')
-        .style('fill', '#000')
         .text('99')
         .style('cursor', 'pointer')
+        .attr('class', 'mapping-count')
         .on('click', (event, d) => {
             console.log('createRightInfo', d);
             if (this.isClickableType(d.data.type)) {

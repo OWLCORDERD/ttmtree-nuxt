@@ -33,6 +33,11 @@ export default defineNuxtConfig({
     '~/assets/scss/base/animation.scss',
     '~/assets/scss/common.scss',
   ],
+  runtimeConfig: {
+    public : {
+      apiBaseUrl: process.env.API_BASE_URL || '',
+    }
+  },
   // @ts-ignore - nuxt-font-loader 모듈 타입 정의 없음
   fontLoader: {
     local: [
