@@ -169,6 +169,8 @@
             <div id="edu-tree" class="tree"></div>
         </div>
     </div>
+
+    <ttm-detail-modal v-if="detailModalStore.modalOpen" />
 </template>
 
 <script setup>
@@ -188,6 +190,7 @@ const { $treeInstance: treeInstance,
     $designConfig: designConfig } = useNuxtApp();
 
 const treeInstanceStore = useMyTreeInstanceStore();
+const detailModalStore = useMyDetailModalStore();
 
 /* DOM 트리 구조 생성 이후 백터 그래픽 렌더링 시작 */
 onBeforeMount(() => {

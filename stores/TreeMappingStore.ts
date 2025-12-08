@@ -7,6 +7,7 @@ interface MappingStoreType {
   currentSelectNode: any;
   currentSelectTreeId: string;
   loadingYn: boolean;
+  scheduledUpdate: boolean; // 스크롤 이벤트 스케줄링 관리 플래그
 }
 
 export const useMyTreeMappingStore = defineStore('treeMapping', {
@@ -15,6 +16,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
     currentSelectNode: null,
     currentSelectTreeId: '',
     loadingYn: false,
+    scheduledUpdate: false,
    }),
   actions: {
     async handleMappingSetting(node: any, treeId: string) {
@@ -72,9 +74,12 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
         throw new Error('트리 매핑 데이터 조회 실패');
       }
     },
-    async clearConnection() {
+    clearConnection() {
+      this.lines.forEach((line: any) => line.remove());
       this.$state.lines = [];
       d3.selectAll('.node-selected').classed('node-selected', false);
+
+      d3.selectAll('.node-mapped-target').classed('node-mapped-target', false);
 
       this.currentSelectNode = null;
       this.currentSelectTreeId = '';
@@ -159,7 +164,41 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
           // 맵핑 타겟 노드에 맵핑 타겟 클래스 추가
           d3.select(targetElement).classed('node-mapped-target', true);
         }
+
+        // 맵핑 선 생성 이후 트리 컨테이너마다 스크롤 이벤트 부여
+        this.registerScrollListener();
       }
+    },
+    registerScrollListener() {
+      const treeContainer = document.querySelectorAll('.tree');
+
+      treeContainer.forEach(container => {
+        const listener = () => this.schedulePositionUpdate();
+        container.addEventListener('scroll', listener, { passive: true });
+      })
+    },
+    schedulePositionUpdate() {
+      if (this.scheduledUpdate) return;
+
+      this.scheduledUpdate = true;
+
+      nextTick(() => {
+        this.updateLinePositions();
+        this.scheduledUpdate = false;
+      })
+    },
+    updateLinePositions() {
+      if (this.lines.length === 0) return;
+
+      this.lines.forEach(line => {
+        try {
+          if (typeof line.position === 'function') {
+            line.position();
+          }
+        } catch (error) {
+          console.warn('Failed to update line position', error);
+        }
+      });
     }
   }
 })

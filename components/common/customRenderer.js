@@ -1,4 +1,6 @@
 import * as d3 from 'd3';
+import { useMyDetailModalStore } from '~/stores/detailModalStore';
+import { useMyTreeInstanceStore } from '~/stores/TreeInstanceStore';
 /**
  * TreeRenderer
  * D3.js 활용한 트리 백터 그래픽 렌더링 담당
@@ -16,7 +18,6 @@ export class TTMTreeRenderer {
         this.onNodeClick = null; // Callback for node click (detail modal)
         this.getTypeDisplayName = null;
         this.isClickableType = null;
-        this.nodeUpdate = null;
     }
 
     /**
@@ -289,10 +290,8 @@ export class TTMTreeRenderer {
             .text(d => d.data.name)
             .on('click', (event, d) => {
                 // Node name click shows detail modal for all types
-                if (this.onNodeClick) {
-                    event.stopPropagation();
-                    this.onNodeClick(event, d);
-                }
+                event.stopPropagation();
+                useMyDetailModalStore().currentDetailModalShow(d);
         });
     }
  
@@ -304,6 +303,7 @@ export class TTMTreeRenderer {
         const rightInfo = nodeEnter.append('g')
             .attr('class', 'right-info')
             .attr('transform', `translate(450, 0)`)
+            .style('display', (d) => (this.isClickableType(d.data.type) ? 'block' : 'none'));
 
         rightInfo.append('rect')
         .attr('class', 'mapping-button')
@@ -341,14 +341,10 @@ export class TTMTreeRenderer {
         .style('cursor', 'pointer')
         .attr('class', 'mapping-count')
         .on('click', (event, d) => {
-            console.log('createRightInfo', d);
             if (this.isClickableType(d.data.type)) {
-                console.log('isClickableType', this.isClickableType(d.data.type));
-                console.log('createRightInfo', d);
-                if (this.onMappingClick) {
-                    event.stopPropagation();
-                    this.onMappingClick(event, d);
-                }
+                event.stopPropagation();
+                // 현재 클릭한 노드의 컨테이너 아이디값과 함께 상태관리 맵핑 셋팅 함수 호출
+                useMyTreeMappingStore().handleMappingSetting(d, this.containerId);
             }
         })
         
@@ -456,7 +452,7 @@ export class TTMTreeRenderer {
             node._children = null;
         }
         
-        this.nodeUpdate(node);
+        useMyTreeInstanceStore().nodeUpdate(node, this.containerId);
     }
     
     // 2025.12.03[mhlim]: 노드 제목 말줄임 처리

@@ -110,5 +110,12 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
           node._children.forEach((child: any) => this.traverseTypeFilter(child, treeType));
       }
     },
+    // 각 트리 컨테이너에서의 동적 트리 구조 변경에 따른
+    // 기존 노드 업데이트 함수
+    async nodeUpdate(source: any, containerId: string) {
+      const treeType = containerId.split('-')[0];
+      const currentTreeInstance: any = this.$state[treeType as keyof typeof this.$state];
+      currentTreeInstance.renderer.update(currentTreeInstance.root, source);
+    },
   }
 })

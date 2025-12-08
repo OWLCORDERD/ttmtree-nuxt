@@ -1,7 +1,6 @@
 import { useMyTreeInstanceStore } from "~/stores/TreeInstanceStore";
-import { useMyTreeMappingStore } from "~/stores/TreeMappingStore";
 import * as d3 from 'd3';
-import { TTMTreeRenderer } from "~/components/customRenderer";
+import { TTMTreeRenderer } from "~/components/common/customRenderer";
 
 export default defineNuxtPlugin((nuxtApp) => {
     const isClient = typeof window !== 'undefined';
@@ -123,6 +122,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             // 트리 데이터 매니저 상태관리에 트리 데이터 조회 요청 
             await treeInstanceStore.fetchTreeDepthData(containerId);
 
+            // 현재 컨트롤러 호출한 컨테이너의 검색 필터 셋팅 & 트리 데이터 셋팅
             switch (containerId) {
                 case 'comp-tree':
                     currentTreeRoot = treeInstanceStore.$state.comp.root;
@@ -138,40 +138,6 @@ export default defineNuxtPlugin((nuxtApp) => {
                     break;
             }
 
-            // 현재 노드 데이터 구조 렌더러에서 변경사항 업데이트 시, 콜백 호출
-            const nodeUpdate = (source) => {
-                Renderer.update(currentTreeRoot, source);
-            }
-
-            // 2025.12.05[mhlim]: 맵핑 타겟 노드의 상위 부모 폴더들을 순회하여
-            // 부모 폴더들 펼침 활성화하여 노드 업데이트하는 함수
-            const expandNodePath = (targetNode) => {
-                let needsUpdate = false;
-                
-                // Build path from root to target
-                const path = [];
-                let current = targetNode;
-        
-                while (current.parent) {
-                    path.unshift(current.parent);
-                    current = current.parent;
-                }
-            
-                path.forEach(node => {
-                    if (node._children) {
-                        node.children = node._children;
-                        node._children = null;
-                        needsUpdate = true;
-                    }
-                });
-        
-                if (needsUpdate) {
-                    nodeUpdate(currentTreeRoot);
-                }
-        
-                return needsUpdate;
-            }
-
             // 2025.12.05[mhlim]: 현 컨테이너 트리 구조에서 
             // 특정 타입과 아이디에 해당하는 노드 조회 함수
             const findNodeByTypeAndId = (itemType, itemId) => {
@@ -179,7 +145,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         
                 const search = (node) => {
                     if (node.data.type === itemType && node.data.id === itemId) {
-                        console.log('foundNode', node);
                         foundNode = node;
                         return true;
                     }
@@ -203,17 +168,38 @@ export default defineNuxtPlugin((nuxtApp) => {
                 return foundNode;
             }
 
-            // 각 트리 렌더러에서 생성된 맵핑 버튼 클릭 이벤트 콜백
-            const handleMappingClick = (event, d) => {
-                // 현재 클릭한 노드의 컨테이너 아이디값과 함께 상태관리 맵핑 셋팅 함수 호출
-                useMyTreeMappingStore().handleMappingSetting(d, containerId);
+            // 2025.12.05[mhlim]: 맵핑 타겟 노드의 상위 부모 폴더들을 순회하여
+            // 부모 폴더들 펼침 활성화하여 노드 업데이트하는 함수
+            const expandNodePath = (targetNode) => { 
+                let needsUpdate = false;
+                
+                // Build path from root to target
+                const path = [];
+                let current = targetNode;
+        
+                while (current.parent) {
+                    path.unshift(current.parent);
+                    current = current.parent;
+                }
+            
+                path.forEach(node => {
+                    if (node._children) {
+                        node.children = node._children;
+                        node._children = null;
+                        needsUpdate = true;
+                    }
+                });
+        
+                if (needsUpdate) {
+                    treeInstanceStore.nodeUpdate(currentTreeRoot, containerId);
+                }
+        
+                return needsUpdate;
             }
 
             // 렌더러 인스턴스 내부 이벤트 리스너 바인딩
             Renderer.getTypeDisplayName = getTypeDisplayName;
             Renderer.isClickableType = isClickableType;
-            Renderer.nodeUpdate = nodeUpdate;
-            Renderer.onMappingClick = handleMappingClick;
             Renderer.findNodeByTypeAndId = findNodeByTypeAndId;
             Renderer.expandNodePath = expandNodePath;
 
@@ -249,7 +235,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             });
 
             // 뎁스 버튼 클릭 이벤트 셋팅
-            settingDepthBtnClickEvent(containerId, currentTreeRoot);
+            settingDepthBtnClickEvent(containerId);
 
         } catch (error) {
             loadingElement.remove();
@@ -280,10 +266,13 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
 
     // 2025.12.03[mhlim]: 각 트리 컨테이너 뎁스 버튼 클릭 이벤트 바인딩 셋팅
-    const settingDepthBtnClickEvent = (containerId, root) => {
+    const settingDepthBtnClickEvent = (containerId) => {
         const container = document.querySelector(`#${containerId}`);
         const treePanel = container.closest('.tree-panel');
+        // 뎁스 버튼 셋팅하려는 타겟 트리 컨테이너
+        const root = treeInstanceStore.$state[containerId.split('-')[0]].root;
 
+        // 뎁스 버튼 요소들 조회
         const depthButtons = treePanel.querySelectorAll('.depth-btn[data-depth]');
 
         depthButtons.forEach(button => {
@@ -301,7 +290,7 @@ export default defineNuxtPlugin((nuxtApp) => {
         
                 expandToDepth(root, depth);
 
-                treeInstanceStore.nodeUpdate(root);
+                treeInstanceStore.nodeUpdate(root, containerId);
             })
         })
 
@@ -312,14 +301,30 @@ export default defineNuxtPlugin((nuxtApp) => {
             e.preventDefault();
             e.stopPropagation();
             expandAll(root);
-            nodeUpdate(root);
+            treeInstanceStore.nodeUpdate(root, containerId);
+            treePanel.querySelectorAll('.depth-btn[data-depth]').forEach(button => {
+                if (button.getAttribute('data-depth') === '5') {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+
+            
         })
 
         allDepthCloseButton.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
-            collapseFromDepth(root, 1);
-            nodeUpdate(root);
+            expandToDepth(root, 1);
+            treeInstanceStore.nodeUpdate(root, containerId);
+            treePanel.querySelectorAll('.depth-btn[data-depth]').forEach(button => {
+                if (button.getAttribute('data-depth') === '1') {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
         })
     }
     
@@ -335,6 +340,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
 
     const expandToDepth = (node, targetDepth) => {
+        console.log('expandToDepth', node, targetDepth);
         // Special handling for virtual ROOT node
         if (node.data.type === 'ROOT') {
             // Always expand ROOT itself
@@ -389,6 +395,14 @@ export default defineNuxtPlugin((nuxtApp) => {
         }
         if (node.children) {
             node.children.forEach(child => expandAll(child));
+        }
+    }
+
+    const collapseAll = (node) => {
+        if (node.children) {
+            node._children = node.children;
+            node._children.forEach(child => collapseAll(child));
+            node.children = null;
         }
     }
 
