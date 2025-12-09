@@ -3,6 +3,8 @@
     height: 100%;
 
     .wrapper {
+        font-size: var(--font-base);
+
         .container {
             display: flex;
             gap: var(--spacing-md);
@@ -369,6 +371,11 @@
         }
 
         .right-info {
+            &:hover {
+                .mapping-button {
+                    fill: #EBF7FF;
+                }
+            }
             .mapping-button {
                 display: block;
                 width: 50px;
@@ -391,48 +398,7 @@
             fill: var(--color-link);
             font-weight: bold;
         }
-        
-        /* 타입에 따른 라벨 색상 (디자인 변경으로 인한 비활성화) */
-        // .type-COMPETENCY .type-tag-bg {
-        //     fill: var(--type-competency);
-        // }
-        
-        // .type-BEHAVIORAL_INDICATOR .type-tag-bg {
-        //     fill: var(--type-behavioral-indicator);
-        // }
-        
-        // .type-JOB_FAMILY .type-tag-bg {
-        //     fill: var(--type-job-family);
-        // }
-        
-        // .type-JOB_SERIES .type-tag-bg {
-        //     fill: var(--type-job-series);
-        // }
-        
-        // .type-JOB .type-tag-bg {
-        //     fill: var(--type-job);
-        // }
-        
-        // .type-TASK .type-tag-bg {
-        //     fill: var(--type-task);
-        // }
-        
-        // .type-KST .type-tag-bg {
-        //     fill: var(--type-kst);
-        // }
-        
-        // .type-COURSE .type-tag-bg {
-        //     fill: var(--type-course);
-        // }
-        
-        // .type-LESSON .type-tag-bg {
-        //     fill: var(--type-lesson);
-        // }
-        
-        // .type-LEARNING_OBJECT .type-tag-bg {
-        //     fill: var(--type-learning-object);
-        // }
-        
+
         /* Loading indicator */
         .loading {
             text-align: center;
@@ -493,7 +459,7 @@
         /* Selected node */
         .node-selected {
             .node-bg {
-                fill: transparent; 
+                fill: #EBF7FF; 
                 stroke: var(--color-selected-border);
                 stroke-width: 1px;
             }
@@ -652,20 +618,6 @@
                         display: flex;
                         align-items: center;
 
-                        .badge {
-                            position: relative;
-                            padding: 7px 10px;
-                            font-size: 14px;
-                            font-weight: 400;
-                            border-radius: 5px;
-                            color: #fff;
-                            margin-right: 5px;
-
-                            &.competency {
-                                background: var(--color-comp);
-                            }
-                        }
-
                         .current-path {
                             display: flex;
                             align-items: center;
@@ -675,6 +627,17 @@
                             &-item {
                                 display: inline-flex;
                                 align-items: center;
+
+                                // 2025.12.09[mhlim]: 현재 네비게이션이 2뎁스 이상인 경우
+                                // 마지막 뎁스 이름 길이 넘침 고려하여 네비게이션 말줄임 처리
+                                &:last-child {
+                                    .current-path-item-name {
+                                        max-width: 300px;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                    }
+                                }
 
                                 &:before {
                                     display: block;
@@ -811,6 +774,110 @@
                                             word-break: keep-all;
                                             font-size: 16px;
                                             line-height: 1.3;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // 맵핑 아이템 목록 영역
+                        .mapping-cont {
+                            margin-top: 20px;
+
+                            .cont-header {
+                                display: flex;
+                                gap: 8px;
+                                align-items: center;
+                                height: 19px;
+                                margin-bottom: 10px;
+
+                                .index-title {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+
+                                    .nuxt-icon {
+                                        margin-bottom: 0;
+                                        width: 18px;
+                                        height: 18px;
+                                    }
+
+                                    .title {
+                                        font-weight: bold;
+                                    }
+                                }
+
+                                .mapping-count {
+                                    font-weight: 400;
+                                    font-size: 14px;
+
+                                    & > strong {
+                                        color: #147C6C;
+                                    }
+                                }
+                            }
+
+                            .mapping-list {
+                                border: 1px solid #E8E8E8;
+                                padding: 10px 20px;
+
+                                &-item {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                    width: 100%;
+                                    padding: 8px 0;
+                                    gap: 5px;
+                                    border-bottom: 1px solid #E8E8E8;
+
+                                    .nuxt-icon {
+                                        margin-bottom: 0;
+                                        width: 8px;
+                                        height: 10px;
+                                    }
+
+                                    .mapping-label {
+                                        display: inline-block;
+                                        padding: 6px 10px;
+                                        font-size: 14px;
+                                        font-weight: 400;
+                                        color: #0065CD;
+                                        border: 1px solid #d7d7d7;
+                                        border-radius: 100px;
+                                    }
+
+                                    .mapping-name {
+                                        font-weight: 500;
+                                        line-height: 100%;
+                                    }
+                                }
+                            }
+
+                            .etc-table {
+                                margin-top: 20px;
+
+                                .row {
+                                    max-width: 780px;
+                                    height: 36px;
+                                    border: 1px solid #E8E8E8;
+                                    
+                                    .index {
+                                        width: 112px;
+                                        background-color: #F4F4F4;
+                                        padding-left: 10px;
+                                        font-weight: 500;
+                                    }
+
+                                    .cont {
+                                        padding: 8.5px 10px;
+                                        border-left: 1px solid #E8E8E8;
+                                        border-right: 1px solid #E8E8E8;
+                                        &.small {
+                                            width: 198px;
+                                        }
+
+                                        &.large {
+                                            width: 357px;
                                         }
                                     }
                                 }

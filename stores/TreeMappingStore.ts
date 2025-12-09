@@ -6,8 +6,11 @@ interface MappingStoreType {
   lines: LeaderLine[];
   currentSelectNode: any;
   currentSelectTreeId: string;
+  currentMappingData: Map<string, any>;
   loadingYn: boolean;
   scheduledUpdate: boolean; // 스크롤 이벤트 스케줄링 관리 플래그
+  targetNodeList: any[];
+  currentIntersectionObserver: IntersectionObserver | null;
 }
 
 export const useMyTreeMappingStore = defineStore('treeMapping', {
@@ -15,8 +18,11 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
     lines: [],
     currentSelectNode: null,
     currentSelectTreeId: '',
+    currentMappingData: new Map(),
     loadingYn: false,
     scheduledUpdate: false,
+    targetNodeList: [],
+    currentIntersectionObserver: null,
    }),
   actions: {
     async handleMappingSetting(node: any, treeId: string) {
@@ -24,14 +30,11 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
         
         this.clearConnection();
         return;
+      } else {
+        this.currentIntersectionObserver?.disconnect();
       }
 
       this.clearConnection();
-
-      this.currentSelectNode = node;
-      this.currentSelectTreeId = treeId;
-
-      this.loadingYn = true;
 
       // 현재 클릭한 노드의 트리 인스턴스 조회
       const treeInstanceStore = useMyTreeInstanceStore();
@@ -42,18 +45,66 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       // 렌더러 인스턴스의 노드 요소 조회 콜백 호출 (선택 노드 조회)
       const nodeElement = currentTreeInstance.renderer.getNodeElement(node);
 
+      this.currentSelectNode = node;
+      this.currentSelectTreeId = treeId;
+
+      this.loadingYn = true;
+      
       // 선택 노드 요소에 선택 하이라이팅 효과 처리
       if (nodeElement) {
-        d3.select(nodeElement).classed('node-selected', true);
-      }
+          d3.select(nodeElement).classed('node-selected', true);
+
+          // 맵핑 클릭 아이템 영역 > 활성화 아이콘 추가
+          const svg = d3.select(nodeElement)
+          .append('svg')
+          .attr('class', 'mapping-selected-icon')
+          .attr('width', 20)
+          .attr('height', 20)
+          .attr('viewBox', '0 0 22 23')
+          .attr('transform', 'translate(435, -6)')
+
+          svg.append('path')
+          .attr('d', 'M4.99705 0.67551C10.4285 6.08815 15.8862 1.71546 21.3177 7.1281C15.8762 5.89434 10.405 14.4516 4.96347 13.2178C4.97234 9.03435 4.98703 4.85439 4.99589 0.670929L4.99705 0.67551Z')
+          .attr('fill', '#F83F83')
+
+          svg.append('path')
+          .attr('d', 'M3.80762 0C4.54556 -3.23739e-08 5.14453 0.575387 5.14453 1.28516V19.125C6.74744 19.3143 7.90991 19.8764 7.91016 20.54C7.91016 21.3592 6.13937 22.0234 3.95508 22.0234C1.77076 22.0234 0 21.3592 0 20.54C0.000231038 19.9177 1.02259 19.386 2.47168 19.166V1.28516C2.47168 0.575541 3.06989 0.000248274 3.80762 0Z')
+          .attr('fill', '#3C3C3C') 
       
-      try {
-        const mappingData = await this.fetchMappingData(node.data.id, node.data.type);
-        
-        await this.drawConnections(node, treeId, mappingData);
-        this.loadingYn = false;
-      } catch (error) {
-        console.error(error);
+        try {
+          if (!this.currentMappingData.has(node.data.id)) {
+            const mappingData = await this.fetchMappingData(node.data.id, node.data.type);
+
+            await this.drawConnections(node, treeId, mappingData);
+            this.currentMappingData.set(node.data.id, mappingData);
+          }
+
+          this.currentIntersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(async (entry) => {
+              if(entry.isIntersecting) {
+                console.log('entry', entry);
+                  const mappingData = this.currentMappingData.get(node.data.id);
+                  await this.drawConnections(node, treeId, mappingData);
+              } else {
+                this.lines.forEach((line: any) => line.remove());
+                this.$state.lines = [];
+              }
+            })
+          })
+
+          this.currentIntersectionObserver?.observe(nodeElement);
+
+          const currentIntersectionObserver = this.currentIntersectionObserver;
+
+          d3.selectAll('.node-mapped-target').each(function() {
+            currentIntersectionObserver?.observe(this as Element);
+          })
+
+        } catch (error) {
+          console.error(error);
+        } finally {
+          this.loadingYn = false;
+        }
       }
     },
     async fetchMappingData(nodeId: string, nodeType: string) {
@@ -81,8 +132,11 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
 
       d3.selectAll('.node-mapped-target').classed('node-mapped-target', false);
 
+      d3.selectAll('.mapping-selected-icon').remove();
+      
       this.currentSelectNode = null;
       this.currentSelectTreeId = '';
+      this.currentMappingData.clear();
     },
     // 2025.12.05[mhlim]: 현재 클릭한 노드와 맵핑 타겟 노드들 연결 선 그리는 함수
     async drawConnections(sourceNode: any, sourceId: string, mappingData: any) {
@@ -97,6 +151,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       const sourceNodeElement = sourceRenderer.getNodeElement(sourceNode);
 
       const targetsToExpand = [];
+
       let firstTarget = null;
 
       for (const mapping of mappingData) {
@@ -112,6 +167,10 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
           }
         }
       }
+
+      targetsToExpand.forEach(target => {
+        this.targetNodeList.push(target.node);
+      });
 
       if (targetsToExpand.length > 0) {
         const treeToUpdate = new Set();
@@ -167,6 +226,10 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
 
         // 맵핑 선 생성 이후 트리 컨테이너마다 스크롤 이벤트 부여
         this.registerScrollListener();
+
+        if (firstTarget) {
+          firstTarget.tree.renderer.scrollToNode(firstTarget.node);
+        }
       }
     },
     registerScrollListener() {

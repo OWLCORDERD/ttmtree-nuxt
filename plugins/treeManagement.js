@@ -340,7 +340,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
 
     const expandToDepth = (node, targetDepth) => {
-        console.log('expandToDepth', node, targetDepth);
         // Special handling for virtual ROOT node
         if (node.data.type === 'ROOT') {
             // Always expand ROOT itself

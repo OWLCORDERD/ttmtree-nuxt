@@ -3,13 +3,15 @@
     <div class="modal-container">
       <div class="modal-header">
         <div class="modal-title">
-          <div class="badge competency">
-            <span>역량체계</span>
-          </div> 
+          <!-- 상세 모달 역량 체계 라벨 뱃지 -->
+          <ttm-detail-modal-system-label :type="modalStore.$state.frameworkType" />
+          <!-- 상세 모달 체계 풀 경로 네비게이션 -->
           <ul class="current-path" v-if="currentFullPath.length > 0">
             <li v-for="item in currentFullPath" :key="item.id"
             class="current-path-item">
+            <span class="current-path-item-name">
               {{ item.name }}
+            </span>
             </li>
           </ul>
           <p class="current-path" v-else>
@@ -48,8 +50,13 @@ import { Suspense } from 'vue';
 const modalStore = useMyDetailModalStore();
 
 const componentSelector = {
+  // 역량 상세
   'COMPETENCY': () => import('@/components/ttm/detail-modal/content/competency.vue'),
+  // 행동지표 상세
+  'BEHAVIORAL_INDICATOR': () => import('@/components/ttm/detail-modal/content/competency.vue'),
+  // 직무체계 상세
   'JOB_FAMILY': () => import('@/components/ttm/detail-modal/content/job.vue'),
+  // 교육체계 상세
   'COURSE': () => import('@/components/ttm/detail-modal/content/edu.vue'),
 }
 

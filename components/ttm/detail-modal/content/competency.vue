@@ -1,14 +1,15 @@
 <template>
-  <div class="framework-detail">
+  <div class="framework-detail" v-if="currentFrameworkDetail">
     <div class="detail-header">
       <div class="framework-index">
         <div class="framework-icon competency">
           <TTMBulb />
         </div>
-        <h2 class="framework-name">{{ currentFrameworkDetail.name }}</h2>
+        <h2 class="framework-name">{{  currentFrameworkDetail.name }}</h2>
       </div>
 
-      <div class="framework-count">
+      <!-- 역량체계 역량 1뎁스 > 하위 행동지표 수 카운트 표시 -->
+      <div class="framework-count" v-if="currentFrameworkDetail.itemType === 'COMPETENCY'">
         <TTMPlates />
         <span class="count-txt">
           <span class="title">행동지표 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
@@ -57,6 +58,8 @@
             </ul>
           </td>
         </tr>
+        <!-- 역량체계 역량 1뎁스에서만 정의, 레벨 표시 -->
+        <template v-if="currentFrameworkDetail.itemType === 'COMPETENCY'">
         <tr class="row">
           <td class="index">역량 정의</td>
           <td class="cont">
@@ -83,14 +86,60 @@
             </ul>
           </td>
         </tr>
+      </template>
       </tbody>
     </table>
+
+    <div class="mapping-cont">
+      <div class="cont-header">
+        <div class="index-title">
+          <TTMConnect />
+          <p class="title">매핑</p>
+        </div>
+
+        <span class="mapping-count">
+          총 <strong>{{ mappingList.length }}</strong>건
+        </span>
+      </div>
+
+      <ul class="mapping-list">
+        <li class="mapping-list-item" v-for="item in mappingList">
+          <ttm-detail-modal-system-label :type="item.itemType" />
+          <arrowRight />
+          <div class="mapping-label">
+            <span class="label-name">
+              {{ item.itemType === 'COURSE' ? '교육과정' : 'TASK'}}
+            </span>
+          </div>
+          <span class="mapping-name">{{ item.name }}</span>
+        </li>
+      </ul>
+
+      <table class="etc-table">
+        <tbody>
+          <tr class="row">
+            <td class="index">최초 등록자</td>
+            <td class="cont large">{{ currentFrameworkDetail.createdByName || '-' }}</td>
+            <td class="index">최초 등록일</td>
+            <td class="cont small">{{ currentFrameworkDetail.createdDate }}</td>
+          </tr>
+          <tr class="row">
+            <td class="index">최종 수정자</td>
+            <td class="cont large">{{ currentFrameworkDetail.lastModifiedByName || '-' }}</td>
+            <td class="index">최종 수정일</td>
+            <td class="cont small">{{ currentFrameworkDetail.lastModifiedDate }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <script setup>
 import TTMBulb from '@/assets/images/svg/ttm-bulb.svg';
 import TTMPlates from '@/assets/images/svg/plates.svg';
+import TTMConnect from '@/assets/images/svg/ttm-connect.svg';
+import arrowRight from '@/assets/images/svg/chevron-right.svg';
 
 const frameworkList = [
   {
@@ -154,7 +203,10 @@ const frameworkLevelList = [
 const detailModalStore = useMyDetailModalStore();
 
 const currentFrameworkDetail = computed(() => {
-  if (detailModalStore.frameworkType !== 'COMPETENCY') {
+  // 현재 클릭 노드의 체계 카테고리가 역량 or 행동지표도 아닌 경우
+  if (detailModalStore.$state.frameworkType !== 'COMPETENCY'
+  && detailModalStore.$state.frameworkType !== 'BEHAVIORAL_INDICATOR'
+  ) {
     return null;
   }
 
@@ -166,9 +218,17 @@ const currentFrameworkDetail = computed(() => {
   }
 })
 
+const mappingList = computed(() => {
+  if (detailModalStore.$state.frameworkType === 'COMPETENCY') {
+    return detailModalStore.$state.currentDetail.mappedCourses;
+  } else if (detailModalStore.$state.frameworkType === 'BEHAVIORAL_INDICATOR') {
+    return detailModalStore.$state.currentDetail.mappedTasks;
+  }
+})
+
 const handleDetailChange = (event, currentFrameworkDetail, key) => {
   currentFrameworkDetail[key] = event.target.value;
-}
+} 
 </script>
 
 <style>
