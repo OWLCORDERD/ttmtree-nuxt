@@ -1,6 +1,8 @@
 <template>
+    <!-- 트리 컨테이너 영역-->
     <div class="container">
-        <div class="tree-panel">
+        <div class="tree-container">
+            <div class="tree-panel">
             <div class="panel-header comp-header">
                 <div class="index-title">
                     <TTMBulb />
@@ -56,7 +58,9 @@
                     </div>
                 </div>
             </div>
-            <div id="comp-tree" class="tree"></div>
+            <div class="tree-area">
+                <div class="tree" id="comp-tree"></div>
+            </div>
         </div>
 
         <div class="tree-panel">
@@ -111,7 +115,9 @@
                     </div>
                 </div>
             </div>
-            <div id="job-tree" class="tree"></div>
+            <div class="tree-area">
+                <div class="tree" id="job-tree"></div>
+            </div>
         </div>
 
         <div class="tree-panel">
@@ -166,8 +172,26 @@
                     </div>
                 </div>
             </div>
-            <div id="edu-tree" class="tree"></div>
+            <div class="tree-area">
+                <div class="tree" id="edu-tree"></div>
+            </div>
         </div>
+        </div>
+
+        <div class="btn-wrap">
+        <button type="button" class="btn-line-m-main">
+            <MappingMode />
+            <span class='title'>매핑모드</span>
+        </button>
+        <button type="button" class="btn-line-m-main">
+            <CourseEdit />
+            <span class='title'>과정구성 편집</span>
+        </button>
+        <button type="button" class="btn-fill-m-main">
+            <checkRequest />
+            <span class='title'>결제요청</span>
+        </button>
+    </div>
     </div>
 
     <ttm-detail-modal v-if="detailModalStore.modalOpen" />
@@ -184,6 +208,9 @@ import MinusButton from '~/assets/images/svg/minus.svg';
 import Search from '~/assets/images/svg/btn-search.svg';
 import Refresh from '~/assets/images/svg/btn-reset.svg';
 import CheckBox from '~/assets/images/svg/check.svg';
+import MappingMode from '~/assets/images/svg/ttm-connect.svg';
+import CourseEdit from '~/assets/images/svg/gnb-setting.svg';
+import checkRequest from '~/assets/images/svg/btn-correct.svg';
 
 const { $treeInstance: treeInstance, 
     $ttmController: ttmController,

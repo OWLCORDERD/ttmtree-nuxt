@@ -41,28 +41,25 @@ export default defineNuxtPlugin((nuxtApp) => {
             }
         },
 
-        // TTM 트리 유저 인터페이스 설정
-        ui: {
-            loadingDelay: 350,       // 로딩 후 대기 시간 (ms)
-            scrollDelay: 300,        // 스크롤 애니메이션 지연 (ms)
-            typeTagOffset: {
-                withToggle: 21,      // 토글 버튼이 있을 때 타입 태그 시작 위치
-                withoutToggle: 5     // 토글 버튼이 없을 때 타입 태그 시작 위치
-            },
-            toggleRadius: 8,         // 토글 버튼 반지름 (px)
-            rightInfoOffset: 450     // 오른쪽 정보 표시 위치 (px)
-        },
-
         // 각 타입별 노출 텍스트 설정
         types: {
             // 클릭 가능한 (매핑 지원) 노드 타입
             clickable: [
+                'KST', // K/S/T
+                'LEARNING_OBJECT', // 학습목표 
+                'TASK', // TASK
+                'COURSE', // 교육과정
+                'BEHAVIORAL_INDICATOR', // 행동지표
+                'COMPETENCY' // 역량
+            ],
+
+            // 맵핑 가능한 타입 목록
+            mappingAvailableTypes: [
                 'KST',
-                'LEARNING_OBJECT',
                 'TASK',
-                'COURSE',
-                'BEHAVIORAL_INDICATOR',
-                'COMPETENCY'
+                'LEARNING_OBJECT', // 학습목표
+                'DETAIL_LEARNING_OBJECT', // 세부학습목표 
+                'BEHAVIORAL_INDICATOR', // 행동지표
             ],
 
             // 타입 표시명 매핑
@@ -76,8 +73,9 @@ export default defineNuxtPlugin((nuxtApp) => {
                 'KST': 'K/S/T',
                 'COURSE': '교육과정',
                 'LESSON': '교과목',
+                'LESSON_GROUP': '교과목 그룹',
                 'LEARNING_OBJECT': '학습목표',
-                'MODULE': '모듈'
+                'DETAIL_LEARNING_OBJECT': '세부학습목표',
             },
 
             // 교과목 학습유형 매핑

@@ -301,16 +301,19 @@ export class TTMTreeRenderer {
     createRightInfo(nodeEnter) {
         const rightInfo = nodeEnter.append('g')
             .attr('class', 'right-info')
-            .attr('transform', `translate(450, 0)`)
+            .attr('transform', `translate(390, 0)`)
             .style('display', (d) => (this.isClickableType(d.data.type) ? 'block' : 'none'));
 
         rightInfo.append('rect')
         .attr('class', 'mapping-button')
         .attr('cursor', 'pointer')
         .on('click', (event, d) => {
-            if (this.isClickableType(d.data.type)) {
+            if (this.isClickableType(d.data.type) && this.designConfig.types.mappingAvailableTypes.includes(d.data.type)) {
                 event.stopPropagation();
                 useMyTreeMappingStore().handleMappingSetting(d, this.containerId);
+            } else {
+                event.stopPropagation();
+                useMyTreeMappingStore().toastifyMessage('맵핑 가능한 타입이 아닙니다.');
             }
         })
 
@@ -324,9 +327,12 @@ export class TTMTreeRenderer {
         .attr('viewBox', '0 0 18 16')
         .attr('class', 'mapping-icon')
         .on('click', (event, d) => {
-            if (this.isClickableType(d.data.type)) {
+            if (this.isClickableType(d.data.type) && this.designConfig.types.mappingAvailableTypes.includes(d.data.type)) {
                 event.stopPropagation();
                 useMyTreeMappingStore().handleMappingSetting(d, this.containerId);
+            } else {
+                event.stopPropagation();
+                useMyTreeMappingStore().toastifyMessage('맵핑 가능한 타입이 아닙니다.');
             }
         })
 
@@ -341,9 +347,12 @@ export class TTMTreeRenderer {
         .style('cursor', 'pointer')
         .attr('class', 'mapping-count')
         .on('click', (event, d) => {
-            if (this.isClickableType(d.data.type)) {
+            if (this.isClickableType(d.data.type) && this.designConfig.types.mappingAvailableTypes.includes(d.data.type)) {
                 event.stopPropagation();
                 useMyTreeMappingStore().handleMappingSetting(d, this.containerId);
+            } else {
+                event.stopPropagation();
+                useMyTreeMappingStore().toastifyMessage('맵핑 가능한 타입이 아닙니다.');
             }
         })
         
@@ -469,7 +478,7 @@ export class TTMTreeRenderer {
         const title = document.querySelectorAll('.node-name');
 
         // 25자 제한
-        const maxLength = 25;
+        const maxLength = 16;
 
         // 각 노드명 요소 텍스트 말줄임 처리
         title.forEach((item) => {
