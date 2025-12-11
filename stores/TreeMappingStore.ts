@@ -4,9 +4,11 @@ import { useRuntimeConfig } from '#app';
 
 interface MappingStoreType {
   lines: LeaderLine[]; // leaderline 생성 연결 선 생성자 목록
+  newLines: Map<string, LeaderLine>; // 새로운 맵핑 타겟 노드 연결 선 생성자 목록
   currentSelectNode: any; // 현재 클릭한 노드
   currentSelectTreeId: string; // 현재 클릭한 노드를 포함한 트리 ID
   currentMappingData: Map<string, any>; // 현재 클릭한 노드의 맵핑 데이터 캐싱
+  newTargetNodeIdList: { id: string, type: string }[]; // 새로운 맵핑 타겟 노드 ID 목록
   loadingYn: boolean; // 맵핑 로딩 중 팝업 노출 여부
   toastifyYn: boolean; // 토스트 메시지 활성화 여부
   scheduledUpdate: boolean; // 스크롤 이벤트 스케줄링 관리 플래그
@@ -17,12 +19,14 @@ interface MappingStoreType {
 export const useMyTreeMappingStore = defineStore('treeMapping', {
   state: (): MappingStoreType => ({
     lines: [],
+    newLines: new Map(),
     currentSelectNode: null,
     currentSelectTreeId: '',
     currentMappingData: new Map(),
     loadingYn: false,
     scheduledUpdate: false,
     targetNodeList: [],
+    newTargetNodeIdList: [],
     currentIntersectionObserver: null,
     toastifyYn: false,
    }),
@@ -285,47 +289,74 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
         }
       }
     },
+    // 2025.12.11 [mhlim]: 신규 맵핑 타겟 노드에 대한 
+    // 신규 맵핑 leaderLine 선 & 데이터 관리
     async drawNewConnection(sourceNode: any, d: any) {
       const treeInstanceStore = useMyTreeInstanceStore();
       const treeInstances = treeInstanceStore.$state;
 
+      // 새 연결 타겟 노드 조회
       let connectionTargetEl: any;
       
+      // 모든 트리 인스턴스에서 타겟 노드 조회
       for(const [treeId, treeInstance] of Object.entries(treeInstances)) {
         const targetNode = treeInstance.renderer.findNodeByTypeAndId(d.data.type, d.data.id);
-        // const lineFilter = this.lines.filter((item) => item.end === targetNode);
-
+  
         if (targetNode) {
           connectionTargetEl = treeInstance.renderer.getNodeElement(targetNode);
           break;
         }
       }
 
-      
-      if (connectionTargetEl) {
-        if (import.meta.client) {
-          const LeaderLine = await import('leader-line-new');
+      // 타겟노드 고유 아이디, 타입 값
+      const nodeId = d.data.id;
+      const nodeType = d.data.type;
 
-          // 현재 클릭한 노드와 맵핑 타겟 노드 연결 선 생성
-          const line = new LeaderLine.default(
-            sourceNode,
-            connectionTargetEl,
-            {
-              color: 'var(--color-selected-border)',
-              size: 2,
-              dash: false,
-              endPlug: 'behind',
-              startPlug: 'behind',
-              path: 'grid',
-              startSocketGravity: [0, 0],
-              endSocketGravity: [0, 0],
-            }
-          );
+      // 신규 맵핑 타겟 노드에 대한 leaderLine 조회
+      const existLine = this.newLines.get(`${nodeType}-${nodeId}`);
 
-          // 연결 선 인스턴스 상태관리 배열에 추가
-          this.lines.push(line);
+      // 기존 존재하는 선 삭제 처리
+      if (existLine) {
+        try {
+          existLine.remove();
+        } catch (error) {
+          console.warn('Failed to remove line', error);
         }
+
+        // 신규 맵핑 타겟 노드에 대한 leaderLine 인스턴스 삭제
+        this.newLines.delete(`${nodeType}-${nodeId}`);
+        // 신규 맵핑 배열 타겟 노드 데이터 삭제 처리
+        this.newTargetNodeIdList = this.newTargetNodeIdList.filter((item) => item.id !== nodeId);
+        return;
       }
+  
+      if (import.meta.client) {
+        const LeaderLine = await import('leader-line-new');
+  
+        // 현재 클릭한 노드와 맵핑 타겟 노드 연결 선 생성
+        const line = new LeaderLine.default(
+          sourceNode,
+          connectionTargetEl,
+          {
+            color: 'var(--color-selected-border)',
+            size: 2,
+            dash: false,
+            endPlug: 'behind',
+            startPlug: 'behind',
+            path: 'grid',
+            startSocketGravity: [0, 0],
+            endSocketGravity: [0, 0],
+          }
+        );
+          // 연결 선 인스턴스 상태관리 배열에 추가
+          this.newLines.set(`${nodeType}-${nodeId}`, line);
+          this.newTargetNodeIdList.push({
+            id: nodeId,
+            type: nodeType,
+          });
+      }
+
+      this.currentIntersectionObserver?.observe(connectionTargetEl);
     },
     registerScrollListener() {
       const treeContainer = document.querySelectorAll('.tree');
@@ -349,6 +380,16 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       if (this.lines.length === 0) return;
 
       this.lines.forEach(line => {
+        try {
+          if (typeof line.position === 'function') {
+            line.position();
+          }
+        } catch (error) {
+          console.warn('Failed to update line position', error);
+        }
+      });
+
+      this.newLines.forEach(line => {
         try {
           if (typeof line.position === 'function') {
             line.position();

@@ -411,14 +411,7 @@
     
                 .toggle-btn {
                     cursor: pointer;
-    
-                    .toggle-open {
-                        fill: var(--color-dark);
-                    }
-                    
-                    .toggle-closed {
-                        fill: var(--color-dark);
-                    }
+                    fill: var(--color-dark);
                 }
     
                 .type-tag {
@@ -754,6 +747,7 @@
 
                 .modal-cont {
                     margin-top: 20px;
+                    overflow-y: auto;
 
                     .framework-detail {
                         border: 1px solid #e8e8e8;
@@ -778,14 +772,24 @@
                                     height: 27px;
                                     border-radius: 50%;
 
-                                    .nuxt-icon {
-                                        font-size: 17px;
-                                        color: #fff;
-                                        margin-bottom: 0;
-                                    }
-
                                     &.competency {
                                         background: var(--color-comp);
+
+                                        .nuxt-icon {
+                                            font-size: 17px;
+                                            color: #fff;
+                                            margin-bottom: 0;
+                                        }
+                                    }
+
+                                    &.job {
+                                        background: var(--color-job);
+
+                                        .nuxt-icon {
+                                            font-size: 14px;
+                                            color: #fff;
+                                            margin-bottom: 0;
+                                        }
                                     }
                                 }
 

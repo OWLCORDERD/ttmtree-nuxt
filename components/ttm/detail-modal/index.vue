@@ -56,6 +56,12 @@ const componentSelector = {
   'BEHAVIORAL_INDICATOR': () => import('@/components/ttm/detail-modal/content/competency.vue'),
   // 직무체계 상세
   'JOB_FAMILY': () => import('@/components/ttm/detail-modal/content/job.vue'),
+  'JOB_SERIES': () => import('@/components/ttm/detail-modal/content/job.vue'),
+  'JOB': () => import('@/components/ttm/detail-modal/content/job.vue'),
+  'TASK': () => import('@/components/ttm/detail-modal/content/job.vue'),
+  'K': () => import('@/components/ttm/detail-modal/content/job.vue'),
+  'S': () => import('@/components/ttm/detail-modal/content/job.vue'),
+  'T': () => import('@/components/ttm/detail-modal/content/job.vue'),
   // 교육체계 상세
   'COURSE': () => import('@/components/ttm/detail-modal/content/edu.vue'),
 }

@@ -14,7 +14,13 @@
   const displayTypeName = computed(() => {
     if (props.type === 'COMPETENCY') {
       return '역량체계';
-    } else if (props.type === 'JOB_FAMILY' || props.type === 'TASK') {
+    } else if (props.type === 'JOB_FAMILY' ||
+    props.type === 'JOB_SERIES' ||
+    props.type === 'JOB' ||
+    props.type === 'TASK' ||
+    props.type === 'K' ||
+    props.type === 'S' ||
+    props.type === 'T') {
       return '직무체계';
     } else if (props.type === 'COURSE') {
       return '교육체계';
@@ -44,6 +50,11 @@
 
                             
       &.JOB_FAMILY,
+      &.JOB_SERIES,
+      &.JOB,
+      &.K,
+      &.S,
+      &.T,
       &.TASK {
           background: var(--color-job);
       }
