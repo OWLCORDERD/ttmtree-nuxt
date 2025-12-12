@@ -6,10 +6,10 @@
           <!-- 상세 모달 역량 체계 라벨 뱃지 -->
           <ttm-detail-modal-system-label :type="modalStore.$state.frameworkType" />
           <!-- 상세 모달 체계 풀 경로 네비게이션 -->
-          <ul class="current-path" v-if="currentFullPath.length > 0">
+          <ul class="navigation" v-if="currentFullPath.length > 0" :class="modalStore.$state.frameworkType">
             <li v-for="item in currentFullPath" :key="item.id"
-            class="current-path-item">
-            <span class="current-path-item-name">
+            class="navigation-item">
+            <span class="current-path-item-name" :title="item.name">
               {{ item.name }}
             </span>
             </li>
@@ -59,9 +59,7 @@ const componentSelector = {
   'JOB_SERIES': () => import('@/components/ttm/detail-modal/content/job.vue'),
   'JOB': () => import('@/components/ttm/detail-modal/content/job.vue'),
   'TASK': () => import('@/components/ttm/detail-modal/content/job.vue'),
-  'K': () => import('@/components/ttm/detail-modal/content/job.vue'),
-  'S': () => import('@/components/ttm/detail-modal/content/job.vue'),
-  'T': () => import('@/components/ttm/detail-modal/content/job.vue'),
+  'KST': () => import('@/components/ttm/detail-modal/content/job.vue'),
   // 교육체계 상세
   'COURSE': () => import('@/components/ttm/detail-modal/content/edu.vue'),
 }

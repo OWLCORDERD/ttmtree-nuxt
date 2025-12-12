@@ -30,8 +30,17 @@
                     </div>
                 </div>
                 <div class="search-controls">
+                    <!-- 검색어 입력 필드 (역량체계) -->
                     <div class="search-box">
-                        <input type="text" placeholder="검색어를 입력하세요." />
+                        <input type="text"
+                        placeholder="검색어를 입력하세요."
+                        ref="searchCompInput"
+                        v-model="searchFrameWorkKeyword.competency.keyword" />
+
+                        <!-- 검색어 연관 목록 데이터 표시 -->
+                        <ttm-search-filter
+                        v-model="searchFrameWorkKeyword.competency"
+                        v-if="searchFrameWorkKeyword.competency.keyword !== '' && treeInstanceStore.$state.currentSearchNode === null" />
                         <button class="search-btn">
                             <Search />
                         </button>
@@ -91,8 +100,12 @@
                     </div>
                 </div>
                 <div class="search-controls">
+                    <!-- 검색어 입력 필드 (직무체계) -->
                     <div class="search-box">
-                        <input type="text" placeholder="검색어를 입력하세요." />
+                        <input type="text"
+                        placeholder="검색어를 입력하세요."
+                        ref="searchJobInput"
+                        v-model="searchFrameWorkKeyword.job" />
                         <button class="search-btn"><Search /></button>
                     </div>
                     <button class="refresh-btn"><Refresh /></button>
@@ -148,8 +161,13 @@
                     </div>
                 </div>
                 <div class="search-controls">
+                    <!-- 검색어 입력 필드 (교육체계) -->
                     <div class="search-box">
-                        <input type="text" placeholder="검색어를 입력하세요." />
+                        <input type="text"
+                        placeholder="검색어를 입력하세요."
+                        ref="searchEduInput"
+                        v-model="searchFrameWorkKeyword.edu" />
+
                         <button class="search-btn"><Search /></button>
                     </div>
                     <button class="refresh-btn"><Refresh /></button>
@@ -237,6 +255,77 @@ const checkBoxTypes = computed(() => {
         edu: treeInstanceStore.$state.edu.types,
     }
 })
+
+// 각 체계별 동적 검색어 입력 값 및 검색어 연관 목록 데이터 관리
+const searchFrameWorkKeyword = reactive({
+    competency: {
+        keyword: '',
+        data: [],
+    },
+    job: {
+        keyword: '',
+        data: [],
+    },
+    edu: {
+        keyword: '',
+        data: [],
+    },
+});
+
+let searchDebounceScheduler = null;
+
+// 2025.12.12[mhlim]: 역량체계 검색어 입력 필드 keyword 감시
+// -> 스케줄링에 등록하여 1초마다 검색하도록 디바운스 적용
+watch(() => searchFrameWorkKeyword.competency.keyword, (newKeyword) => {
+    // 기존 타이머 클리어
+    if (searchDebounceScheduler) {
+        clearTimeout(searchDebounceScheduler);
+    }
+    
+    // 빈 문자열이면 검색 필터링 배열 초기화
+    if (newKeyword === '') {
+        searchFrameWorkKeyword.competency.data = [];
+        treeInstanceStore.$state.currentSearchNode = null;
+        return;
+    }
+    
+    // 1초 검색 디바운스
+    searchDebounceScheduler = setTimeout(() => {
+        const treeRoot = treeInstanceStore.$state.comp.root;
+        if(treeRoot?.data?.type === 'ROOT') {
+            searchCurrentTreeDepth('COMPETENCY', newKeyword, treeRoot);
+        }
+    }, 500);
+}, { immediate: false });
+
+const searchCurrentTreeDepth = (itemType, keyword, currentTreeRoot) => {
+    // 검색 시작 전 기존 조회 데이터 배열 초기화
+    searchFrameWorkKeyword.competency.data = [];
+    
+    const search = (node) => {
+        if (itemType === 'COMPETENCY') {
+            if (node.data.name.includes(keyword)) {
+                searchFrameWorkKeyword.competency.data.push(node);
+            }
+        }
+        
+        // children 검색
+        if (node.children) {
+            for (const child of node.children) {
+                search(child);
+            }
+        }
+
+        // _children 검색
+        if (node._children) {
+            for (const child of node._children) {
+                search(child);
+            }
+        }
+    };
+
+    search(currentTreeRoot);
+}
 
 // 2025.12.03[mhlim]: 각 트리 컨테이너 체크박스 필터 상태관리
 const filterCheckedYn = ref({

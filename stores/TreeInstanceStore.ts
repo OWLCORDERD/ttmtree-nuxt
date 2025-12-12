@@ -20,6 +20,7 @@ interface TreeInstanceStateType {
     containerId: string | null;
     renderer: Object | null;
   },
+  currentSearchNode: d3.HierarchyNode<any> | null;
 }
 
 export const useMyTreeInstanceStore = defineStore('TreeInstance', {
@@ -42,6 +43,7 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
       containerId: '', // 트리 컨테이너 ID
       renderer: null, // 트리 렌더러 인스턴스
     }, // 교육체계 트리 정보 인스턴스
+    currentSearchNode: null, // 현재 사용자가 검색한 노드
   }),
   actions: {
     async fetchTreeDepthData(containerId: string) {
@@ -101,7 +103,7 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
     // 현재 타겟 컨테이너 트리 내부 타입 조회 (Set 컬렉션 add 처리를 통한 중복 방지)
     async traverseTypeFilter(node: any, treeType: string) {
       if (node.data.type && node.data.type !== 'ROOT' && node.data.type !== 'EMPTY') {
-          this[treeType as keyof TreeInstanceStateType].types.add(node.data.type);
+          (this.$state[treeType as keyof typeof this.$state] as any).types.add(node.data.type);
       }
       if (node.children) {
           node.children.forEach((child: any) => this.traverseTypeFilter(child, treeType));
@@ -117,5 +119,25 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
       const currentTreeInstance: any = this.$state[treeType as keyof typeof this.$state];
       currentTreeInstance.renderer.update(currentTreeInstance.root, source);
     },
+    // 2025.12.12[mhlim]: 검색 키워드 조회 목록 중, 검색 아이템 클릭 시 해당 노드의 부모 뎁스 펼침 활성화
+    searchNode(node: d3.HierarchyNode<any>, type: string) {
+      this.currentSearchNode = node;
+
+      if (type === 'COMPETENCY' || type === 'BEHAVIORAL_INDICATOR') {
+        const renderer = this.$state.comp.renderer as any;
+        
+        // 검색 목록에서의 클릭 노드의 아이디와 타입 활용
+        // -> 현재 트리 영역에 그려진 트리 구조에서의 동일한 노드 찾기
+        const currentNode = renderer.findNodeByTypeAndId(node.data.type, node.data.id);
+        
+        if (!currentNode) {
+          console.warn('Node not found in current tree structure:', node.data);
+          return;
+        }
+        
+        // 현재 트리 구조에서 찾은 노드로 부모 폴더 추적 펼침 활성화 함수 호출
+        renderer.expandNodePath(currentNode);
+      }
+    }
   }
 })

@@ -168,7 +168,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
             // 2025.12.05[mhlim]: 맵핑 타겟 노드의 상위 부모 폴더들을 순회하여
             // 부모 폴더들 펼침 활성화하여 노드 업데이트하는 함수
-            const expandNodePath = (targetNode) => { 
+            const expandNodePath = (targetNode) => {
                 let needsUpdate = false;
                 
                 // Build path from root to target
@@ -408,6 +408,7 @@ export default defineNuxtPlugin((nuxtApp) => {
             ttmController: TTMController, // TTM 메인 컨트롤러 함수
             designConfig: designConfig, // 백터 그래픽 디자인 설정
             treeInstance: treeInstance, // 트리 컨테이너 인스턴스 배열
+            typeDisplayName: getTypeDisplayName,
         }
     }
 })
