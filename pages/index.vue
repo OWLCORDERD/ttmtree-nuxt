@@ -36,16 +36,20 @@
                         placeholder="검색어를 입력하세요."
                         ref="searchCompInput"
                         v-model="searchFrameWorkKeyword.competency.keyword" />
-
                         <!-- 검색어 연관 목록 데이터 표시 -->
                         <ttm-search-filter
                         v-model="searchFrameWorkKeyword.competency"
-                        v-if="searchFrameWorkKeyword.competency.keyword !== '' && treeInstanceStore.$state.currentSearchNode === null" />
+                        v-if="searchFrameWorkKeyword.competency.keyword !== ''
+                        && treeInstanceStore.$state.currentSearchNode?.COMP === null" />
                         <button class="search-btn">
                             <Search />
                         </button>
                     </div>
-                    <button class="refresh-btn">
+                    <button class="refresh-btn"
+                    @click="() => {
+                        treeInstanceStore.resetSearchNode('competency');
+                        searchFrameWorkKeyword.competency.keyword = '';
+                    }">
                         <Refresh />
                     </button>
                 </div>
@@ -54,12 +58,9 @@
                         <TTMPlates />
                         <span>Depth</span>
                     </div>
-                    <button class="depth-btn active" data-depth="1">1</button>
-                    <button class="depth-btn" data-depth="2">2</button>
-                    <button class="depth-btn" data-depth="3">3</button>
-                    <button class="depth-btn" data-depth="4">4</button>
-                    <button class="depth-btn" data-depth="5">5</button>
-
+                    <template v-for="(item, index) in treeInstanceStore.$state.comp.types">
+                        <button class="depth-btn" :data-depth="index + 1">{{ index + 1 }}</button>
+                    </template>
                     <!-- 전체 뎁스 컨트롤 버튼 -->
                     <div class="all-control">
                         <button class="open-all-depth"><PlusButton /></button>
@@ -105,21 +106,27 @@
                         <input type="text"
                         placeholder="검색어를 입력하세요."
                         ref="searchJobInput"
-                        v-model="searchFrameWorkKeyword.job" />
+                        v-model="searchFrameWorkKeyword.job.keyword" />
+                        <ttm-search-filter
+                            v-model="searchFrameWorkKeyword.job"
+                            v-if="searchFrameWorkKeyword.job.keyword !== '' &&
+                            treeInstanceStore.$state.currentSearchNode.JOB === null" />
                         <button class="search-btn"><Search /></button>
                     </div>
-                    <button class="refresh-btn"><Refresh /></button>
+                    <button class="refresh-btn"
+                    @click="() => {
+                        treeInstanceStore.resetSearchNode('job');
+                        searchFrameWorkKeyword.job.keyword = '';
+                    }"><Refresh /></button>
                 </div>
                 <div class="depth-controls job">
                     <div class="depth-label">
                         <TTMPlates />
                         <span>Depth</span>
                     </div>
-                    <button class="depth-btn active" data-depth="1">1</button>
-                    <button class="depth-btn" data-depth="2">2</button>
-                    <button class="depth-btn" data-depth="3">3</button>
-                    <button class="depth-btn" data-depth="4">4</button>
-                    <button class="depth-btn" data-depth="5">5</button>
+                    <template v-for="(item, index) in treeInstanceStore.$state.job.types">
+                        <button class="depth-btn" :data-depth="index + 1">{{ index + 1 }}</button>
+                    </template>
 
                     <!-- 전체 뎁스 컨트롤 버튼 -->
                     <div class="all-control">
@@ -166,22 +173,28 @@
                         <input type="text"
                         placeholder="검색어를 입력하세요."
                         ref="searchEduInput"
-                        v-model="searchFrameWorkKeyword.edu" />
+                        v-model="searchFrameWorkKeyword.edu.keyword" />
 
+                        <ttm-search-filter 
+                            v-model="searchFrameWorkKeyword.edu"
+                            v-if="searchFrameWorkKeyword.edu.keyword !== ''
+                            && treeInstanceStore.$state.currentSearchNode?.EDU === null"
+                        />
                         <button class="search-btn"><Search /></button>
                     </div>
-                    <button class="refresh-btn"><Refresh /></button>
+                    <button class="refresh-btn" @click="() => {
+                        treeInstanceStore.resetSearchNode('edu');
+                        searchFrameWorkKeyword.edu.keyword = ''
+                    }"><Refresh /></button>
                 </div>
                 <div class="depth-controls edu">
                     <div class="depth-label">
                         <TTMPlates />
                         <span>Depth</span>
                     </div>
-                    <button class="depth-btn active" data-depth="1">1</button>
-                    <button class="depth-btn" data-depth="2">2</button>
-                    <button class="depth-btn" data-depth="3">3</button>
-                    <button class="depth-btn" data-depth="4">4</button>
-                    <button class="depth-btn" data-depth="5">5</button>
+                    <template v-for="(item, index) in treeInstanceStore.$state.edu.types">
+                        <button class="depth-btn" :data-depth="index + 1">{{ index + 1 }}</button>
+                    </template>
 
                     <!-- 전체 뎁스 컨트롤 버튼 -->
                     <div class="all-control">
@@ -199,19 +212,42 @@
         <div class="btn-wrap">
         <button type="button" class="btn-line-m-main">
             <MappingMode />
-            <span class='title'>매핑모드</span>
+            <span class='title'
+            @click="() => {
+                treeInstanceStore.$state.currentMode = 'mapping';
+            }">
+            매핑모드
+            </span>
         </button>
         <button type="button" class="btn-line-m-main">
             <CourseEdit />
             <span class='title'>과정구성 편집</span>
         </button>
-        <button type="button" class="btn-fill-m-main">
-            <checkRequest />
-            <span class='title'>결제요청</span>
+        <button type="button" class="btn-fill-m-main"
+        @click="() => {
+            treeInstanceStore.$state.classificationType = 'JOB';
+        }">
+            <CourseEdit />
+            <span class='title'>직무역량</span>
+        </button>
+        <button type="button" class="btn-fill-m-main"
+        @click="() => {
+            treeInstanceStore.$state.classificationType = 'LEADERSHIP';
+        }">
+            <CourseEdit />
+            <span class='title'>리더십/공통역량</span>
+        </button>
+        <button type="button" class="btn-fill-m-main"
+        @click="() => {
+            treeInstanceStore.$state.classificationType = 'CONSIGNMENT';
+        }">>
+            <CourseEdit />
+            <span class='title'>수탁/컨소시엄 역량</span>
         </button>
     </div>
     </div>
 
+    <!-- 체계 유형별 상세 모달 -->
     <ttm-detail-modal v-if="detailModalStore.modalOpen" />
 </template>
 
@@ -244,10 +280,6 @@ onBeforeMount(() => {
     });
 })
 
-onMounted(() => {
-    loading.value = false;
-})
-
 const checkBoxTypes = computed(() => {
     return {
         competency: Array.from(treeInstanceStore.$state.comp.types),
@@ -272,41 +304,96 @@ const searchFrameWorkKeyword = reactive({
     },
 });
 
-let searchDebounceScheduler = null;
+// 검색 디바운스 타이머 스케줄링 관리
+const searchDebounceScheduler = reactive({
+    competency: null,
+    job: null,
+    edu: null,
+});
 
 // 2025.12.12[mhlim]: 역량체계 검색어 입력 필드 keyword 감시
 // -> 스케줄링에 등록하여 1초마다 검색하도록 디바운스 적용
 watch(() => searchFrameWorkKeyword.competency.keyword, (newKeyword) => {
     // 기존 타이머 클리어
-    if (searchDebounceScheduler) {
-        clearTimeout(searchDebounceScheduler);
+    if (searchDebounceScheduler.competency) {
+        clearTimeout(searchDebounceScheduler.competency);
     }
+
+    treeInstanceStore.$state.currentSearchNode.COMP = null;
     
     // 빈 문자열이면 검색 필터링 배열 초기화
     if (newKeyword === '') {
         searchFrameWorkKeyword.competency.data = [];
-        treeInstanceStore.$state.currentSearchNode = null;
         return;
     }
     
     // 1초 검색 디바운스
-    searchDebounceScheduler = setTimeout(() => {
+    searchDebounceScheduler.competency = setTimeout(() => {
         const treeRoot = treeInstanceStore.$state.comp.root;
         if(treeRoot?.data?.type === 'ROOT') {
-            searchCurrentTreeDepth('COMPETENCY', newKeyword, treeRoot);
+            searchCurrentTreeDepth('competency', newKeyword, treeRoot);
         }
     }, 500);
 }, { immediate: false });
 
+// 2025.12.12[mhlim]: 직무체계 검색어 입력 필드 keyword 감시
+// -> 스케줄링에 등록하여 1초마다 검색하도록 디바운스 적용
+watch(() => searchFrameWorkKeyword.job.keyword, (newKeyword) => {
+    // 기존 타이머 클리어
+    if (searchDebounceScheduler.job) {
+        clearTimeout(searchDebounceScheduler.job);
+    }
+
+    treeInstanceStore.$state.currentSearchNode.JOB = null;
+    
+    // 빈 문자열이면 검색 필터링 배열 초기화
+    if (newKeyword === '') {
+        searchFrameWorkKeyword.job.data = [];
+        return;
+    }
+    
+    // 1초 검색 디바운스
+    searchDebounceScheduler.job = setTimeout(() => {
+        const treeRoot = treeInstanceStore.$state.job.root;
+        if(treeRoot?.data?.type === 'ROOT') {
+            searchCurrentTreeDepth('job', newKeyword, treeRoot);
+        }
+    }, 500);
+}, { immediate: false });
+
+// 2025.12.12[mhlim]: 교육체계 검색어 입력 필드 keyword 감시
+// -> 스케줄링에 등록하여 1초마다 검색하도록 디바운스 적용
+watch(() => searchFrameWorkKeyword.edu.keyword, (newKeyword) => {
+    // 기존 타이머 클리어
+    if (searchDebounceScheduler.edu) {
+        clearTimeout(searchDebounceScheduler.edu);
+    }
+
+    treeInstanceStore.$state.currentSearchNode.EDU = null;
+    
+    // 빈 문자열이면 검색 필터링 배열 초기화
+    if (newKeyword === '') {
+        searchFrameWorkKeyword.competency.data = [];
+        return;
+    }
+    
+    // 1초 검색 디바운스
+    searchDebounceScheduler.edu = setTimeout(() => {
+        const treeRoot = treeInstanceStore.$state.edu.root;
+        if(treeRoot?.data?.type === 'ROOT') {
+            searchCurrentTreeDepth('edu', newKeyword, treeRoot);
+        }
+    }, 500);
+}, { immediate: false });
+
+// 2025.12.12[mhlim]: 각 체계 트리별 검색 입력 값 포함된 아이템 필터링 처리
 const searchCurrentTreeDepth = (itemType, keyword, currentTreeRoot) => {
     // 검색 시작 전 기존 조회 데이터 배열 초기화
-    searchFrameWorkKeyword.competency.data = [];
+    searchFrameWorkKeyword[itemType].data = [];
     
     const search = (node) => {
-        if (itemType === 'COMPETENCY') {
-            if (node.data.name.includes(keyword)) {
-                searchFrameWorkKeyword.competency.data.push(node);
-            }
+        if (node.data.name.includes(keyword)) {
+            searchFrameWorkKeyword[itemType].data.push(node);
         }
         
         // children 검색
@@ -350,8 +437,6 @@ const filterCheckedYn = ref({
         'MODULE': true, // 모듈
     }
 })
-
-const loading = ref(true);
 
 const displayTypesName = (type) => {
     if (designConfig?.types?.displayNames[type]) {

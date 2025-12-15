@@ -12,17 +12,16 @@
   })
 
   const displayTypeName = computed(() => {
-    if (props.type === 'COMPETENCY') {
-      return '역량체계';
-    } else if (props.type === 'JOB_FAMILY' ||
+    if (props.type === 'JOB_FAMILY' ||
     props.type === 'JOB_SERIES' ||
     props.type === 'JOB' ||
     props.type === 'TASK' ||
     props.type === 'KST') {
       return '직무체계';
-    } else if (props.type === 'COURSE') {
+    } else if (props.type === 'COURSE' ||
+    props.type === 'LEARNING_OBJECT') {
       return '교육체계';
-    } else if (props.type === 'BEHAVIORAL_INDICATOR') {
+    } else if (props.type === 'BEHAVIORAL_INDICATOR' || props.type === 'COMPETENCY') {
       return '역량체계';
     } else {
       return null;
@@ -41,12 +40,13 @@
     color: #fff;
     margin-right: 5px;
 
+    // 역량 체계 관련 라벨
       &.COMPETENCY,
       &.BEHAVIORAL_INDICATOR {
           background: var(--color-comp);
       }
 
-                            
+      // 직무 체계 관련 라벨
       &.JOB_FAMILY,
       &.JOB_SERIES,
       &.JOB,
@@ -55,8 +55,9 @@
           background: var(--color-job);
       }
 
-                            
-      &.COURSE {
+      // 교육 체계 관련 라벨
+      &.COURSE,
+      &.LEARNING_OBJECT {
           background: var(--color-edu);
       }
   }

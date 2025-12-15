@@ -5,9 +5,10 @@ import { useRuntimeConfig } from '#app';
 interface MappingStoreType {
   lines: LeaderLine[]; // leaderline 생성 연결 선 생성자 목록
   newLines: Map<string, LeaderLine>; // 새로운 맵핑 타겟 노드 연결 선 생성자 목록
-  currentSelectNode: any; // 현재 클릭한 노드
+
+  currentSelectNode: any; // 현재 맵핑버튼 클릭한 그룹 노드
   currentSelectTreeId: string; // 현재 클릭한 노드를 포함한 트리 ID
-  currentMappingData: Map<string, any>; // 현재 클릭한 노드의 맵핑 데이터 캐싱
+  currentMappingData: Map<string, any>; // 현재 맵핑버튼 클릭한 그룹 노드의 맵핑 데이터 캐싱
   newTargetNodeIdList: { id: string, type: string }[]; // 새로운 맵핑 타겟 노드 ID 목록
   loadingYn: boolean; // 맵핑 로딩 중 팝업 노출 여부
   toastifyYn: boolean; // 토스트 메시지 활성화 여부
@@ -41,6 +42,9 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       }
 
       this.clearConnection();
+
+      // 2025.12.15[mhlim]: 검색 노드 선택 포커싱 효과 해제 처리
+      d3.selectAll('.search-selected').classed('search-selected', false);
 
       // 현재 클릭한 노드의 트리 인스턴스 조회
       const treeInstanceStore = useMyTreeInstanceStore();
@@ -201,7 +205,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       const treeInstances = treeInstanceStore.$state;
 
       // 현재 타겟 트리의 렌더러 인스턴스 조회
-      const sourceTreeInstance = treeInstances[sourceId.split('-')[0] as keyof typeof treeInstances];
+      const sourceTreeInstance = treeInstances[sourceId.split('-')[0] as keyof typeof treeInstances] as any;
 
       const sourceRenderer = sourceTreeInstance.renderer as any;
       // 현재 클릭한 노드의 렌더러 인스턴스에서 노드 요소 조회
@@ -358,6 +362,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
 
       this.currentIntersectionObserver?.observe(connectionTargetEl);
     },
+
     registerScrollListener() {
       const treeContainer = document.querySelectorAll('.tree');
 
@@ -366,6 +371,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
         container.addEventListener('scroll', listener, { passive: true });
       })
     },
+
     schedulePositionUpdate() {
       if (this.scheduledUpdate) return;
 
@@ -376,6 +382,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
         this.scheduledUpdate = false;
       })
     },
+
     updateLinePositions() {
       if (this.lines.length === 0) return;
 
@@ -399,6 +406,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
         }
       });
     },
+    
     toastifyMessage(message: string) {
       if (this.toastifyYn) return;
 

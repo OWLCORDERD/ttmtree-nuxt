@@ -399,6 +399,40 @@
                     overflow-y: auto;
                     overflow-x: auto;
                     max-height: 586px;
+
+                    .none-mapping-container {
+                        margin: 80px auto 0;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 20px;
+                        padding: 90px 0;
+
+                        .mapping-icon {
+                            width: 100%;
+                            height: 58px;
+
+                            .icon {
+                                margin: 0 auto;
+                                width: 92px;
+                                height: 58px;
+                                background-image: url("data:image/svg+xml,%3Csvg width='95' height='98' viewBox='0 0 95 98' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_17119_47055)'%3E%3Cpath d='M79.3165 42.2559L80.0927 44.7698C80.2449 45.2592 80.5797 45.6541 81.016 45.8544L82.7864 46.6552C83.0654 46.7832 83.0705 47.2114 82.7966 47.3449L81.0363 48.207C80.6304 48.4072 80.3159 48.7743 80.1637 49.2359L79.3317 51.7554C79.2201 52.0835 78.794 52.0835 78.6875 51.7554L77.8555 49.2359C77.7033 48.7798 77.3888 48.4072 76.983 48.207L75.2075 47.3393C74.9335 47.2059 74.9386 46.7832 75.2075 46.6497L76.9018 45.8432C77.3077 45.6486 77.6272 45.2815 77.7845 44.8254L78.6672 42.2448C78.7788 41.9111 79.21 41.9222 79.3115 42.2559H79.3165Z' fill='%23C4C4C4'/%3E%3C/g%3E%3Ccircle cx='92' cy='34' r='3' fill='%23C4C4C4'/%3E%3Cpath d='M3.63672 22.6406L11.3628 30.3667' stroke='%23C4C4C4' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M11.3628 22.6406L3.63672 30.3667' stroke='%23C4C4C4' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cg filter='url(%23filter0_d_17119_47055)'%3E%3Cpath d='M67.7556 59.1854L47.387 47.1341C45.9083 46.2574 44.0864 46.2574 42.6025 47.1341L22.2444 59.1854C21.109 59.8564 20.3116 60.9657 20 62.2374C20.3116 63.5091 21.109 64.6185 22.2444 65.2895L42.613 77.3408C44.0917 78.2175 45.9136 78.2175 47.3976 77.3408L67.7662 65.2895C68.9016 64.6185 69.699 63.5091 70.0106 62.2374C69.699 60.9657 68.9016 59.8564 67.7662 59.1854H67.7556Z' fill='%23ADADAD'/%3E%3Cpath d='M67.7556 45.9432L47.387 33.8919C45.9083 33.0152 44.0864 33.0152 42.6025 33.8919L22.2444 45.9432C21.109 46.6142 20.3116 47.7236 20 48.9952C20.3116 50.2669 21.109 51.3763 22.2444 52.0473L42.613 64.0986C44.0917 64.9753 45.9136 64.9753 47.3976 64.0986L67.7662 52.0473C68.9016 51.3763 69.699 50.2669 70.0106 48.9952C69.699 47.7236 68.9016 46.6142 67.7662 45.9432H67.7556Z' fill='%23C3C3C3'/%3E%3Cpath d='M67.7556 32.7088L47.3923 20.6575C45.9136 19.7808 44.0917 19.7808 42.6077 20.6575L22.2444 32.7088C21.109 33.3798 20.3116 34.4892 20 35.7609C20.3116 37.0326 21.109 38.1419 22.2444 38.8129L42.613 50.8642C44.0917 51.7409 45.9136 51.7409 47.3976 50.8642L67.7662 38.8129C68.9016 38.1419 69.699 37.0326 70.0106 35.7609C69.699 34.4892 68.9016 33.3798 67.7662 32.7088H67.7556Z' fill='%23D4D4D4'/%3E%3C/g%3E%3Cdefs%3E%3Cfilter id='filter0_d_17119_47055' x='0' y='0' width='90.0105' height='98' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'%3E%3CfeFlood flood-opacity='0' result='BackgroundImageFix'/%3E%3CfeColorMatrix in='SourceAlpha' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0' result='hardAlpha'/%3E%3CfeOffset/%3E%3CfeGaussianBlur stdDeviation='10'/%3E%3CfeComposite in2='hardAlpha' operator='out'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0'/%3E%3CfeBlend mode='normal' in2='BackgroundImageFix' result='effect1_dropShadow_17119_47055'/%3E%3CfeBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_17119_47055' result='shape'/%3E%3C/filter%3E%3CclipPath id='clip0_17119_47055'%3E%3Crect width='8' height='10' fill='white' transform='translate(75 42)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+                                background-size: cover;
+                                background-repeat: no-repeat;
+                                background-position: center;
+                            }
+                        }
+
+                        .content {
+                            display: block;
+                            width: 100%;
+                            font-size: 16px;
+                            color: var(--color-gray);
+                            text-align: center;
+                            word-break: keep-all;
+                            line-height: 20px;
+                        }
+                    }
                 }
             }
             
@@ -430,6 +464,12 @@
                         &:hover {
                             fill: var(--color-link);
                             text-decoration: underline;
+                        }
+                    }
+
+                    &.search-selected {
+                        .node-bg {
+                            stroke: var(--color-error);
                         }
                     }
                 }

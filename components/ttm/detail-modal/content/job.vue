@@ -10,26 +10,29 @@
 
       <!-- 역량체계 역량 1뎁스 > 하위 행동지표 수 카운트 표시 -->
       <div class="framework-count">
-        <TTMPlates />
         <div class="count-txt" v-if="currentFrameworkDetail.itemType === 'JOB_FAMILY'">
+          <TTMPlates />
           <span class="title">
             직렬 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
           </span>
         </div>
 
         <div class="count-txt" v-else-if="currentFrameworkDetail.itemType === 'JOB_SERIES'">
+          <TTMPlates />
           <span class="title">
             직무 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
           </span>
         </div>
 
         <div class="count-txt" v-else-if="currentFrameworkDetail.itemType === 'JOB'">
+          <TTMPlates />
           <span class="title">
             TASK 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
           </span>
         </div>
 
         <div class="count-txt" v-else-if="currentFrameworkDetail.itemType === 'TASK'">
+          <TTMPlates />
           <span class="title">
             K/S/T 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
           </span>
@@ -99,7 +102,7 @@
           <arrowRight />
           <div class="mapping-label">
             <span class="label-name">
-              {{ item.itemType === 'COURSE' ? '교육과정' : '행동지표'}}
+              {{ displayTypeName(item.itemType ) }}
             </span>
           </div>
           <span class="mapping-name">{{ item.name }}</span>
@@ -174,17 +177,17 @@ const frameworkItemTypeList = [
   {
     id: 5,
     name: 'K',
-    value: 'K',
+    value: 'KST-K',
   },
   {
     id: 6,
     name: 'S',
-    value: 'S',
+    value: 'KST-S',
   },
   {
     id: 7,
     name: 'T',
-    value: 'T',
+    value: 'KST-T',
   },
 ]
 
@@ -196,12 +199,23 @@ const currentFrameworkDetail = computed(() => {
   && detailModalStore.$state.frameworkType !== 'JOB_SERIES'
   && detailModalStore.$state.frameworkType !== 'JOB'
   && detailModalStore.$state.frameworkType !== 'TASK'
+  && detailModalStore.$state.frameworkType !== 'KST'
   ) {
     return null;
   }
 
   const currentDetail = detailModalStore.$state.currentDetail;
 
+  // K/S/T 아이템 타입 식별자 분리
+  if (detailModalStore.$state.frameworkType === 'KST') {
+    return {
+      ...currentDetail,
+      mappedItems: currentDetail.mappedLearningObjects,
+      itemType: 'KST-' + currentDetail.kstType,
+    }
+  }
+
+  // TASK 맵핑 목록 > 행동지표 / 과정 두개의 맵핑 목록 병합
   if (detailModalStore.$state.frameworkType === 'TASK') {
     const newArray = [];
     const newChildrenCount = currentDetail.importance + currentDetail.difficulty + currentDetail.frequency;
@@ -227,6 +241,16 @@ const currentFrameworkDetail = computed(() => {
     hasChildren: currentDetail.childrenCount > 0 ? true : false,
   }
 })
+
+const displayTypeName = (type) => {
+  if (type === 'COURSE') {
+    return '교육과정';
+  } else if (type === 'BEHAVIORAL_INDICATOR') {
+    return '행동지표';
+  } else if (type === 'LEARNING_OBJECT') {
+    return '학습목표';
+  }
+}
 
 const handleDetailChange = (event, currentFrameworkDetail, key) => {
   currentFrameworkDetail[key] = event.target.value;

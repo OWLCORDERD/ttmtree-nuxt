@@ -274,6 +274,10 @@ export default defineNuxtPlugin((nuxtApp) => {
         const depthButtons = treePanel.querySelectorAll('.depth-btn[data-depth]');
 
         depthButtons.forEach(button => {
+            // 초기 렌더링 시, 1뎁스 버튼 활성화
+            if (button.getAttribute('data-depth') === '1') {
+                button.classList.add('active');
+            }
             button.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -300,15 +304,15 @@ export default defineNuxtPlugin((nuxtApp) => {
             e.stopPropagation();
             expandAll(root);
             treeInstanceStore.nodeUpdate(root, containerId);
-            treePanel.querySelectorAll('.depth-btn[data-depth]').forEach(button => {
-                if (button.getAttribute('data-depth') === '5') {
+            const depthButtons = treePanel.querySelectorAll('.depth-btn[data-depth]');
+            
+            depthButtons.forEach(button => {
+                if (button.getAttribute('data-depth') === depthButtons.length.toString()) {
                     button.classList.add('active');
                 } else {
                     button.classList.remove('active');
                 }
             });
-
-            
         })
 
         allDepthCloseButton.addEventListener('click', (e) => {

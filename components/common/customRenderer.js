@@ -82,6 +82,31 @@ export class TTMTreeRenderer {
      * @param {Object} source - Source node for transition
      */
     update(root, source) {
+        // 2025.12.15[mhlim]: 역량분류: 리더십 & 공통 역량
+        // -> 직무체계 트리 맵핑 비활성화 화면 생성 & 트리 노드 생성 중단
+        if (useMyTreeInstanceStore().$state.classificationType === 'LEADERSHIP'
+            || useMyTreeInstanceStore().$state.classificationType === 'COMMON') {
+            if (root === useMyTreeInstanceStore().$state.job.root) {
+                this.svg.remove(); // 직무체계 트리 생성 도면 제거
+                const noneMappingEl = d3.select('#job-tree') // 직무체계 트리 컨테이너 선택
+                .append('div')
+                .attr('class', 'none-mapping-container');
+
+                noneMappingEl.append('div')
+                .attr('class', 'mapping-icon')
+                .attr('width', 92)
+                .attr('height', 58)
+                .append('div')
+                .attr('class', 'icon')
+
+                noneMappingEl.append('div')
+                .attr('class', 'content')
+                .html(`리더십/공통 역량은 <br/>
+                    직무체계와 매핑하지 않습니다.`);
+
+                return;
+            }
+        }
         // Flatten the tree
         let nodes = root.descendants();
 

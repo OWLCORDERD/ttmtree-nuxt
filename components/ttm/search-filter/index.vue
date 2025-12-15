@@ -51,7 +51,15 @@ const props = defineProps({
 })
 
 const selectSearchNode = (node, type) => {
-  treeInstanceStore.searchNode(node, type);
+  let replaceType = type.toUpperCase();
+  if (type === 'JOB_FAMILY' || type === 'JOB_SERIES' || type === 'TASK' || type === 'KST') {
+    replaceType = 'JOB';
+  } else if (type === 'BEHAVIORAL_INDICATOR' || type === 'COMPETENCY') {
+    replaceType = 'COMP';
+  } else if (type === 'COURSE' || type === 'LESSON' || type === 'LEARNING_OBJECT') {
+    replaceType = 'EDU';
+  }
+  treeInstanceStore.searchNode(node, replaceType);
 }
 </script>
 
