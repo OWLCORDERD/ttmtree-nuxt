@@ -31,6 +31,7 @@ export class TTMTreeRenderer {
         this.svg = container
             .append('svg')
             .attr('width', '100%')
+            .attr('class', `${this.containerId}-drawing`)
             .style('display', 'none'); // Hide until data is loaded
         // Create group with margin
         this.g = this.svg.append('g')
@@ -82,15 +83,61 @@ export class TTMTreeRenderer {
      * @param {Object} source - Source node for transition
      */
     update(root, source) {
+        // 현재 상태관리에 저장된 트리 인스턴스 조회
+        const treeInstance = useMyTreeInstanceStore().$state;
+        // 현재 전역 선택 역량분류 조회
+        const classificationType = treeInstance.classificationType;
         // 2025.12.15[mhlim]: 역량분류: 리더십 & 공통 역량
         // -> 직무체계 트리 맵핑 비활성화 화면 생성 & 트리 노드 생성 중단
-        if (useMyTreeInstanceStore().$state.classificationType === 'LEADERSHIP'
-            || useMyTreeInstanceStore().$state.classificationType === 'COMMON') {
-            if (root === useMyTreeInstanceStore().$state.job.root) {
-                this.svg.remove(); // 직무체계 트리 생성 도면 제거
-                const noneMappingEl = d3.select('#job-tree') // 직무체계 트리 컨테이너 선택
+        if (classificationType === 'LEADERSHIP'
+            || classificationType === 'COMMON') {
+            if (root === treeInstance.job.root) {
+                const duplicateNodeCheck = d3.selectAll('.none-mapping-container').nodes();
+
+                if (duplicateNodeCheck.length <= 0) {
+                    this.svg.remove(); // 직무체계 트리 생성 도면 제거
+                    const noneMappingEl = d3.select('#job-tree') // 직무체계 트리 컨테이너 선택
+                    .append('div')
+                    .attr('class', 'none-mapping-container')
+                    .on('click', (e) => {
+                        e.preventDefault();
+    
+                        useMyTreeMappingStore().toastifyMessage('리더십/공통 역량은 직무체계와 매핑하지 않습니다.')
+                    });
+    
+                    noneMappingEl.append('div')
+                    .attr('class', 'mapping-icon')
+                    .attr('width', 92)
+                    .attr('height', 58)
+                    .append('div')
+                    .attr('class', 'icon')
+    
+                    noneMappingEl.append('div')
+                    .attr('class', 'content')
+                    .html(`리더십/공통 역량은 <br/>
+                        직무체계와 매핑하지 않습니다.`);
+    
+                    return;
+                }
+            }
+        // 2025.12.15[mhlim]: 역량분류: 수탁/컨소시엄 역량
+        // -> 직무체계 & 역량체계 트리 맵핑 비활성화 화면 생성 & 트리 노드 생성 중단
+        } else if (classificationType === 'CONSIGNMENT') {
+            if (root === treeInstance.job.root
+                || root === treeInstance.comp.root) {
+            const treeContainer = root === treeInstance.job.root ? 'job-tree' : 'comp-tree';
+                this.svg.remove(); // 트리 생성 도면 제거
+                const noneMappingEl = d3.select(`#${treeContainer}`) // 직무,역량체계 트리 컨테이너 선택
                 .append('div')
-                .attr('class', 'none-mapping-container');
+                .attr('class', 'none-mapping-container')
+                .on('click', (e) => {
+                    e.preventDefault();
+                    if (root === treeInstance.job.root) {
+                        useMyTreeMappingStore().toastifyMessage('직무체계는 수탁 역량과 매핑하지 않습니다.');
+                    } else if (root === treeInstance.comp.root) {
+                        useMyTreeMappingStore().toastifyMessage('역량체계는 수탁 역량과 매핑하지 않습니다.');
+                    }
+                });
 
                 noneMappingEl.append('div')
                 .attr('class', 'mapping-icon')
@@ -101,7 +148,7 @@ export class TTMTreeRenderer {
 
                 noneMappingEl.append('div')
                 .attr('class', 'content')
-                .html(`리더십/공통 역량은 <br/>
+                .html(`수탁 역량은 <br/>
                     직무체계와 매핑하지 않습니다.`);
 
                 return;

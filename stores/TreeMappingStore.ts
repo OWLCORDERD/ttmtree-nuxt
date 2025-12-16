@@ -9,32 +9,35 @@ interface MappingStoreType {
   currentSelectNode: any; // 현재 맵핑버튼 클릭한 그룹 노드
   currentSelectTreeId: string; // 현재 클릭한 노드를 포함한 트리 ID
   currentMappingData: Map<string, any>; // 현재 맵핑버튼 클릭한 그룹 노드의 맵핑 데이터 캐싱
+  currentIntersectionObserver: IntersectionObserver | null; // 맵핑 타겟 노드 연결 선 그리기 인터섹션 옵저버
   newTargetNodeIdList: { id: string, type: string }[]; // 새로운 맵핑 타겟 노드 ID 목록
+  
   loadingYn: boolean; // 맵핑 로딩 중 팝업 노출 여부
   toastifyYn: boolean; // 토스트 메시지 활성화 여부
   scheduledUpdate: boolean; // 스크롤 이벤트 스케줄링 관리 플래그
   targetNodeList: any[]; // 맵핑 타겟 노드 목록
-  currentIntersectionObserver: IntersectionObserver | null; // 맵핑 타겟 노드 연결 선 그리기 인터섹션 옵저버
 }
 
 export const useMyTreeMappingStore = defineStore('treeMapping', {
   state: (): MappingStoreType => ({
     lines: [],
     newLines: new Map(),
+
     currentSelectNode: null,
     currentSelectTreeId: '',
     currentMappingData: new Map(),
+    currentIntersectionObserver: null,
+    newTargetNodeIdList: [],
+
     loadingYn: false,
+    toastifyYn: false,
     scheduledUpdate: false,
     targetNodeList: [],
-    newTargetNodeIdList: [],
-    currentIntersectionObserver: null,
-    toastifyYn: false,
    }),
   actions: {
     async handleMappingSetting(node: any, treeId: string) {
       if (this.currentSelectNode === node && this.currentSelectTreeId === treeId) {
-        
+        this.currentIntersectionObserver?.disconnect();
         this.clearConnection();
         return;
       } else {
@@ -48,6 +51,10 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
 
       // 현재 클릭한 노드의 트리 인스턴스 조회
       const treeInstanceStore = useMyTreeInstanceStore();
+
+      if (treeInstanceStore.$state.classificationType === 'CONSIGNMENT') {
+        return;
+      }
       const treeType = treeId.split('-')[0];
       // 트리 인스턴스 상태관리에서 현재 트리 인스턴스 조회
       const currentTreeInstance: any = treeInstanceStore.$state[treeType as keyof typeof treeInstanceStore.$state];
@@ -109,6 +116,11 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
               }
             })
           })
+
+          // 2025.12.16 [mhlim]: 매핑모드에서만 신규 맵핑 처리
+          if (treeInstanceStore.$state.currentMode !== 'mapping') {
+            return;
+          }
 
           // 2025.12.10[mhlim]: 현재 클릭 노드와 맵핑 가능한 유형 조회
           const possibleTypes = possibleMappingTargets[node.data.type as keyof typeof possibleMappingTargets];
@@ -187,6 +199,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
     clearConnection() {
       this.lines.forEach((line: any) => line.remove());
       this.$state.lines = [];
+
       d3.selectAll('.node-selected').classed('node-selected', false);
 
       d3.selectAll('.node-mapped-target').classed('node-mapped-target', false);
@@ -194,10 +207,19 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       d3.selectAll('.mapping-selected-icon').remove();
 
       d3.selectAll('.possible-mapping-target').remove();
-      
-      this.currentSelectNode = null;
-      this.currentSelectTreeId = '';
-      this.currentMappingData.clear();
+
+      this.newLines.forEach((line: any) => line.remove());
+      this.$state.newLines = new Map();
+      this.$state.newTargetNodeIdList = [];
+
+      this.$state.currentSelectNode = null;
+      this.$state.currentSelectTreeId = '';
+      this.$state.currentMappingData.clear();
+      this.$state.loadingYn = false;
+      this.$state.toastifyYn = false;
+      this.$state.scheduledUpdate = false;
+      this.$state.targetNodeList = [];
+      this.$state.currentIntersectionObserver = null;
     },
     // 2025.12.05[mhlim]: 현재 클릭한 노드와 맵핑 타겟 노드들 연결 선 그리는 함수
     async drawConnections(sourceNode: any, sourceId: string, mappingData: any) {
@@ -221,6 +243,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
   
           const targetNode = treeInstance.renderer.findNodeByTypeAndId(mapping.itemType, mapping.id);
 
+          console.log(targetNode);
           if (targetNode) {
             targetsToExpand.push({ node: targetNode, tree: treeInstance, treeId });
             if (!firstTarget) firstTarget = { node: targetNode, tree: treeInstance, treeId };
@@ -259,7 +282,7 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
 
         // 2025.12.05[mhlim]: 서버 사이드단 import 에러로 인한
         // 클라이언트 사이드 import 선언 처리
-        if (import.meta.client) {
+        if (import.meta.client && targetElement) {
           const LeaderLine = await import('leader-line-new');
 
           // 현재 클릭한 노드와 맵핑 타겟 노드 연결 선 생성
@@ -415,6 +438,6 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       alert(message);
       
       this.toastifyYn = false;
-    }
+    },
   }
 })

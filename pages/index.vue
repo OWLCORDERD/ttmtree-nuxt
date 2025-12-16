@@ -6,7 +6,7 @@
             <div class="panel-header comp-header">
                 <div class="index-title">
                     <TTMBulb />
-                    <p class="title">역량체계</p>
+                    <p class="title">역량체계</p> 
                 </div>
                 <span class="sub-title">KHNP Competency Framework</span>
             </div>
@@ -21,7 +21,8 @@
                                 :id="'competency-' + type"
                                 :value="type"
                                 @change="handleCheckBoxChange($event, type, 'competency')"
-                                :checked="filterCheckedYn.competency[type]" />
+                                :checked="filterCheckedYn.competency[type]" 
+                                :disabled="classificationTypeDisabled.competency"/>
                             <button type="button" class="custom-checkbox" @change="handleCheckBoxChange($event, type, 'competency')">
                                 <CheckBox />
                             </button>
@@ -33,23 +34,28 @@
                     <!-- 검색어 입력 필드 (역량체계) -->
                     <div class="search-box">
                         <input type="text"
-                        placeholder="검색어를 입력하세요."
+                        :placeholder="classificationTypeDisabled.competency ? '리더십/공통 역량은 역량체계와 매핑하지 않습니다.' : '검색어를 입력하세요.'"
                         ref="searchCompInput"
+                        :disabled="classificationTypeDisabled.competency"
                         v-model="searchFrameWorkKeyword.competency.keyword" />
+                        
                         <!-- 검색어 연관 목록 데이터 표시 -->
                         <ttm-search-filter
                         v-model="searchFrameWorkKeyword.competency"
                         v-if="searchFrameWorkKeyword.competency.keyword !== ''
                         && treeInstanceStore.$state.currentSearchNode?.COMP === null" />
-                        <button class="search-btn">
+                        
+                        <button class="search-btn"
+                            :disabled="classificationTypeDisabled.competency">
                             <Search />
                         </button>
                     </div>
                     <button class="refresh-btn"
-                    @click="() => {
-                        treeInstanceStore.resetSearchNode('competency');
-                        searchFrameWorkKeyword.competency.keyword = '';
-                    }">
+                        :disabled="classificationTypeDisabled.competency"
+                        @click="() => {
+                            treeInstanceStore.resetSearchNode('competency');
+                            searchFrameWorkKeyword.competency.keyword = '';
+                        }">
                         <Refresh />
                     </button>
                 </div>
@@ -59,12 +65,22 @@
                         <span>Depth</span>
                     </div>
                     <template v-for="(item, index) in treeInstanceStore.$state.comp.types">
-                        <button class="depth-btn" :data-depth="index + 1">{{ index + 1 }}</button>
+                        <button class="depth-btn"
+                            :data-depth="index + 1"
+                            :disabled="classificationTypeDisabled.competency">
+                            {{ index + 1 }}
+                        </button>
                     </template>
                     <!-- 전체 뎁스 컨트롤 버튼 -->
                     <div class="all-control">
-                        <button class="open-all-depth"><PlusButton /></button>
-                        <button class="close-all-depth"><MinusButton /></button>
+                        <button class="open-all-depth"
+                            :disabled="classificationTypeDisabled.competency">
+                            <PlusButton />
+                        </button>
+                        <button class="close-all-depth"
+                            :disabled="classificationTypeDisabled.competency">
+                            <MinusButton />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -91,6 +107,7 @@
                             <input type="checkbox"
                                 :id="'job-' + type"
                                 :value="type"
+                                :disabled="classificationTypeDisabled.job"
                                 @change="handleCheckBoxChange($event, type, 'competency')"
                                 :checked="filterCheckedYn.job[type]" />
                             <button type="button" class="custom-checkbox" @change="handleCheckBoxChange($event, type, 'job')">
@@ -104,14 +121,20 @@
                     <!-- 검색어 입력 필드 (직무체계) -->
                     <div class="search-box">
                         <input type="text"
-                        placeholder="검색어를 입력하세요."
+                        :placeholder="classificationTypeDisabled.job ? '리더십/공통 역량은 직무체계와 매핑하지 않습니다.' : '검색어를 입력하세요.'"
                         ref="searchJobInput"
+                        :disabled="classificationTypeDisabled.job"
                         v-model="searchFrameWorkKeyword.job.keyword" />
+                        
                         <ttm-search-filter
                             v-model="searchFrameWorkKeyword.job"
                             v-if="searchFrameWorkKeyword.job.keyword !== '' &&
                             treeInstanceStore.$state.currentSearchNode.JOB === null" />
-                        <button class="search-btn"><Search /></button>
+                        
+                        <button class="search-btn"
+                            :disabled="classificationTypeDisabled.job">
+                            <Search />
+                        </button>
                     </div>
                     <button class="refresh-btn"
                     @click="() => {
@@ -125,13 +148,22 @@
                         <span>Depth</span>
                     </div>
                     <template v-for="(item, index) in treeInstanceStore.$state.job.types">
-                        <button class="depth-btn" :data-depth="index + 1">{{ index + 1 }}</button>
+                        <button class="depth-btn" :data-depth="index + 1"
+                            :disabled="classificationTypeDisabled.job">
+                            {{ index + 1 }}
+                        </button>
                     </template>
 
                     <!-- 전체 뎁스 컨트롤 버튼 -->
                     <div class="all-control">
-                        <button class="open-all-depth"><PlusButton /></button>
-                        <button class="close-all-depth"><MinusButton /></button>
+                        <button class="open-all-depth"
+                            :disabled="classificationTypeDisabled.job">
+                            <PlusButton />
+                        </button>
+                        <button class="close-all-depth"
+                            :disabled="classificationTypeDisabled.job">
+                            <MinusButton />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -193,7 +225,10 @@
                         <span>Depth</span>
                     </div>
                     <template v-for="(item, index) in treeInstanceStore.$state.edu.types">
-                        <button class="depth-btn" :data-depth="index + 1">{{ index + 1 }}</button>
+                        <button class="depth-btn" 
+                            :data-depth="index + 1">
+                            {{ index + 1 }}
+                        </button>
                     </template>
 
                     <!-- 전체 뎁스 컨트롤 버튼 -->
@@ -210,37 +245,35 @@
         </div>
 
         <div class="btn-wrap">
-        <button type="button" class="btn-line-m-main">
+        <button type="button" class="btn-line-m-main"
+            v-if="treeInstanceStore.$state.classificationType !== 'CONSIGNMENT'"
+            @click="() => {
+                treeInstanceStore.treeModeChange('mapping');
+            }"
+        >
             <MappingMode />
             <span class='title'
-            @click="() => {
-                treeInstanceStore.$state.currentMode = 'mapping';
-            }">
-            매핑모드
-            </span>
+            >매핑모드</span>
         </button>
-        <button type="button" class="btn-line-m-main">
+        <button type="button" class="btn-line-m-main"
+            @click="() => {
+                treeInstanceStore.treeModeChange('edit');
+            }">
             <CourseEdit />
             <span class='title'>과정구성 편집</span>
         </button>
         <button type="button" class="btn-fill-m-main"
-        @click="() => {
-            treeInstanceStore.$state.classificationType = 'JOB';
-        }">
+        @click="(e) => handleClassificationTypeChange(e, 'JOB')">
             <CourseEdit />
             <span class='title'>직무역량</span>
         </button>
         <button type="button" class="btn-fill-m-main"
-        @click="() => {
-            treeInstanceStore.$state.classificationType = 'LEADERSHIP';
-        }">
+        @click="(e) => handleClassificationTypeChange(e, 'LEADERSHIP')">
             <CourseEdit />
             <span class='title'>리더십/공통역량</span>
         </button>
         <button type="button" class="btn-fill-m-main"
-        @click="() => {
-            treeInstanceStore.$state.classificationType = 'CONSIGNMENT';
-        }">>
+        @click="(e) => handleClassificationTypeChange(e, 'CONSIGNMENT')">
             <CourseEdit />
             <span class='title'>수탁/컨소시엄 역량</span>
         </button>
@@ -264,20 +297,37 @@ import Refresh from '~/assets/images/svg/btn-reset.svg';
 import CheckBox from '~/assets/images/svg/check.svg';
 import MappingMode from '~/assets/images/svg/ttm-connect.svg';
 import CourseEdit from '~/assets/images/svg/gnb-setting.svg';
-import checkRequest from '~/assets/images/svg/btn-correct.svg';
 
 const { $treeInstance: treeInstance, 
-    $ttmController: ttmController,
+    $drawTTMTree: drawTTMTree,
     $designConfig: designConfig } = useNuxtApp();
 
 const treeInstanceStore = useMyTreeInstanceStore();
 const detailModalStore = useMyDetailModalStore();
 
+// 2025.12.16 [mhlim]: 역량분류 타입에 따라 검색 필터 영역 비활성화 상태관리
+const classificationTypeDisabled = computed(() => {
+    if (treeInstanceStore.$state.classificationType === 'LEADERSHIP') {
+        return {
+            competency: false,
+            job: true,
+        };
+    } else if (treeInstanceStore.$state.classificationType === 'CONSIGNMENT') {
+        return {
+            competency: true,
+            job: true,
+        };
+    } else {
+        return {
+            competency: false,
+            job: false,
+        };
+    }
+}, { immediate: true });
+
 /* DOM 트리 구조 생성 이후 백터 그래픽 렌더링 시작 */
 onBeforeMount(() => {
-    treeInstance.forEach(instance => {
-        ttmController(instance.containerId, instance.dataUrl);
-    });
+    drawTTMTree();
 })
 
 const checkBoxTypes = computed(() => {
@@ -452,6 +502,15 @@ const handleCheckBoxChange = (event, type, category) => {
     const currentContainer = filterCheckedYn.value[category];
 
     currentContainer[type] = !currentContainer[type];
+}
+
+const handleClassificationTypeChange = (event, classificationType) => {
+    event.preventDefault();
+
+    treeInstanceStore.$state.classificationType = classificationType;
+
+    // 역량분류에 따라 트리 렌더링 재생성
+    drawTTMTree();
 }
 
 definePageMeta({

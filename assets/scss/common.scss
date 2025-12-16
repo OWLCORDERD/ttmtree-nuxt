@@ -206,8 +206,19 @@
     
                                 &:checked {
                                     + .custom-checkbox {
-                                        background: var(--color-link);
-                                        border-color: var(--color-link);
+                                        background: #147C6C;
+                                        border-color: #147C6C;
+                                    }
+                                }
+
+                                &:disabled {
+                                    + .custom-checkbox {
+                                        background: #d7d7d7;
+                                        border-color: #d7d7d7;
+
+                                        .nuxt-icon {
+                                            color: var(--color-gray);
+                                        }
                                     }
                                 }
                             }
@@ -303,7 +314,7 @@
     
                     .depth-btn {
                         background: var(--color-white);
-                        border: 1px solid var(--color-gray-light);
+                        border: 1px solid #D7D7D7;
                         color: var(--color-dark);
                         padding: var(--spacing-xs) 0.6rem;
                         border-radius: var(--radius-rectangle);
@@ -317,6 +328,17 @@
     
                         &:hover {
                             background: var(--color-gray-bg);
+                        }
+
+                        &:disabled {
+                            background: #f9f9f9;
+                            color: var(--color-gray);
+
+                            &.active {
+                                background: #f9f9f9 !important;
+                                color: var(--color-gray) !important;
+                                border-color: #D7D7D7 !important;
+                            }
                         }
     
                         &.expand-all,
@@ -383,6 +405,17 @@
     
                             &:hover {
                                 background: var(--color-gray-bg);
+                            }
+
+                            &:disabled {
+                                background: #f9f9f9;
+                                color: var(--color-gray);
+    
+                                &.active {
+                                    background: #f9f9f9 !important;
+                                    color: var(--color-gray) !important;
+                                    border-color: #D7D7D7 !important;
+                                }
                             }
                         }
                     }
@@ -510,26 +543,23 @@
     
             /* Loading indicator */
             .loading {
-                text-align: center;
-                padding: var(--spacing-xl);
-                color: var(--color-primary);
-                font-size: var(--font-base);
-            }
-            
-            .loading::after {
-                content: '...';
-                animation: dots var(--duration-very-slow) steps(4, end) infinite;
-            }
-            
-            @keyframes dots {
-                0%, 20% {
-                    content: '.';
-                }
-                40% {
-                    content: '..';
-                }
-                60%, 100% {
-                    content: '...';
+                position: relative;
+                margin: 50px auto 0;
+                width: 120px;
+
+                &-lottie {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    align-items: center;
+
+                    .loading-txt {
+                        font-size: 16px;
+                        font-weight: bold;
+                        line-height: 20px;
+                        text-align: center;
+                        word-break: keep-all;
+                    }
                 }
             }
             

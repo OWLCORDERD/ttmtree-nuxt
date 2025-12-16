@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import * as d3 from 'd3';
+import { useNuxtApp } from '#app';
 
 interface TreeInstanceStateType {
   comp: {
@@ -26,6 +27,7 @@ interface TreeInstanceStateType {
     EDU: d3.HierarchyNode<any> | null;
   },
   currentMode: string,
+  modeChangeToastifyYn: boolean,
   classificationType: string;
 }
 
@@ -56,6 +58,7 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
     }, // 현재 사용자가 검색한 노드
     currentMode: 'index', // TTM 트리 모드 (메인 화면, 맵핑모드, 편집모드),
     classificationType: 'JOB', // 역량분류 (JOB: 직무역량, LEADERSHIP: 리더십, COMMON: 공통, CONSIGNMENT: 수탁)
+    modeChangeToastifyYn: false,
   }),
   actions: {
     async fetchTreeDepthData(containerId: string) {
@@ -171,6 +174,40 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
     resetSearchNode(type: string) {
       this.currentSearchNode[type as keyof typeof this.currentSearchNode] = null;
       d3.selectAll('.search-selected').classed('search-selected', false);
+    },
+
+    resetTreeInstace() {
+      this.$state.comp.types = new Set();
+      this.$state.job.types = new Set();
+      this.$state.edu.types = new Set();
+      this.$state.comp.root = null;
+      this.$state.job.root = null;
+      this.$state.edu.root = null;
+      this.$state.comp.containerId = '';
+      this.$state.job.containerId = '';
+      this.$state.edu.containerId = '';
+      this.$state.comp.renderer = null;  
+      this.$state.job.renderer = null;
+      this.$state.edu.renderer = null;
+    },
+
+    // 2025.12.16 [mhlim]: (매핑/일반/편집) 모드 전환 처리 함수
+    treeModeChange(type: string) {
+      // 트리 모드 상태관리 업데이트
+      this.$state.currentMode = type;
+      // 토스트 메시지 활성화
+      this.$state.modeChangeToastifyYn = true;
+
+      // 맵핑 상태관리 초기화
+      useMyTreeMappingStore().clearConnection();
+
+      // 모든 트리 리렌더링 처리
+      useNuxtApp().$drawTTMTree();
+
+      // 1초 후 토스트 메시지 비활성화
+      setTimeout(() => {
+        this.$state.modeChangeToastifyYn = false;
+      }, 1000);
     }
   }
 })

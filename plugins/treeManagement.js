@@ -1,6 +1,8 @@
 import { useMyTreeInstanceStore } from "~/stores/TreeInstanceStore";
 import * as d3 from 'd3';
 import { TTMTreeRenderer } from "~/components/common/customRenderer";
+import { createApp } from 'vue';
+import Loading from '~/components/common/loading.vue';
 
 export default defineNuxtPlugin((nuxtApp) => {
     const isClient = typeof window !== 'undefined';
@@ -95,20 +97,30 @@ export default defineNuxtPlugin((nuxtApp) => {
 
     // 2025.11.26[mhlim]: 각 트리 인스턴스 상태관리 스토어
     const treeInstanceStore = useMyTreeInstanceStore();
+    const treeMappingStore = useMyTreeMappingStore();
 
     // 2025.11.26[mhlim]: TTM 메인 컨트롤러 함수
-    const TTMController = async (containerId) => {
+    const drawFrameworkTreeController = async (containerId) => {
         // 현재 컨테이너에 대한 백터 그래픽 렌더링 생성자 인스턴스 생성
         const Renderer = new TTMTreeRenderer(containerId, designConfig);
 
         // 현재 트리 생성 대상자 컨테이너 DOM 요소 선택
         const container = d3.select(`#${containerId}`);
 
+        // 2025.12.16[mhlim]: 로딩 애니메이션 컴포넌트 인스턴스 생성
+        const vueApp = createApp(Loading, {
+            containerId: containerId,
+        });
+
         // 컨테이너 내부 로딩 인디케이터 추가
         const loadingElement = container
         .append('div')
-        .attr('class', 'loading-spinner')
-        .text('트리 데이터 로딩 중...');
+        .attr('class', 'loading');
+
+        // 로딩 인디케이터 내부 로딩 스피너 애니메이션 컴포넌트 추가
+        if(container.node().isConnected) {
+            vueApp.mount(loadingElement.node());
+        }
 
         // 백터 그래픽 렌더링 생성자 인스턴스 초기화
         Renderer.init();
@@ -221,11 +233,14 @@ export default defineNuxtPlugin((nuxtApp) => {
                 collapseFromDepth(currentTreeRoot, designConfig.tree.initialDepth);
             }
 
-            // 해당 트리 계층 데이터 구조로 업데이트
-            Renderer.update(currentTreeRoot);
+            setTimeout(() => {
+                // 해당 트리 계층 데이터 구조로 업데이트
+                Renderer.update(currentTreeRoot);
+                // 로딩 인디케이터 종료
+                loadingElement.remove();
+                vueApp.unmount();
+            }, 500)
 
-            // Remove loading indicator and show SVG
-            loadingElement.remove();
             Renderer.show();
 
             requestAnimationFrame(() => {
@@ -407,9 +422,27 @@ export default defineNuxtPlugin((nuxtApp) => {
         }
     }
 
+    // TTM 트리 역량 체계별 백터 그래픽 렌더링 호출 함수
+    const drawNewTTMTree = () => {
+        // 기존 각 체계별 트리 d3 백터 그래픽 도면 삭제
+        d3.select('.job-tree-drawing').remove();
+        d3.select('.edu-tree-drawing').remove();
+        d3.select('.comp-tree-drawing').remove();
+        d3.selectAll('.none-mapping-container').remove();
+        
+        // 기존 생성 트리 인스턴스 및 맵핑 상태관리 초기화
+        treeMappingStore.clearConnection(); // 기존 맵핑 상태관리 초기화
+        treeInstanceStore.resetTreeInstace(); // 기존 트리 인스턴스 초기화
+
+        // 신규 트리 노드 생성
+        treeInstance.forEach(instance => {
+            drawFrameworkTreeController(instance.containerId);
+        })
+    }
+
     return {
         provide: {
-            ttmController: TTMController, // TTM 메인 컨트롤러 함수
+            drawTTMTree: drawNewTTMTree, // TTM 메인 컨트롤러 함수
             designConfig: designConfig, // 백터 그래픽 디자인 설정
             treeInstance: treeInstance, // 트리 컨테이너 인스턴스 배열
             typeDisplayName: getTypeDisplayName,
