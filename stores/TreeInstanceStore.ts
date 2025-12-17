@@ -62,15 +62,11 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
   }),
   actions: {
     async fetchTreeDepthData(containerId: string) {
-      const endpoint = containerId.split('-')[0];
+      const endPoint = containerId === 'comp-tree' ? 'competency' : containerId === 'job-tree' ? 'job' : 'education';
+      const apiUrl = useRuntimeConfig().public.apiBaseUrl;
       // -----트리 데이터 조회 엔드포인트에 따른 테스트 코드
       // (더미데이터이며, API 나올 시 구조에 따라 변경 예정)
-      const response = await $fetch(`/api/ttm/tree?type=${endpoint}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
+      const response: any = await $fetch(`${apiUrl}/${endPoint}`);
 
       let originalData = response.data;
 
