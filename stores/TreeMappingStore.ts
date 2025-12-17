@@ -6,7 +6,7 @@ interface MappingStoreType {
   lines: LeaderLine[]; // leaderline 생성 연결 선 생성자 목록
   newLines: Map<string, LeaderLine>; // 새로운 맵핑 타겟 노드 연결 선 생성자 목록
 
-  currentSelectNode: any; // 현재 맵핑버튼 클릭한 그룹 노드
+  currentSelectNode: d3.Selection<SVGGElement, any, any, any> | null; // 현재 맵핑버튼 클릭한 그룹 노드
   currentSelectTreeId: string; // 현재 클릭한 노드를 포함한 트리 ID
   currentMappingData: Map<string, any>; // 현재 맵핑버튼 클릭한 그룹 노드의 맵핑 데이터 캐싱
   currentIntersectionObserver: IntersectionObserver | null; // 맵핑 타겟 노드 연결 선 그리기 인터섹션 옵저버
@@ -36,14 +36,14 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
    }),
   actions: {
     async handleMappingSetting(node: any, treeId: string) {
-      if (this.currentSelectNode === node && this.currentSelectTreeId === treeId) {
-        this.currentIntersectionObserver?.disconnect();
+      // 현재 맵핑 활성화된 요소 선택 시, 초기화만 처리
+      if(this.currentSelectNode === node && this.currentSelectTreeId === treeId) {
+        // 기존 맵핑 타겟 노드 연결 선 삭제 처리
         this.clearConnection();
         return;
-      } else {
-        this.currentIntersectionObserver?.disconnect();
       }
 
+      // 기존 맵핑 타겟 노드 연결 선 삭제 처리
       this.clearConnection();
 
       // 2025.12.15[mhlim]: 검색 노드 선택 포커싱 효과 해제 처리
@@ -52,9 +52,11 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       // 현재 클릭한 노드의 트리 인스턴스 조회
       const treeInstanceStore = useMyTreeInstanceStore();
 
+      // 2025.12.15[mhlim]: 수탁/컨소시엄 모드 > 매핑 비활성화 처리
       if (treeInstanceStore.$state.classificationType === 'CONSIGNMENT') {
         return;
       }
+
       const treeType = treeId.split('-')[0];
       // 트리 인스턴스 상태관리에서 현재 트리 인스턴스 조회
       const currentTreeInstance: any = treeInstanceStore.$state[treeType as keyof typeof treeInstanceStore.$state];
@@ -64,6 +66,8 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
 
       this.currentSelectNode = node;
       this.currentSelectTreeId = treeId;
+
+      console.log(this.currentSelectNode);
 
       this.loadingYn = true;
 
@@ -119,6 +123,14 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
 
           // 2025.12.16 [mhlim]: 매핑모드에서만 신규 맵핑 처리
           if (treeInstanceStore.$state.currentMode !== 'mapping') {
+            // 현재 선택 노드와 맵핑 타겟 노드 intersectionObserver 등록 후, 종료
+            this.currentIntersectionObserver?.observe(nodeElement);
+
+            const currentIntersectionObserver = this.currentIntersectionObserver;
+  
+            d3.selectAll('.node-mapped-target').each(function() {
+              currentIntersectionObserver?.observe(this as Element);
+            })
             return;
           }
 
@@ -197,29 +209,39 @@ export const useMyTreeMappingStore = defineStore('treeMapping', {
       }
     },
     clearConnection() {
+      // 기존 맵핑 선 제거
       this.lines.forEach((line: any) => line.remove());
+      // 기존 맵핑 선 생성 인스턴스 목록 삭제
       this.$state.lines = [];
 
+      // 기존 선택 노드 하이라이팅 효과 해제
       d3.selectAll('.node-selected').classed('node-selected', false);
-
+      // 기존 맵핑 타겟 노드 하이라이팅 효과 해제
       d3.selectAll('.node-mapped-target').classed('node-mapped-target', false);
-
+      // 기존 선택 노드 맵핑 아이콘 제거
       d3.selectAll('.mapping-selected-icon').remove();
-
+      // 기존 맵핑 가능 노드 제거
       d3.selectAll('.possible-mapping-target').remove();
 
+      // 기존 신규 맵핑 선 제거
       this.newLines.forEach((line: any) => line.remove());
+      // 기존 신규 맵핑 선 생성 인스턴스 목록 삭제
       this.$state.newLines = new Map();
+      // 기존 신규 맵핑 타겟 데이터 목록 삭제
       this.$state.newTargetNodeIdList = [];
 
+      // 기존 선택 노드 초기화
       this.$state.currentSelectNode = null;
+      // 기존 선택 노드 트리 ID 초기화
       this.$state.currentSelectTreeId = '';
+      // 기존 선택 노드 맵핑 조회 데이터 초기화
       this.$state.currentMappingData.clear();
-      this.$state.loadingYn = false;
-      this.$state.toastifyYn = false;
       this.$state.scheduledUpdate = false;
       this.$state.targetNodeList = [];
       this.$state.currentIntersectionObserver = null;
+
+      // 기존 맵핑 타겟 노드 intersectionObserver 등록 해제
+      this.currentIntersectionObserver?.disconnect();
     },
     // 2025.12.05[mhlim]: 현재 클릭한 노드와 맵핑 타겟 노드들 연결 선 그리는 함수
     async drawConnections(sourceNode: any, sourceId: string, mappingData: any) {

@@ -472,9 +472,33 @@
             /* Tree Nodes */
             .node-group {
                 font-size: 13px;
+                
+                .drag-handle-btn {
+                    x: 0;
+                    y: -8;
+                    width: 18px;
+                    height: 22px;
+                }
     
                 .node-bg {
                     cursor: pointer;
+                }
+
+                &.dragging-element {
+                    .node-bg {
+                        opacity: 0.5;
+                        stroke-dasharray: 8;
+                        stroke: var(--color-gray);
+                        fill: #fff;
+                    };
+                }
+
+                &.dragging-element-clone {
+                    .node-bg {
+                        stroke-dasharray: 0;
+                        stroke: var(--color-dark);
+                        fill: #fff;
+                    }
                 }
     
                 .toggle-btn {
@@ -640,38 +664,6 @@
                         stroke: none;
                     }
                 }
-            }
-            
-            /* Mapping loading indicator */
-            .mapping-loading {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: rgba(0, 0, 0, 0.85);
-                color: var(--color-white);
-                padding: var(--spacing-lg) var(--spacing-xxl);
-                border-radius: var(--radius-lg);
-                z-index: 2000;
-                font-size: 14px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-                display: flex;
-                align-items: center;
-                gap: 0.8rem;
-            }
-            
-            .mapping-loading::before {
-                content: '';
-                width: var(--spinner-size);
-                height: var(--spinner-size);
-                border: 3px solid var(--color-white);
-                border-top-color: transparent;
-                border-radius: var(--radius-circle);
-                animation: spin var(--duration-slow) linear infinite;
-            }
-            
-            @keyframes spin {
-                to { transform: rotate(360deg); }
             }
             
             .main-content {

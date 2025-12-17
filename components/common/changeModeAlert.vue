@@ -5,7 +5,9 @@
     </div>
 
     <span class="alert-message">
-      {{ mode === 'mapping' ? '매핑모드 전환 중...' : mode === 'edit' ? '편집모드 전환 중...' : '일반모드 전환 중...' }}
+      {{ mode === 'mapping' ? '매핑모드 전환 중...'
+      : mode === 'edit' ? '편집모드 전환 중...' 
+      : '일반모드 전환 중...' }}
     </span>
   </div>
 </template>

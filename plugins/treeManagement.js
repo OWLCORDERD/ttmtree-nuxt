@@ -233,13 +233,11 @@ export default defineNuxtPlugin((nuxtApp) => {
                 collapseFromDepth(currentTreeRoot, designConfig.tree.initialDepth);
             }
 
-            setTimeout(() => {
-                // 해당 트리 계층 데이터 구조로 업데이트
-                Renderer.update(currentTreeRoot);
-                // 로딩 인디케이터 종료
-                loadingElement.remove();
-                vueApp.unmount();
-            }, 500)
+            // 해당 트리 계층 데이터 구조로 업데이트
+            Renderer.update(currentTreeRoot);
+            // 로딩 인디케이터 종료
+            loadingElement.remove();
+            vueApp.unmount();
 
             Renderer.show();
 

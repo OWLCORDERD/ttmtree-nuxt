@@ -243,40 +243,102 @@
             </div>
         </div>
         </div>
+        
 
         <div class="btn-wrap">
-        <button type="button" class="btn-line-m-main"
-            v-if="treeInstanceStore.$state.classificationType !== 'CONSIGNMENT'"
-            @click="() => {
-                treeInstanceStore.treeModeChange('mapping');
-            }"
-        >
-            <MappingMode />
-            <span class='title'
-            >매핑모드</span>
-        </button>
-        <button type="button" class="btn-line-m-main"
-            @click="() => {
-                treeInstanceStore.treeModeChange('edit');
-            }">
-            <CourseEdit />
-            <span class='title'>과정구성 편집</span>
-        </button>
-        <button type="button" class="btn-fill-m-main"
-        @click="(e) => handleClassificationTypeChange(e, 'JOB')">
-            <CourseEdit />
-            <span class='title'>직무역량</span>
-        </button>
-        <button type="button" class="btn-fill-m-main"
-        @click="(e) => handleClassificationTypeChange(e, 'LEADERSHIP')">
-            <CourseEdit />
-            <span class='title'>리더십/공통역량</span>
-        </button>
-        <button type="button" class="btn-fill-m-main"
-        @click="(e) => handleClassificationTypeChange(e, 'CONSIGNMENT')">
-            <CourseEdit />
-            <span class='title'>수탁/컨소시엄 역량</span>
-        </button>
+            <!-- 매핑모드 진입 시, 노출 버튼 -->
+            <template v-if="treeInstanceStore.$state.currentMode === 'mapping'">
+                <button type="button" class="btn-line-m-main"
+                    @click="() => {
+                        treeInstanceStore.treeModeChange('mapping');
+                    }"
+                >
+                    <MappingMode />
+                    <span class='title'
+                    >매핑저장</span>
+                </button>
+
+                <button type="button" class="btn-fill-m-main"
+                    @click="() => {
+                        treeInstanceStore.treeModeChange('mapping');
+                    }"
+                >
+                    <MappingMode />
+                    <span class='title'
+                    >매핑완료</span>
+                </button>
+
+                <button type="button" class="btn-fill-m-main"
+                    @click="() => {
+                        treeInstanceStore.treeModeChange('basic');
+                    }"
+                >
+                    <Search />
+                    <span class='title'
+                    >기본 트리로 이동</span>
+                </button>
+            </template>
+
+            <template v-else>
+                <button type="button" class="btn-line-m-main"
+                    v-if="treeInstanceStore.$state.classificationType !== 'CONSIGNMENT'
+                    && treeInstanceStore.$state.currentMode !== 'mapping'
+                    && treeInstanceStore.$state.currentMode !== 'edit'"
+                    @click="() => {
+                        treeInstanceStore.treeModeChange('mapping');
+                    }"
+                >
+                    <MappingMode />
+                    <span class='title'
+                    >매핑모드</span>
+                </button>
+
+                <button type="button" class="btn-line-m-main"
+                v-if="treeInstanceStore.$state.currentMode !== 'edit'"
+                    @click="() => {
+                        treeInstanceStore.treeModeChange('edit');
+                    }">
+                    <CourseEdit />
+                    <span class='title'>과정구성 편집</span>
+                </button>
+                
+                <template v-if="treeInstanceStore.$state.currentMode === 'edit'">
+                    <button type="button" class="btn-fill-m-main"
+                    v-if="treeInstanceStore.$state.currentMode === 'edit'"
+                        @click="() => {
+                            treeInstanceStore.treeModeChange('edit');
+                        }">
+                        <CourseEdit />
+                        <span class='title'>편집완료</span>
+                    </button>
+
+                    <button type="button" class="btn-line-m-main"
+                        @click="() => {
+                            treeInstanceStore.treeModeChange('basic');
+                    }">
+                        <CourseEdit />
+                        <span class='title'>편집모드 종료</span>
+                    </button>
+                </template>
+
+                <template v-if="treeInstanceStore.$state.currentMode === 'basic'">
+                    <button type="button" class="btn-fill-m-main"
+                    @click="(e) => handleClassificationTypeChange(e, 'JOB')">
+                        <CourseEdit />
+                        <span class='title'>직무역량</span>
+                    </button>
+                    <button type="button" class="btn-fill-m-main"
+                    @click="(e) => handleClassificationTypeChange(e, 'LEADERSHIP')">
+                        <CourseEdit />
+                        <span class='title'>리더십/공통역량</span>
+                    </button>
+                    <button type="button" class="btn-fill-m-main"
+                    @click="(e) => handleClassificationTypeChange(e, 'CONSIGNMENT')">
+                        <CourseEdit />
+                        <span class='title'>수탁/컨소시엄 역량</span>
+                    </button>
+                </template>
+            </template>
     </div>
     </div>
 

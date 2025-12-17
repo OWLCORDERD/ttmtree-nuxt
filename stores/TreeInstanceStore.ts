@@ -56,7 +56,7 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
       JOB: null, // 직무체계 검색 노드
       EDU: null, // 교육체계 검색 노드
     }, // 현재 사용자가 검색한 노드
-    currentMode: 'index', // TTM 트리 모드 (메인 화면, 맵핑모드, 편집모드),
+    currentMode: 'basic', // TTM 트리 모드 (메인 화면, 맵핑모드, 편집모드),
     classificationType: 'JOB', // 역량분류 (JOB: 직무역량, LEADERSHIP: 리더십, COMMON: 공통, CONSIGNMENT: 수탁)
     modeChangeToastifyYn: false,
   }),
@@ -197,9 +197,6 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
       this.$state.currentMode = type;
       // 토스트 메시지 활성화
       this.$state.modeChangeToastifyYn = true;
-
-      // 맵핑 상태관리 초기화
-      useMyTreeMappingStore().clearConnection();
 
       // 모든 트리 리렌더링 처리
       useNuxtApp().$drawTTMTree();
