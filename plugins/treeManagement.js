@@ -242,7 +242,14 @@ export default defineNuxtPlugin((nuxtApp) => {
             Renderer.show();
 
             requestAnimationFrame(() => {
-                Renderer.recalculateTypeTagPositions();
+                // 2025.12.18[mhlim]: 과정구성 편집 모드 전환 시
+                //  교육체계 트리 그룹 노드 타입 태그 위치는 따로 계산
+                if (useMyTreeInstanceStore().$state.currentMode === 'edit' &&
+                    currentTreeRoot === useMyTreeInstanceStore().edu.root) {
+                    Renderer.recalculateTypeTagPositions(true);
+                } else {
+                    Renderer.recalculateTypeTagPositions();
+                }
             });
 
             // 뎁스 버튼 클릭 이벤트 셋팅

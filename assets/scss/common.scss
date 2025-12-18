@@ -500,6 +500,13 @@
                         fill: #fff;
                     }
                 }
+
+                &.dragging-element-closest {
+                    .node-bg {
+                        stroke-dasharray: 0;
+                        stroke: var(--color-error);
+                    }
+                }
     
                 .toggle-btn {
                     cursor: pointer;
@@ -554,6 +561,20 @@
                     stroke: #d7d7d7;
                     stroke-width: 1px;
                 }
+            }
+
+            .edit-tooltip {
+                fill: #fff;
+                stroke: #D7D7D7;
+                rx: 5;
+                ry: 5;
+            }
+
+            .edit-menu-item {
+                fill: #000;
+                font-weight: 400;
+                font-size: 16px;
+                cursor: pointer;
             }
             
             .node-clickable .node-count {

@@ -52,29 +52,59 @@ export class TTMTreeRenderer {
     }
 
     /**
-     * Recalculate type tag positions (after visibility changes)
-     */
-    recalculateTypeTagPositions() {
-        this.g.selectAll('.type-tag').each(function(d) {
-            const hasToggle = d.data.children && d.data.children.length > 0;
-            const typeTagStartX = 50;
+     * 2025.12.18[mhlim]: 노드 그룹 내부 타입 태그 및 제목 위치 조정
+     @param {boolean} editMode - 편집 모드 여부
+    */
+    recalculateTypeTagPositions(editMode) {
+        // 과정구성 편집모드 > 교육체계 트리 노드 그룹 위치 조정
+        if (editMode) {
+            // 교육체계 트리 노드 그룹 중 드래그 버튼 포함된 노드 필터링
+            const nodeGroup = this.g.selectAll('.node-group').filter(function() {
+                return d3.select(this).select('.drag-handle-btn').node() !== null;
+            });
 
-            // Update type tag position
-            d3.select(this).attr('transform', `translate(${typeTagStartX}, 0)`);
+            // 모든 요소 내부 타입 태그 & 제목 텍스트 위치 조정
+            nodeGroup.each(function() {
+                const typeTagStartX = 60;
 
-            // Recalculate text width
-            const textElement = this.querySelector('text');
+                d3.select(this).select('.type-tag')
+                .attr('transform', `translate(${typeTagStartX}, 0)`);
 
-            if (textElement) {
-                const textWidth = textElement.getComputedTextLength();
-                const rectWidth = textWidth + 20;
-                d3.select(this).select('rect').attr('width', rectWidth);
+                // Recalculate text width
+                const textElement = d3.select(this).select('text').node();
 
-                // Update node name position
-                const nodeNameElement = d3.select(this.parentNode).select('.node-name');
-                nodeNameElement.attr('x', typeTagStartX + rectWidth + 5);
-            }
-        });
+                if (textElement) {
+                    const textWidth = textElement.getComputedTextLength();
+                    const rectWidth = textWidth + 20;
+                    d3.select(this).select('.type-tag')
+                    .select('rect').attr('width', rectWidth);
+
+                    // Update node name position
+                    const nodeNameElement = d3.select(this).select('.node-name');
+                    nodeNameElement.attr('x', typeTagStartX + rectWidth + 5);
+                }
+            });
+        } else {
+            this.g.selectAll('.type-tag').each(function(d) {
+                const typeTagStartX = 50;
+    
+                // Update type tag position
+                d3.select(this).attr('transform', `translate(${typeTagStartX}, 0)`);
+    
+                // Recalculate text width
+                const textElement = this.querySelector('text');
+    
+                if (textElement) {
+                    const textWidth = textElement.getComputedTextLength();
+                    const rectWidth = textWidth + 20;
+                    d3.select(this).select('rect').attr('width', rectWidth);
+    
+                    // Update node name position
+                    const nodeNameElement = d3.select(this.parentNode).select('.node-name');
+                    nodeNameElement.attr('x', typeTagStartX + rectWidth + 5);
+                }
+            });
+        }
     }
 
     /**
@@ -208,18 +238,10 @@ export class TTMTreeRenderer {
             .duration(this.duration)
             .style('opacity', 0)
             .remove();
-
-        // 2025.12.17[mhlim]:
-        // 과정 편집 모드 전환, 토글, 맵핑, 드래그 이벤트 호출 시점
-        if (useMyTreeInstanceStore().$state.currentMode === 'edit') {
-            // 기존 드래그 버튼 제거
-            d3.selectAll('.drag-handle-btn').remove();
-            // 업데이트된 트리 노드 그룹에 대한 드래그 핸들링 요소 및 이벤트 추가
-            this.setupEditModeNodes();
-        }
     }
 
-    // 2025.12.17[mhlim]: 드래그 드롭 요소 및 이벤트 추가 메소드
+    // 2025.12.17[mhlim]: 교욱체계 트리 > 노드 그룹 요소
+    // 드래그 드롭 버튼 및 케밥(토글) 버튼 추가 메소드
     setupEditModeNodes() {
         // 전체 트리 그룹 노드 중에서 교육체계 관련 유형 노드 필터링
         const nodeGroup = this.g.selectAll('.node-group').filter((d) => d.data.type === 'COURSE'
@@ -227,187 +249,10 @@ export class TTMTreeRenderer {
 
         if (nodeGroup.nodes().length <= 0) return;
 
+        // 2025.12.18[mhlim]: 교육체계 트리의 그룹 노드마다 드래그 드롭 버튼 및 케밥(토글) 요소 생성
         nodeGroup.each(function() {
-            // 드래그 핸들링 버튼 추가 전, 토글 버튼 위치 조정
-            d3.select(this).select('.toggle-btn').each(function() {
-                d3.select(this).select('circle').attr('cx', 40);
-                d3.select(this).select('path').attr('d', d => {
-                    if(d._children?.length > 0) {
-                        return 'M 38 -1 L 43 2 L 38 5 Z';
-                        // (d.data.children && d.data.children.length > 0)
-                    } else if(d.children?.length > 0) {
-                        return 'M 37 0 L 43 0 L 40 5 Z';
-                    } else {
-                        return 'M 37 1 L 43 1 L 43 3 L 37 3 Z'; // 마지막 뎁스 
-                    }
-                });
-            })
-
-            // 유형 태그 위치 조정
-            d3.select(this).select('.type-tag').each(function(d) {
-                const typeTagStartX = 60;
-            
-                // Update type tag position
-                d3.select(this).attr('transform', `translate(${typeTagStartX}, 0)`);
-            
-                // Recalculate text width
-                const textElement = this.querySelector('text');
-            
-                if (textElement) {
-                    const textWidth = textElement.getComputedTextLength();
-                    const rectWidth = textWidth + 20;
-                    d3.select(this).select('rect').attr('width', rectWidth);
-                
-                    // Update node name position
-                    const nodeNameElement = d3.select(this.parentNode).select('.node-name');
-                    nodeNameElement.attr('x', typeTagStartX + rectWidth + 5);
-                }
-            });
-
-            // 노드 배경 위치 및 크기 조정
-            d3.select(this).select('.node-bg').attr('width', 'calc(100% - 40px)')
-            .attr('x', 25);
-
-            // 드래그 핸들링 버튼 추가
-            const dragHandleGroup = d3.select(this).append('g')
-            .attr('class', 'drag-handle-btn')
-
-            dragHandleGroup.append('rect')
-            .attr('width', 18)
-            .attr('height', 22)
-            .attr('x', 5)
-            .attr('y', -8)
-            .attr('fill', 'transparent')
-            .attr('cursor', 'pointer')
-        
-        
-            const handleIcon = dragHandleGroup.append('svg')
-            .attr('width', 8)
-            .attr('height', 14)
-            .attr('transform', 'translate(10, -4)')
-            .attr('viewBox', '0, 0, 29, 50')
-
-            const handleIconGroup = handleIcon.append('g')
-            .attr('clip-path', 'url(#clip0_349_8644)');
-
-            const pathList = [
-                'M5 10C7.76142 10 10 7.76142 10 5C10 2.23858 7.76142 0 5 0C2.23858 0 0 2.23858 0 5C0 7.76142 2.23858 10 5 10Z',
-                'M5 30C7.76142 30 10 27.7614 10 25C10 22.2386 7.76142 20 5 20C2.23858 20 0 22.2386 0 25C0 27.7614 2.23858 30 5 30Z',
-                'M5 50C7.76142 50 10 47.7614 10 45C10 42.2386 7.76142 40 5 40C2.23858 40 0 42.2386 0 45C0 47.7614 2.23858 50 5 50Z',
-                "M23.5029 10C26.2644 10 28.5029 7.76142 28.5029 5C28.5029 2.23858 26.2644 0 23.5029 0C20.7415 0 18.5029 2.23858 18.5029 5C18.5029 7.76142 20.7415 10 23.5029 10Z",
-                "M23.5029 30C26.2644 30 28.5029 27.7614 28.5029 25C28.5029 22.2386 26.2644 20 23.5029 20C20.7415 20 18.5029 22.2386 18.5029 25C18.5029 27.7614 20.7415 30 23.5029 30Z",
-                "M23.5029 50C26.2644 50 28.5029 47.7614 28.5029 45C28.5029 42.2386 26.2644 40 23.5029 40C20.7415 40 18.5029 42.2386 18.5029 45C18.5029 47.7614 20.7415 50 23.5029 50Z"
-            ]
-
-            pathList.forEach(path => {
-                handleIconGroup.append('path')
-                .attr('d', path)
-                .attr('fill', '#C2C2C2')
-            })
-
-            handleIcon.append('defs')
-            .append('clipPath')
-            .attr('id', 'clip0_349_8644')
-            .append('rect')
-            .attr('width', '28.5')
-            .attr('height', '50')
-            .attr('fill', 'white');
-
-            // 각 유형 아이템 노드마다 추가된 핸들링 버튼 
-            // -> d3 드래그드롭 이벤트 추가
-            d3.select(this).select('.drag-handle-btn').call(d3.drag()
-                .on("start", (event, d) => {
-                    // 드래그 시작한 아이템 노드의 복제 노드(ghost) 추가
-                    d3.select(this).classed('dragging-element', true);
-                    d3.select(this).clone(true).raise().classed('dragging-element-clone', true);
-
-                    // 각 요소의 실제 transform 값 파싱
-                    const currentTransform = d3.select(this).attr('transform');
-                    if (currentTransform) {
-                        // 현재 아이템 위치 y 값 추출
-                        const match = currentTransform.match(/translate\([^,]+,([^)]+)\)/);
-                        d._startX = match ? parseFloat(match[1]) : d.x;
-                    } else {
-                        d._startX = d.x;
-                    }
-                    
-                    // 드래그 시작 시 마우스 y 위치 저장 (SVG 좌표계 기준)
-                    const [x, y] = d3.pointer(event, this.parentElement);
-
-                    d.currentDraggingNode = d;
-                    d._startMouseY = y;
-                })
-
-                .on("drag", (event, d) => {
-                    // SVG 좌표계 기준으로 마우스 이동 위치 계산
-                    const [x, y] = d3.pointer(event, this.parentElement);
-                    const dy = y - d._startMouseY;
-
-                    d._closestNode = null;
-                    let minDistance = 10;
-
-                    // 현재 드래그중인 노드의 ghost 노드 위치와 인접한 노드 필터링
-                    nodeGroup.each(function(node) {
-                        if (node === d.currentDraggingNode) return;
-                        
-                        const transform = d3.select(this).attr('transform');
-                        
-                        if (transform) {
-                            const match = transform.match(/translate\([^,]+,([^)]+)\)/);
-                            if (match) {
-                                const nodeY = parseFloat(match[1]);
-                                const distance = Math.abs(y - nodeY);
-                                
-                                // 노드 높이 범위 내에 있으면
-                                if (distance < minDistance) {
-                                    minDistance = distance;
-                                    d._closestNode = node;
-                                }
-                            }
-                        }
-                    });
-
-                    // 2025.12.17[mhlim]: 초기 위치에 상대 이동량 더하기
-                    d.x = d._startX + dy;
-                    // 드래그중인 노드의 ghost 노드 위치 업데이트
-                    d3.select('.dragging-element-clone').attr('transform', `translate(0, ${d.x})`);
-                })
-            
-                .on("end", (event, d) => {
-                    d3.select(this).classed('dragging', false);
-                    d3.select('.dragging-element-clone').remove();
-                    d3.select('.dragging-element').classed('dragging-element', false);
-
-                    // 드래그중에 저장된 ghost 노드와 인접한 노드 조회
-                    // -> 드래그중인 노드와 드롭한 위치가 똑같으면 실행 x
-                    if (d._closestNode && d._closestNode !== d.currentDraggingNode) {
-                        const draggingNode = d.currentDraggingNode;
-                        const closestNode = d._closestNode;
-                        
-                        // 둘 다 부모 뎁스가 있으며, 부모 뎁스가 동일한 영역에서만 교체
-                        if (draggingNode.parent && closestNode.parent
-                            && draggingNode.parent === closestNode.parent) {
-                            const parent = draggingNode.parent;
-                            const children = parent.children || parent._children;
-                            
-                            if (children) {
-                                const idx1 = children.indexOf(draggingNode);
-                                const idx2 = children.indexOf(closestNode);
-                                
-                                if (idx1 !== -1 && idx2 !== -1 && idx1 !== idx2) {
-                                    [children[idx1], children[idx2]] = [children[idx2], children[idx1]];
-                                    
-                                    // 2025.12.17[mhlim]: requestAnimationFrame으로 지연
-                                    requestAnimationFrame(async () => {
-                                        const treeInstanceStore = useMyTreeInstanceStore();
-                                        await treeInstanceStore.nodeUpdate(parent, 'edu-tree');
-                                    });
-                                }
-                            }
-                        }
-                    }
-                })
-            );
+            useMyTreeInstanceStore().$state.edu.renderer.createDragDropRenderer(this, nodeGroup);
+            useMyTreeInstanceStore().$state.edu.renderer.createKebobRenderer(this, nodeGroup);
         });
     }
 
@@ -528,8 +373,11 @@ export class TTMTreeRenderer {
             .style('fill', '#0065CD')
             .text(d => this.getTypeDisplayName(d.data.type, d.data));
 
-        // Calculate width and adjust
-        this.recalculateTypeTagPositions();
+            if (useMyTreeInstanceStore().$state.currentMode === 'edit') {
+                this.recalculateTypeTagPositions(true);
+            } else {
+                this.recalculateTypeTagPositions();
+            }
     }
 
     /**
@@ -558,7 +406,7 @@ export class TTMTreeRenderer {
     createRightInfo(nodeEnter) {
         const rightInfo = nodeEnter.append('g')
             .attr('class', 'right-info')
-            .attr('transform', `translate(390, 0)`)
+            .attr('transform', `translate(380, 0)`)
             .style('display', (d) => (this.isClickableType(d.data.type) ? 'block' : 'none'));
 
         rightInfo.append('rect')
@@ -643,7 +491,16 @@ export class TTMTreeRenderer {
                 }
             });
 
-        this.recalculateTypeTagPositions();
+        // 2025.12.18[mhlim]:
+        // 과정구성 편집모드 > 토글, 맵핑, 드래그 이벤트 호출 시점
+        if (useMyTreeInstanceStore().$state.currentMode === 'edit') {
+            // 업데이트된 트리 노드 그룹에 대한 드래그 핸들링 요소 및 이벤트 추가
+            this.setupEditModeNodes();
+            // 드래그 버튼 고려한 타입 / 제목 위치 조정
+            this.recalculateTypeTagPositions(true);
+        } else {
+            this.recalculateTypeTagPositions();
+        }
     }
 
     /**
@@ -756,5 +613,332 @@ export class TTMTreeRenderer {
                 item.textContent = ellipsisTxt;
             }
         })
+    }
+
+    /**
+    * @param {Object} node - Node selection
+    * @param {Selection} nodeGroup - Node group selection
+    **/
+    createKebobRenderer(node, nodeGroup) {
+        // 2025.12.18[mhlim]: 교과목, 학습목표, 교육과정 유형에 따른 케밥(토글) 버튼 추가
+        const toggleGroup = d3.select(node).append('g')
+        .attr('class', 'toggle-btn')
+        .attr('transform', 'translate(350, -5)')
+        .on('click', (event, d) => {
+            this.toggleEditTooltip(event, d);
+        })
+        
+        toggleGroup.append('rect')
+        .attr('width', 18)
+        .attr('height', 18)
+        .attr('fill', 'transparent')
+        
+        const toggleIcon = toggleGroup.append('svg')
+        .attr('width', 18)
+        .attr('height', 18)
+        .attr('viewBox', '0 0 24 24')
+        .attr('cursor', 'pointer')
+
+        toggleIcon.append('path')
+        .attr('fill-rule', 'evenodd')
+        .attr('clip-rule', 'evenodd')
+        .attr('d', 'M12 2C13.1046 2 14 2.89543 14 4V4.00911C14 5.11368 13.1046 6.00911 12 6.00911C10.8954 6.00911 10 5.11368 10 4.00911V4C10 2.89543 10.8954 2 12 2Z')
+        .attr('fill', '#999999');
+        
+        toggleIcon.append('path')
+        .attr('fill-rule', 'evenodd')
+        .attr('clip-rule', 'evenodd')
+        .attr('d', 'M12 10.0088C13.1046 10.0088 14 10.9042 14 12.0088V12.0179C14 13.1225 13.1046 14.0179 12 14.0179C10.8954 14.0179 10 13.1225 10 12.0179V12.0088C10 10.9042 10.8954 10.0088 12 10.0088Z')
+        .attr('fill', '#999999');
+        
+        toggleIcon.append('path')
+        .attr('fill-rule', 'evenodd')
+        .attr('clip-rule', 'evenodd')
+        .attr('d', 'M12 18.0186C13.1046 18.0186 14 18.914 14 20.0186V20.0277C14 21.1322 13.1046 22.0277 12 22.0277C10.8954 22.0277 10 21.1322 10 20.0277V20.0186C10 18.914 10.8954 18.0186 12 18.0186Z')
+        .attr('fill', '#999999');
+    }
+
+    /**
+     * 
+     * @param {Object} currentNode 
+     * @param {*} nodeGroup 
+     */
+    createDragDropRenderer(currentNode, nodeGroup) {
+        // 드래그 핸들링 버튼 추가 전, 토글 버튼 위치 조정
+        d3.select(currentNode).select('.toggle-btn').each(function() {
+            d3.select(currentNode).select('circle').attr('cx', 40);
+            d3.select(currentNode).select('path').attr('d', d => {
+                if(d._children?.length > 0) {
+                    return 'M 38 -1 L 43 2 L 38 5 Z';
+                    // (d.data.children && d.data.children.length > 0)
+                } else if(d.children?.length > 0) {
+                    return 'M 37 0 L 43 0 L 40 5 Z';
+                } else {
+                    return 'M 37 1 L 43 1 L 43 3 L 37 3 Z'; // 마지막 뎁스 
+                }
+            });
+        })
+        
+        // 맵핑 버튼 위치 조정
+        d3.select(currentNode).select('.right-info')
+        .attr('transform', `translate(370, 0)`);
+        
+        // 노드 배경 위치 및 크기 조정
+        d3.select(currentNode).select('.node-bg')
+        .attr('width', 'calc(100% - 20px)')
+        .attr('x', 0);
+        
+        // 드래그 핸들링 버튼 추가
+        const dragHandleGroup = d3.select(currentNode).append('g')
+        .attr('class', 'drag-handle-btn')
+
+        dragHandleGroup.append('rect')
+        .attr('width', 23)
+        .attr('height', 23)
+        .attr('x', 5)
+        .attr('y', -8)
+        .attr('fill', 'transparent')
+        .attr('cursor', 'pointer')
+                
+                
+        const handleIcon = dragHandleGroup.append('svg')
+        .attr('width', 8)
+        .attr('height', 14)
+        .attr('transform', 'translate(10, -4)')
+        .attr('viewBox', '0, 0, 29, 50')
+        .attr('cursor', 'pointer')
+        
+        const handleIconGroup = handleIcon.append('g')
+        .attr('clip-path', 'url(#clip0_349_8644)');
+        
+        const pathList = [
+            'M5 10C7.76142 10 10 7.76142 10 5C10 2.23858 7.76142 0 5 0C2.23858 0 0 2.23858 0 5C0 7.76142 2.23858 10 5 10Z',
+            'M5 30C7.76142 30 10 27.7614 10 25C10 22.2386 7.76142 20 5 20C2.23858 20 0 22.2386 0 25C0 27.7614 2.23858 30 5 30Z',
+            'M5 50C7.76142 50 10 47.7614 10 45C10 42.2386 7.76142 40 5 40C2.23858 40 0 42.2386 0 45C0 47.7614 2.23858 50 5 50Z',
+            "M23.5029 10C26.2644 10 28.5029 7.76142 28.5029 5C28.5029 2.23858 26.2644 0 23.5029 0C20.7415 0 18.5029 2.23858 18.5029 5C18.5029 7.76142 20.7415 10 23.5029 10Z",
+            "M23.5029 30C26.2644 30 28.5029 27.7614 28.5029 25C28.5029 22.2386 26.2644 20 23.5029 20C20.7415 20 18.5029 22.2386 18.5029 25C18.5029 27.7614 20.7415 30 23.5029 30Z",
+            "M23.5029 50C26.2644 50 28.5029 47.7614 28.5029 45C28.5029 42.2386 26.2644 40 23.5029 40C20.7415 40 18.5029 42.2386 18.5029 45C18.5029 47.7614 20.7415 50 23.5029 50Z"
+        ]
+        
+        pathList.forEach(path => {
+            handleIconGroup.append('path')
+            .attr('d', path)
+            .attr('fill', '#C2C2C2')
+        })
+        
+        handleIcon.append('defs')
+        .append('clipPath')
+        .attr('id', 'clip0_349_8644')
+        .append('rect')
+        .attr('width', '28.5')
+        .attr('height', '50')
+        .attr('fill', 'white');
+        
+        // 각 유형 아이템 노드마다 추가된 핸들링 버튼 
+        // -> d3 드래그드롭 이벤트 추가
+        d3.select(currentNode).select('.drag-handle-btn').call(d3.drag()
+            .on("start", (event, d) => {
+                // 드래그 시작한 아이템 노드의 복제 노드(ghost) 추가
+                d3.select(currentNode).classed('dragging-element', true);
+                d3.select(currentNode).clone(true).raise().classed('dragging-element-clone', true);
+
+                // 각 요소의 실제 transform 값 파싱
+                const currentTransform = d3.select(currentNode).attr('transform');
+                if (currentTransform) {
+                    // 현재 아이템 위치 y 값 추출
+                    const match = currentTransform.match(/translate\([^,]+,([^)]+)\)/);
+                    d._startX = match ? parseFloat(match[1]) : d.x;
+                } else {
+                    d._startX = d.x;
+                }
+                
+                // 드래그 시작 시 마우스 y 위치 저장 (SVG 좌표계 기준)
+                const [x, y] = d3.pointer(event, currentNode.parentElement);
+        
+                // 드래그중인 노드 정보 저장
+                d.currentDraggingNode = d;
+                d._startMouseY = y; // svg 좌표 내부 클릭 시점 마우스 y 위치 저장
+            })
+        
+            .on("drag", (event, d) => {
+                // SVG 좌표계 기준으로 마우스 이동 위치 계산
+                const [x, y] = d3.pointer(event, currentNode.parentElement);
+                const dy = y - d._startMouseY;
+
+                d._closestNode = null;
+                let minDistance = 10;
+
+                if (d3.selectAll('.dragging-element-closest').nodes().length > 1) {
+                    d3.selectAll('.dragging-element-closest').classed('dragging-element-closest', false);
+                }
+                // 현재 드래그중인 노드의 ghost 노드 위치와 인접한 노드 필터링
+                nodeGroup.each(function(node) {
+                    if (node === d.currentDraggingNode) return;
+                    
+                    const transform = d3.select(this).attr('transform');
+                    
+                    if (transform) {
+                        const match = transform.match(/translate\([^,]+,([^)]+)\)/);
+                        if (match) {
+                            const nodeY = parseFloat(match[1]);
+                            const distance = Math.abs(y - nodeY);
+                            
+                            // 노드 높이 범위 내에 있으면
+                            if (distance < minDistance) {
+                                minDistance = distance;
+                                d._closestNode = node;
+                                d3.selectAll('.node-group')
+                                .filter(d => d === node)
+                                .node().classList.add('dragging-element-closest');
+                            }
+                        }
+                    }
+                });
+        
+                // 2025.12.17[mhlim]: 초기 위치에 상대 이동량 더하기
+                d.x = d._startX + dy;
+                // 드래그중인 노드의 ghost 노드 위치 업데이트
+                d3.select('.dragging-element-clone')
+                .attr('transform', `translate(0, ${d.x + 20})`);
+            })
+                    
+            .on("end", (event, d) => {
+                d3.select(currentNode).classed('dragging', false);
+                d3.select('.dragging-element-clone').remove();
+                d3.select('.dragging-element')
+                .classed('dragging-element', false);
+        
+                d3.select('.dragging-element-closest')
+                .classed('dragging-element-closest', false);
+        
+                // 드래그중에 저장된 ghost 노드와 인접한 노드 조회
+                // -> 드래그중인 노드와 드롭한 위치가 똑같으면 실행 x
+                if (d._closestNode && d._closestNode !== d.currentDraggingNode) {
+                    const draggingNode = d.currentDraggingNode;
+                    const closestNode = d._closestNode;
+                    
+                    // 둘 다 부모 뎁스가 있으며, 부모 뎁스가 동일한 영역에서만 교체
+                    if (draggingNode.parent && closestNode.parent
+                        && draggingNode.parent === closestNode.parent) {
+                        const parent = draggingNode.parent;
+                        const children = parent.children || parent._children;
+                        
+                        if (children) {
+                            const idx1 = children.indexOf(draggingNode);
+                            const idx2 = children.indexOf(closestNode);
+        
+                            if (idx1 !== -1 && idx2 !== -1 && idx1 !== idx2) {
+                                [children[idx1], children[idx2]] = [children[idx2], children[idx1]];
+                                
+                                // 2025.12.17[mhlim]: requestAnimationFrame으로 지연
+                                requestAnimationFrame(async () => {
+                                    const treeInstanceStore = useMyTreeInstanceStore();
+                                    d3.selectAll('.drag-handle-btn').remove();
+                                    await treeInstanceStore.nodeUpdate(parent, 'edu-tree');
+                                });
+                            }
+                        }
+                    }
+                }
+            })
+        );   
+    }
+
+    /**
+     * 
+     * @param {Event} event 
+     * @param {Object} node - Node data
+     */
+
+    // 2025.12.18[mhlim]: 편집 모드 토글 버튼 클릭 시 툴팁 생성 메소드
+    toggleEditTooltip(event, node) {
+        event.stopPropagation();
+
+        const nodeElement = this.getNodeElement(node);
+        const duplicateTooltip = d3.select('.edit-tooltip')
+        const duplicateMenuList = d3.selectAll('.edit-menu-item');
+        const duplicateMenuListBg = d3.selectAll('.edit-menu-item-bg');
+
+        // 현재 토글 버튼 클릭한 노드 부모 좌표 마우스 위치 추출
+        const [x, y] = d3.pointer(event, nodeElement.parentElement);
+
+        // 생성된 툴팁이 이미 존재하는데 재클릭한 경우, 제거 후 종료
+        if (duplicateTooltip.node() !== null
+            || duplicateMenuList.nodes().length > 0
+            || duplicateMenuListBg.nodes().length > 0) {
+            duplicateTooltip.node().remove();
+            duplicateMenuList.nodes().forEach(node => node.remove());
+            duplicateMenuListBg.nodes().forEach(node => node.remove());
+            return;
+        }
+
+        // 설정 툴팁 배경 요소 추가
+        d3.select(nodeElement.parentElement).append('rect')
+        .attr('class', 'edit-tooltip')
+        .attr('transform', `translate(200, ${15 + y})`)
+        .attr('width', 172)
+        .attr('height', 148)
+        .attr('rx', 5)
+        .attr('ry', 5)
+
+        // 각 유형별 설정 메뉴 목록
+        const settingMenuList = {
+            "COURSE": [ '교과목그룹 생성', '교과목 생성', '항목명 수정', '삭제'],
+            "LESSON": [ '교과목 생성', '학습목표 생성', '항목명 수정', '삭제'],
+            "LEARNING_OBJECT": [ '학습목표 생성', '항목명 수정', '삭제'],
+        }
+
+        // 설정 메뉴 목록 배경 그룹
+        const tooltipMenuGroupBg = d3.select(nodeElement.parentElement)
+        .append('g')
+        .attr('transform', `translate(200, ${30 + y})`);
+
+        const menuIcon = tooltipMenuGroupBg.append('svg')
+        .attr('width', 50)
+        .attr('height', 50)
+        .attr('viewBox', '1 0 50 51')
+        .attr('cursor', 'pointer');
+
+        // 설정 메뉴 목록 텍스트 그룹
+        const menuListGroup = d3.select(nodeElement.parentElement)
+        .append('g')
+        .attr('class', 'edit-menu')
+        .attr('transform', `translate(220, ${37 + y})`)
+
+        const bgRect = [];
+
+        // 메뉴 목록 배경 요소 추가 및 hover 이벤트 부여
+        settingMenuList.COURSE.forEach((menu, i) => {
+            bgRect.push(
+                tooltipMenuGroupBg.append('rect')
+                .attr('x', 0)
+                .attr('y', (i * 30))
+                .attr('width', 172)
+                .attr('height', 32)
+                .attr('fill', 'transparent')
+                .attr('class', 'edit-menu-item-bg')
+                .on('mouseenter', function() {
+                    d3.select(this).attr('fill', '#F2FDFB');
+                })
+                .on('mouseleave', function() {
+                    d3.select(this).attr('fill', 'transparent');
+                })
+            );
+        });
+
+        // 메뉴 목록 텍스트 요소 추가 및 hover 시, 배경 색상 변경 이벤트 부여
+        settingMenuList.COURSE.forEach((menu, i) => {
+            menuListGroup.append('text')
+            .text(menu)
+            .attr('class', 'edit-menu-item')
+            .attr('x', 20)
+            .attr('y', 15 + (i * 30))
+            .on('mouseenter', function() {
+                bgRect[i].attr('fill', '#F2FDFB');
+            })
+            .on('mouseleave', function() {
+                bgRect[i].attr('fill', 'transparent');
+            })
+        });
     }
 }

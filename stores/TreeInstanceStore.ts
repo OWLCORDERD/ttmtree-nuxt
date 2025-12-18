@@ -56,7 +56,7 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
       JOB: null, // 직무체계 검색 노드
       EDU: null, // 교육체계 검색 노드
     }, // 현재 사용자가 검색한 노드
-    currentMode: 'basic', // TTM 트리 모드 (메인 화면, 맵핑모드, 편집모드),
+    currentMode: 'edit', // TTM 트리 모드 (메인 화면, 맵핑모드, 편집모드),
     classificationType: 'JOB', // 역량분류 (JOB: 직무역량, LEADERSHIP: 리더십, COMMON: 공통, CONSIGNMENT: 수탁)
     modeChangeToastifyYn: false,
   }),
@@ -64,51 +64,56 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
     async fetchTreeDepthData(containerId: string) {
       const endPoint = containerId === 'comp-tree' ? 'competency' : containerId === 'job-tree' ? 'job' : 'education';
       const apiUrl = useRuntimeConfig().public.apiBaseUrl;
-      // -----트리 데이터 조회 엔드포인트에 따른 테스트 코드
-      // (더미데이터이며, API 나올 시 구조에 따라 변경 예정)
-      const response: any = await $fetch(`${apiUrl}/${endPoint}`);
 
-      let originalData = response.data;
+      try {
+        // 2025.12.17[mhlim]: 트리 엔드포인트에 따른 전체 트리 데이터 조회
+        const response: any = await $fetch(`${apiUrl}/${endPoint}`);
 
-      // 트리 데이터가 없는 경우
-      if (!originalData || originalData.length === 0) {
-        originalData = {
-            id: 'empty',
-            name: 'No Data',
-            type: 'EMPTY',
-            children: []
-        };
-      } else {
-        // 여러 루트가 있는 경우 가상 루트 생성
-        originalData = {
-          id: 'virtual-root',
-          name: 'Root',
-          type: 'ROOT',
-          sortOrder: 0,
-          depth: -1,
-          metadata: {},
-          children: originalData
-        };
+        if (response.success) {
+          let originalData = response.data;
+
+          // 트리 데이터가 없는 경우
+          if (!originalData || originalData.length === 0) {
+            originalData = {
+                id: 'empty',
+                name: 'No Data',
+                type: 'EMPTY',
+                children: []
+            };
+          } else {
+            // 여러 루트가 있는 경우 가상 루트 생성
+            originalData = {
+              id: 'virtual-root',
+              name: 'Root',
+              type: 'ROOT',
+              sortOrder: 0,
+              depth: -1,
+              metadata: {},
+              children: originalData
+            };
+          }
+
+          // 조회된 트리 계층 데이터를 d3 계층 데이터로 변환
+          const treeData = d3.hierarchy(originalData);
+
+          switch (containerId) {
+            case 'edu-tree':
+              this.edu.containerId = containerId;
+              this.edu.root = treeData;
+              break;
+            case 'job-tree':
+              this.job.containerId = containerId;
+              this.job.root = treeData;
+              break;
+            case 'comp-tree':
+              this.comp.containerId = containerId;
+              this.comp.root = treeData;
+              break;
+          }
+        }
+      } catch (error) {
+        console.error('트리 데이터 조회 중 오류가 발생했습니다.', error);
       }
-
-      // d3.hierarchy 함수를 사용한 트리 데이터 계층 구조 변환
-      const treeData = d3.hierarchy(originalData);
-
-      switch (containerId) {
-        case 'edu-tree':
-          this.edu.containerId = containerId;
-          this.edu.root = treeData;
-          break;
-        case 'job-tree':
-          this.job.containerId = containerId;
-          this.job.root = treeData;
-          break;
-        case 'comp-tree':
-          this.comp.containerId = containerId;
-          this.comp.root = treeData;
-          break;
-      }
-
       // ---------------------------------------------------
     },
 
@@ -194,7 +199,6 @@ export const useMyTreeInstanceStore = defineStore('TreeInstance', {
       // 토스트 메시지 활성화
       this.$state.modeChangeToastifyYn = true;
 
-      // 모든 트리 리렌더링 처리
       useNuxtApp().$drawTTMTree();
 
       // 1초 후 토스트 메시지 비활성화
