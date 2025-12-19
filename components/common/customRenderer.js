@@ -82,6 +82,52 @@ export class TTMTreeRenderer {
                     // Update node name position
                     const nodeNameElement = d3.select(this).select('.node-name');
                     nodeNameElement.attr('x', typeTagStartX + rectWidth + 5);
+                    const nodeNameGroup = d3.select(this).select('.node-name-group')
+                    
+                    // 제목 노드 요소에 foreignObject 영역 추가
+                    const foriegnObject = nodeNameGroup.append('foreignObject')
+                    .attr('width', 205)
+                    .attr('height', 30)
+                    .attr('x', 100)
+                    .attr('y', -12)
+                    .style('display', 'none')
+                    .attr('class', 'node-name-input-group')
+                    .attr('transform', `translate(${typeTagStartX - 25}, 0)`);
+            
+                    // 제목명 수정 input 노드 추가
+                    foriegnObject.append('xhtml:input')
+                    .attr('type', 'text')
+                    .attr('class', 'node-name-input')
+                    .style('width', '100%')
+                    .style('height', '100%')
+                    .on('blur', function(event, d) {
+                        // 포커스 아웃 시 텍스트로 복원
+                        const newValue = this.value.trim();
+                        if (newValue && newValue !== d.data.name) {
+                            d.data.name = newValue;
+                            // 트리 업데이트
+                            useMyTreeInstanceStore().nodeUpdate(d, this.containerId);
+                        }
+
+                        // foreignObject 숨기고 text 노출 처리
+                        d3.select(this.closest('foreignObject'))
+                            .style('display', 'none');
+                        d3.select(this.closest('.node-name-group'))
+                            .select('.node-name')
+                            .style('display', 'block')
+                            .text(d => d.data.name);
+                    })
+                    .on('keydown', function(event) {
+                        if (event.key === 'Enter') {
+                            this.blur(); // Enter 키로 포커스 아웃 처리
+                        } else if (event.key === 'Escape') {
+                            // Escape 키로 취소
+                            const nodeData = d3.select(this).datum();
+                            this.value = nodeData.data.name;
+                            this.blur();
+                        }
+                        event.stopPropagation();
+                    });
                 }
             });
         } else {
@@ -385,7 +431,11 @@ export class TTMTreeRenderer {
      * @param {Selection} nodeContent - Node content group
      */
     createNodeName(nodeContent) {
-        nodeContent.append('text')
+        const nodeGroup = nodeContent.append('g')
+        .attr('class', 'node-name-group')
+        
+        // 체계 제목명 일반 텍스트 노드
+        const textNode = nodeGroup.append('text')
             .attr('class', 'node-name')
             .attr('x', 100) // Temporary, will be adjusted
             .attr('y', 7)
@@ -854,23 +904,20 @@ export class TTMTreeRenderer {
     toggleEditTooltip(event, node) {
         event.stopPropagation();
 
+        // 활성화 툴팁 중복 제거 호출 함수
+        const removeTooltip = () => this.removeEditTooltip();
+        if (removeTooltip()) return;
+
+        // 클릭한 노드 그룹 selection 노드 요소 조회
         const nodeElement = this.getNodeElement(node);
-        const duplicateTooltip = d3.select('.edit-tooltip')
-        const duplicateMenuList = d3.selectAll('.edit-menu-item');
-        const duplicateMenuListBg = d3.selectAll('.edit-menu-item-bg');
+
+        // 현재 툴팁 메뉴의 메뉴 아이템 클릭 이벤트 분기 처리
+        const handleNodeNameInput = () => {
+            this.handleNodeNameInput(nodeElement, node);
+        }
 
         // 현재 토글 버튼 클릭한 노드 부모 좌표 마우스 위치 추출
         const [x, y] = d3.pointer(event, nodeElement.parentElement);
-
-        // 생성된 툴팁이 이미 존재하는데 재클릭한 경우, 제거 후 종료
-        if (duplicateTooltip.node() !== null
-            || duplicateMenuList.nodes().length > 0
-            || duplicateMenuListBg.nodes().length > 0) {
-            duplicateTooltip.node().remove();
-            duplicateMenuList.nodes().forEach(node => node.remove());
-            duplicateMenuListBg.nodes().forEach(node => node.remove());
-            return;
-        }
 
         // 설정 툴팁 배경 요소 추가
         d3.select(nodeElement.parentElement).append('rect')
@@ -881,11 +928,76 @@ export class TTMTreeRenderer {
         .attr('rx', 5)
         .attr('ry', 5)
 
-        // 각 유형별 설정 메뉴 목록
+        // 각 교육체계 유형별 수정 메뉴 목록
         const settingMenuList = {
-            "COURSE": [ '교과목그룹 생성', '교과목 생성', '항목명 수정', '삭제'],
-            "LESSON": [ '교과목 생성', '학습목표 생성', '항목명 수정', '삭제'],
-            "LEARNING_OBJECT": [ '학습목표 생성', '항목명 수정', '삭제'],
+            "COURSE": [ 
+                {
+                    icon: 'add',
+                    name: '교과목그룹 생성'
+                },
+                {
+                    icon: 'add',
+                    name: '교과목 생성'
+                },
+                {
+                    icon: 'write',
+                    name: '항목명 수정'
+                }
+            ],
+            "LESSON_GROUP": [
+                {
+                    icon: 'add',
+                    name: '교과목그룹 생성'
+                },
+                {
+                    icon: 'add',
+                    name: '교과목 생성'
+                },
+                {
+                    icon: 'write',
+                    name: '항목명 수정'
+                },
+                {
+                    icon: 'delete',
+                    name: '삭제'
+                }
+            ],
+            "LESSON": [
+                {
+                    icon: 'add',
+                    name: '교과목 생성'
+                },
+                {
+                    icon: 'add',
+                    name: '학습목표 생성'
+                },
+                {
+                    icon: 'write',
+                    name: '항목명 수정'
+                },
+                {
+                    icon: 'delete',
+                    name: '삭제'
+                }
+            ],
+            "LEARNING_OBJECT": [
+                {
+                    icon: 'add',
+                    name: '학습목표 생성'
+                },
+                {
+                    icon: 'add',
+                    name: '세부학습목표 생성'
+                },
+                {
+                    icon: 'write',
+                    name: '항목명 수정'
+                },
+                {
+                    icon: 'delete',
+                    name: '삭제'
+                }
+            ],
         }
 
         // 설정 메뉴 목록 배경 그룹
@@ -893,23 +1005,22 @@ export class TTMTreeRenderer {
         .append('g')
         .attr('transform', `translate(200, ${30 + y})`);
 
-        const menuIcon = tooltipMenuGroupBg.append('svg')
-        .attr('width', 50)
-        .attr('height', 50)
-        .attr('viewBox', '1 0 50 51')
-        .attr('cursor', 'pointer');
-
         // 설정 메뉴 목록 텍스트 그룹
         const menuListGroup = d3.select(nodeElement.parentElement)
         .append('g')
         .attr('class', 'edit-menu')
         .attr('transform', `translate(220, ${37 + y})`)
 
-        const bgRect = [];
+        // 2025.12.19[mhlim]: 마우스 호버 이벤트 연동을 위한 메뉴 아이템 요소 배열
+        const bgRects = []; // 메뉴 아이템 배경
+        const textRects = []; // 메뉴 아이템 텍스트
+        const svgRects = []; // 메뉴 아이템 아이콘
 
-        // 메뉴 목록 배경 요소 추가 및 hover 이벤트 부여
-        settingMenuList.COURSE.forEach((menu, i) => {
-            bgRect.push(
+        const container = this.containerId;
+        // 2025.12.19[mhlim]: 메뉴 목록 배경 요소 추가 및 hover 이벤트 부여
+        settingMenuList[node.data.type].forEach((menu, i) => {
+            // 각 메뉴 배경 노드 생성 및 저장
+            bgRects.push(
                 tooltipMenuGroupBg.append('rect')
                 .attr('x', 0)
                 .attr('y', (i * 30))
@@ -917,28 +1028,300 @@ export class TTMTreeRenderer {
                 .attr('height', 32)
                 .attr('fill', 'transparent')
                 .attr('class', 'edit-menu-item-bg')
-                .on('mouseenter', function() {
-                    d3.select(this).attr('fill', '#F2FDFB');
+                .attr('cursor', 'pointer')
+                .data(node)
+            );
+
+            // ---- 각 메뉴 아이콘 유형에 따른 동적 아이콘 노드 추가 및 저장 ----
+            if (menu.icon === 'add') {
+                // 추가 버튼 아이콘 그룹 path 도형 목록
+                const pathList = [
+                    'M43.4928 14.7525C43.4928 10.5306 40.0703 7.10813 35.8484 7.10812H14.5142C10.2924 7.10815 6.86987 10.5306 6.86984 14.7525V35.2343C6.86984 39.4562 10.2923 42.8786 14.5142 42.8787H35.8484C40.0703 42.8787 43.4928 39.4562 43.4928 35.2343V14.7525ZM46.848 35.2343C46.848 41.3092 41.9233 46.2338 35.8484 46.2339H14.5142C8.43933 46.2338 3.51465 41.3092 3.51465 35.2343V14.7525C3.51468 8.67763 8.43935 3.75296 14.5142 3.75293H35.8484C41.9233 3.75294 46.8479 8.67762 46.848 14.7525V35.2343Z',
+                    'M23.5037 33.8367V16.16C23.5037 15.2335 24.2548 14.4824 25.1813 14.4824C26.1078 14.4824 26.8589 15.2335 26.8589 16.16V33.8367C26.8583 34.7628 26.1074 35.5143 25.1813 35.5143C24.2551 35.5143 23.5042 34.7628 23.5037 33.8367Z',
+                    'M34.0201 23.3203L34.3586 23.3536C35.1224 23.5105 35.6977 24.1877 35.6977 24.9979C35.6977 25.8082 35.1224 26.4853 34.3586 26.6423L34.0201 26.6755H16.3434C15.4169 26.6755 14.6658 25.9244 14.6658 24.9979C14.6658 24.0714 15.4169 23.3203 16.3434 23.3203H34.0201Z'
+                ];
+            
+                const menuIcon = tooltipMenuGroupBg.append('svg')
+                .attr('width', 16)
+                .attr('height', 16)
+                .attr('x', 16)
+                .attr('y', 7 + (i * 30))
+                .attr('class', 'edit-menu-item-icon')
+                .attr('viewBox', '1 0 50 51')
+                .attr('cursor', 'pointer');
+            
+                const menuIconGroup = menuIcon.append('g')
+                .attr('clip-path', 'url(#clip0)')
+
+                pathList.forEach(path => {
+                    menuIconGroup.append('path')
+                    .attr('d', path)
+                    .attr('fill', "#333")
                 })
-                .on('mouseleave', function() {
-                    d3.select(this).attr('fill', 'transparent');
+            
+                menuIcon.append('defs')
+                .append('clipPath')
+                .attr('id', 'clip0')
+                .append('rect')
+                .attr('width', '50')
+                .attr('height', '50')
+                .attr('fill', 'white')
+                .attr('transform', 'translate(3.52075 3.75879');
+            
+                svgRects.push(
+                    menuIcon
+                );
+            } else if (menu.icon === 'write') {
+                const pathList = [
+                    'M12.008 3.2459C13.0029 1.88981 14.9046 1.5965 16.2609 2.58477L16.2619 2.58575L18.4582 4.19219L18.5822 4.2879C19.8329 5.30039 20.0846 7.13337 19.1193 8.44903L17.5275 10.6287C17.2808 10.9667 16.807 11.0413 16.4689 10.7947C16.1309 10.5479 16.0571 10.0732 16.3039 9.73516L17.8967 7.55352L17.8976 7.55254C18.3965 6.87258 18.2461 5.91387 17.5656 5.41778L17.5637 5.4168L15.3683 3.80938C14.6865 3.31267 13.731 3.46036 13.2307 4.14239L11.6389 6.32208C11.392 6.66015 10.9174 6.73393 10.5793 6.48711C10.2416 6.24024 10.1676 5.76645 10.4142 5.42852L12.007 3.24688L12.008 3.2459Z',
+                    'M10.3208 5.54122C10.578 5.25757 11.0128 5.20822 11.3286 5.43868L17.2232 9.7463C17.3859 9.86527 17.4944 10.0441 17.5249 10.2434C17.5554 10.4425 17.5059 10.6457 17.3863 10.8078L11.4351 18.8684C11.1866 19.205 10.7122 19.2768 10.3755 19.0285C10.0388 18.7799 9.96681 18.3047 10.2154 17.968L15.7134 10.5197L11.0435 7.10762L5.54154 14.5666C5.29303 14.9034 4.81782 14.9753 4.48099 14.7268C4.14418 14.4782 4.07233 14.003 4.32083 13.6662L10.272 5.60079L10.3208 5.54122Z',
+                    'M4.91237 13.3587C5.33081 13.3479 5.67892 13.6785 5.68971 14.0969L5.81276 18.9133L10.6389 17.6838C11.0445 17.5805 11.4573 17.8252 11.5608 18.2307C11.6642 18.6363 11.4186 19.0492 11.013 19.1526L5.26783 20.6174C5.04453 20.6744 4.80713 20.6265 4.6233 20.4876C4.43951 20.3485 4.32855 20.133 4.32252 19.9026L4.17408 14.136C4.16331 13.7176 4.49393 13.3694 4.91237 13.3587Z',
+                    'M19.624 22.4844C20.0426 22.4844 20.3818 22.8236 20.3818 23.2422C20.3818 23.6608 20.0426 24 19.624 24H4.75781C4.33923 24 4 23.6608 4 23.2422C4 22.8236 4.33923 22.4844 4.75781 22.4844H19.624Z'
+                ];
+            
+                const menuIcon = tooltipMenuGroupBg.append('svg')
+                .attr('width', 16)
+                .attr('height', 16)
+                .attr('x', 16)
+                .attr('y', 7 + (i * 30))
+                .attr('class', 'edit-menu-item-icon')
+                .attr('viewBox', '0 0 24 25')
+                .attr('cursor', 'pointer');
+            
+                const menuIconGroup = menuIcon.append('g')
+                .attr('clip-path', 'url(#clip0_1_1807)')
+
+                pathList.forEach(path => {
+                    menuIconGroup.append('path')
+                    .attr('d', path)
+                    .attr('fill', "#333")
                 })
+            
+                menuIcon.append('defs')
+                .append('clipPath')
+                .attr('id', 'clip0_1_1807')
+                .append('rect')
+                .attr('width', '16.3822')
+                .attr('height', '22')
+                .attr('fill', 'white')
+                .attr('transform', 'translate(4 2)');
+
+                svgRects.push(
+                    menuIcon
+                );
+            } else {
+                const pathList = [
+                    'M30.0859 12.0384V10.3099C30.0856 9.12407 29.1233 8.16146 27.9374 8.16146H22.065C20.8794 8.16175 19.9169 9.12424 19.9166 10.3099V11.9798C19.9166 12.9003 19.1704 13.6465 18.2499 13.6465C17.3295 13.6465 16.5833 12.9003 16.5833 11.9798V10.3099C16.5835 7.28329 19.0384 4.82841 22.065 4.82812H27.9374C30.9643 4.82812 33.4189 7.28312 33.4192 10.3099V12.0384C33.4192 12.9589 32.673 13.7051 31.7525 13.7051C30.8326 13.7044 30.0859 12.9585 30.0859 12.0384Z',
+                    'M47.0125 10.8799L47.3478 10.9124C48.1073 11.0679 48.6792 11.7411 48.6792 12.5465C48.6792 13.352 48.1073 14.0252 47.3478 14.1807L47.0125 14.2132H2.97282C2.05234 14.2132 1.30615 13.467 1.30615 12.5465C1.30615 11.6261 2.05234 10.8799 2.97282 10.8799H47.0125Z',
+                    'M18.9385 34.9056V23.737C18.9385 22.8165 19.6847 22.0703 20.6051 22.0703C21.5256 22.0703 22.2718 22.8165 22.2718 23.737V34.9056L22.2393 35.2409C22.0842 36.0008 21.4109 36.5723 20.6051 36.5723C19.7994 36.5723 19.1261 36.0008 18.971 35.2409L18.9385 34.9056Z',
+                    'M27.7222 34.9056V23.737C27.7222 22.8165 28.4684 22.0703 29.3888 22.0703C30.3093 22.0703 31.0555 22.8165 31.0555 23.737V34.9056L31.0229 35.2409C30.8679 36.0008 30.1946 36.5723 29.3888 36.5723C28.5831 36.5723 27.9098 36.0008 27.7547 35.2409L27.7222 34.9056Z',
+                    'M43.3423 12.3657C44.2529 12.5002 44.883 13.3496 44.7485 14.2602L40.8618 40.5721C40.2636 44.65 36.472 47.915 32.3592 47.9158H17.6424C13.529 47.9158 9.73483 44.6505 9.13656 40.5721L5.24984 14.2602L5.23682 13.9217C5.27991 13.1481 5.85977 12.4835 6.65609 12.3657C7.45317 12.248 8.20157 12.7173 8.46598 13.4464L8.55062 13.7719L12.4341 40.0838V40.0871L12.5252 40.5395C13.0907 42.7749 15.3328 44.5825 17.6424 44.5825H32.3592C34.8223 44.5816 37.2073 42.5251 37.5643 40.0871V40.0838L41.451 13.7719L41.5324 13.4464C41.7966 12.7173 42.5453 12.2483 43.3423 12.3657Z'
+                ]
+            
+                const menuIcon = tooltipMenuGroupBg.append('svg')
+                .attr('width', 16)
+                .attr('height', 16)
+                .attr('x', 16)
+                .attr('y', 7 + (i * 30))
+                .attr('class', 'edit-menu-item-icon')
+                .attr('viewBox', '0 0 50 50')
+                .attr('cursor', 'pointer');
+            
+                const menuIconGroup = menuIcon.append('g')
+                .attr('clip-path', 'url(#clip0_351_8734)')
+
+                pathList.forEach(path => {
+                    menuIconGroup.append('path')
+                    .attr('d', path)
+                    .attr('fill', "#333")
+                })
+            
+                menuIcon.append('defs')
+                .append('clipPath')
+                .attr('id', 'clip0_351_8734')
+                .append('rect')
+                .attr('width', '50')
+                .attr('height', '50')
+                .attr('fill', 'white')
+                .attr('transform', 'translate(3.52075 3.75879)');
+
+                svgRects.push(
+                    menuIcon
+                );
+            }
+
+            // 각 메뉴 텍스트 노드 생성 및 저장
+            textRects.push(
+                menuListGroup.append('text')
+                .text(menu.name)
+                .attr('class', 'edit-menu-item')
+                .attr('x', 20)
+                .attr('y', 15 + (i * 30))
             );
         });
 
-        // 메뉴 목록 텍스트 요소 추가 및 hover 시, 배경 색상 변경 이벤트 부여
-        settingMenuList.COURSE.forEach((menu, i) => {
-            menuListGroup.append('text')
-            .text(menu)
-            .attr('class', 'edit-menu-item')
-            .attr('x', 20)
-            .attr('y', 15 + (i * 30))
-            .on('mouseenter', function() {
-                bgRect[i].attr('fill', '#F2FDFB');
+        // 2025.12.19[mhlim]: 마우스 호버 이벤트 연동
+        bgRects.forEach((bgRect, i) => {
+            bgRect.on('mouseenter', function() {
+                d3.select(this).attr('fill', '#F2FDFB');
+                textRects[i].style('fill', '#105E51');
+                svgRects[i].selectAll('path')
+                .attr('fill', '#105E51');
             })
-            .on('mouseleave', function() {
-                bgRect[i].attr('fill', 'transparent');
+            bgRect.on('mouseleave', function() {
+                d3.select(this).attr('fill', 'transparent');
+                textRects[i].style('fill', '#000');
+                svgRects[i].selectAll('path').attr('fill', '#333');
+            })
+            bgRect.on('click', function(e, d) {
+                // 2025.12.19[mhlim]: 현재 과정 그룹 노드의 교과목그룹 생성 메뉴 클릭
+                // -> 해당 과정 교과목 뎁스의 1번째 교과목 복제
+                if (textRects[i].node().textContent === '교과목그룹 생성') {
+                    // 교과목 그룹 노드 데이터 복제 함수
+                    const cloneNodeData = (nodeData) => {
+                        return {
+                            ...nodeData,
+                            id: `${nodeData.id}_clone_${Date.now()}`,
+                            name: '복사본', // 또는 원하는 이름
+                        };
+                    };
+            
+                    let newNode = null;
+            
+                    // 클릭한 교육과정의 교과목 뎁스가 펼쳐진 경우
+                    if (d.children && d.children.length > 0) {
+                        // 🔥 수정: 첫 번째 노드 데이터를 복사해서 새 노드 생성
+                        const firstChildData = d.children[0].data;
+                        const clonedData = cloneNodeData(firstChildData);
+                        
+                        // 새 노드 생성 (d3.hierarchy 구조)
+                        newNode = {
+                            data: clonedData,
+                            children: d.children[0].children ? d.children[0].children.map(child => {
+                                const cloned = { ...child };
+                                cloned.parent = null; // 나중에 설정
+                                return cloned;
+                            }) : null,
+                            _children: d.children[0]._children ? d.children[0]._children.map(child => {
+                                const cloned = { ...child };
+                                cloned.parent = null;
+                                return cloned;
+                            }) : null,
+                            depth: d.children[0].depth,
+                            parent: d
+                        };
+                        
+                        d.children.unshift(newNode);
+                    }
+                    // 클릭한 교육과정의 교과목 뎁스가 닫힌 경우
+                    else if (d._children && d._children.length > 0) {
+                        // 🔥 수정: 첫 번째 노드 데이터를 복사해서 새 노드 생성
+                        const firstChildData = d._children[0].data;
+                        const clonedData = cloneNodeData(firstChildData);
+                        
+                        newNode = {
+                            data: clonedData,
+                            children: [],
+                            _children: [],
+                            depth: d._children[0].depth,
+                            parent: d._children[0].parent
+                        };
+                        
+                        d._children.unshift(newNode);
+                        
+                        // 펼침 활성화
+                        d.children = [...d._children];
+                    }
+                    
+                    // 🔥 추가: 트리 구조 재계산 (d3.hierarchy 재생성)
+                    // 또는 그냥 루트 노드로 업데이트
+                    useMyTreeInstanceStore().nodeUpdate(d, 'edu-tree');
+
+                    removeTooltip();
+                }
+                if (textRects[i].node().textContent === '항목명 수정') {
+                    handleNodeNameInput();
+                }
             })
         });
+
+        textRects.forEach((textRect, i) => {
+            textRect.on('mouseenter', function() {
+                d3.select(this).style('fill', '#105E51');
+                bgRects[i].attr('fill', '#F2FDFB');
+                svgRects[i].selectAll('path').attr('fill', '#105E51');
+            })
+            textRect.on('mouseleave', function() {
+                d3.select(this).style('fill', '#000');
+                bgRects[i].attr('fill', 'transparent');
+                svgRects[i].selectAll('path').attr('fill', '#333');
+            })
+            textRect.on('click', function() {
+                if (this.textContent === '항목명 수정') {
+                    handleNodeNameInput();
+                }
+            })
+        });
+
+        svgRects.forEach((svgRect, i) => {
+            svgRect.on('mouseenter', function() {
+                d3.select(this).selectAll('path').attr('fill', '#105E51');
+                textRects[i].style('fill', '#105E51');
+                bgRects[i].attr('fill', '#F2FDFB');
+            })
+            svgRect.on('mouseleave', function() {
+                d3.select(this).selectAll('path').attr('fill', '#333');
+                textRects[i].style('fill', '#000');
+                bgRects[i].attr('fill', 'transparent');
+            })
+
+            svgRect.on('click', function() {
+                if (textRects[i].node().textContent === '항목명 수정') {
+                    handleNodeNameInput();
+                }
+            })
+        });
+    }
+
+    // 2025.12.19[mhlim]: 항목명 수정 메뉴 클릭 시,
+    // 항목명 바인딩 및 수정 입력 가능한 input 활성화 함수
+    handleNodeNameInput(nodeElement, node) {
+        // 클릭한 배경 인덱스가 항목명 수정 인덱스인 경우, 
+        // 해당 그룹노드 영역 텍스트 노드 요소 input 활성화
+        const currentNodeInput =  d3.select(nodeElement)
+        .select('.node-name-input-group');
+
+        currentNodeInput.style('display', 'block');
+
+        const currentNodeName = d3.select(nodeElement)
+        .select('.node-name');
+
+        // 현재 활성화된 입력 필드에 툴팁 포함된 그룹노드 항목명 바인딩
+        currentNodeInput.select('.node-name-input')
+        .node().value = node.data.name;
+        currentNodeName.style('display', 'none');
+
+        // 툴팁 비활성화 함수 호출
+        this.removeEditTooltip();
+    }
+
+    removeEditTooltip() {
+        // 중복 생성 방지를 위한 중복 체크 요소 조회
+        // -> 이미 툴팁이 존재하면 제거 후 종료
+        const duplicateEditTooltip = d3.select('.edit-tooltip')
+        const alreadyMenuList = d3.selectAll('.edit-menu-item');
+        const alreadyMenuListBg = d3.selectAll('.edit-menu-item-bg');
+        const alreadySvg = d3.selectAll('.edit-menu-item-icon');
+
+        // 생성된 툴팁이 이미 존재하는데 재클릭한 경우, 제거 후 종료
+        if (duplicateEditTooltip.node() !== null) {
+            duplicateEditTooltip.node().remove();
+            alreadyMenuList.nodes().forEach(node => node.remove());
+            alreadyMenuListBg.nodes().forEach(node => node.remove());
+            alreadySvg.nodes().forEach(node => node.remove());
+            return true;
+        }
+
+        return false;
     }
 }

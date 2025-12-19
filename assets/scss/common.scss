@@ -531,6 +531,16 @@
                         }
                     }
 
+                    .node-name-input {
+                        width: 100%;
+                        height: 100%;
+                        border: 1px solid #D7D7D7;
+                        border-radius: 5px;
+                        padding: 14px;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
                     &.search-selected {
                         .node-bg {
                             stroke: var(--color-error);
@@ -571,7 +581,6 @@
             }
 
             .edit-menu-item {
-                fill: #000;
                 font-weight: 400;
                 font-size: 16px;
                 cursor: pointer;
