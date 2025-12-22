@@ -62,6 +62,10 @@ const componentSelector = {
   'KST': () => import('@/components/ttm/detail-modal/content/job.vue'),
   // 교육체계 상세
   'COURSE': () => import('@/components/ttm/detail-modal/content/edu.vue'),
+  'LESSON_GROUP': () => import('@/components/ttm/detail-modal/content/edu.vue'),
+  'LESSON': () => import('@/components/ttm/detail-modal/content/edu.vue'),
+  'LEARNING_OBJECT': () => import('@/components/ttm/detail-modal/content/edu.vue'),
+  'DETAIL_LEARNING_OBJECT': () => import('@/components/ttm/detail-modal/content/edu.vue'),
 }
 
 const dynamicDetailComponent = computed(() => {

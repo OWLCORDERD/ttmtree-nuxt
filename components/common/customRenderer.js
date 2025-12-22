@@ -79,20 +79,28 @@ export class TTMTreeRenderer {
                     d3.select(this).select('.type-tag')
                     .select('rect').attr('width', rectWidth);
 
+                    const currentDepth = d3.select(this).datum().depth;
                     // Update node name position
                     const nodeNameElement = d3.select(this).select('.node-name');
                     nodeNameElement.attr('x', typeTagStartX + rectWidth + 5);
                     const nodeNameGroup = d3.select(this).select('.node-name-group')
-                    
+
                     // 제목 노드 요소에 foreignObject 영역 추가
                     const foriegnObject = nodeNameGroup.append('foreignObject')
-                    .attr('width', 205)
+                    .attr('width', `calc(205px - (${25 * currentDepth}px))`)
                     .attr('height', 30)
-                    .attr('x', 100)
+                    .attr('x', 0)
                     .attr('y', -12)
                     .style('display', 'none')
                     .attr('class', 'node-name-input-group')
-                    .attr('transform', `translate(${typeTagStartX - 25}, 0)`);
+
+                    // 1뎁스 노드들의 타입 도형 크기 추적에 문제 발생
+                    // -> 항목명 수정 input 노드 위치 조정 예외 처리
+                    if (currentDepth <= 1) {
+                        foriegnObject.attr('transform', `translate(${typeTagStartX + rectWidth + 60}, 0)`);
+                    } else {
+                        foriegnObject.attr('transform', `translate(${typeTagStartX + rectWidth + 5}, 0)`);
+                    }
             
                     // 제목명 수정 input 노드 추가
                     foriegnObject.append('xhtml:input')
@@ -281,9 +289,19 @@ export class TTMTreeRenderer {
 
         // Remove exiting nodes
         node.exit().transition()
-            .duration(this.duration)
             .style('opacity', 0)
             .remove();
+
+        // 2025.12.18[mhlim]:
+        // 과정구성 편집모드 > 토글, 맵핑, 드래그 이벤트 호출 시점
+        if (useMyTreeInstanceStore().$state.currentMode === 'edit') {
+            // 업데이트된 트리 노드 그룹에 대한 드래그 핸들링 요소 및 이벤트 추가
+            this.setupEditModeNodes();
+            // 드래그 버튼 고려한 타입 / 제목 위치 조정
+            this.recalculateTypeTagPositions(true);
+        } else {
+            this.recalculateTypeTagPositions();
+        }
     }
 
     // 2025.12.17[mhlim]: 교욱체계 트리 > 노드 그룹 요소
@@ -291,14 +309,20 @@ export class TTMTreeRenderer {
     setupEditModeNodes() {
         // 전체 트리 그룹 노드 중에서 교육체계 관련 유형 노드 필터링
         const nodeGroup = this.g.selectAll('.node-group').filter((d) => d.data.type === 'COURSE'
-        || d.data.type === 'LESSON' || d.data.type === 'LEARNING_OBJECT');
+        || d.data.type === 'LESSON' || 
+        d.data.type === 'LESSON_GROUP' ||
+         d.data.type === 'LEARNING_OBJECT' || 
+         d.data.type === 'DETAIL_LEARNING_OBJECT');
 
-        if (nodeGroup.nodes().length <= 0) return;
+        if (nodeGroup.empty()) return;
 
         // 2025.12.18[mhlim]: 교육체계 트리의 그룹 노드마다 드래그 드롭 버튼 및 케밥(토글) 요소 생성
         nodeGroup.each(function() {
-            useMyTreeInstanceStore().$state.edu.renderer.createDragDropRenderer(this, nodeGroup);
-            useMyTreeInstanceStore().$state.edu.renderer.createKebobRenderer(this, nodeGroup);
+            const renderer = useMyTreeInstanceStore().$state.edu.renderer;
+            if (!renderer) return;
+
+            renderer.createDragDropRenderer(this, nodeGroup);
+            renderer.createKebobRenderer(this, nodeGroup);
         });
     }
 
@@ -358,7 +382,7 @@ export class TTMTreeRenderer {
             .text(d => `${d.data.type}: ${d.data.name}`);
 
         
-        this.ellipsisNodeName();
+        this.ellipsisNodeName(nodeEnter);
 
         return nodeEnter;
     }
@@ -540,17 +564,6 @@ export class TTMTreeRenderer {
                     return 'M 26 1 L 34 1 L 34 3 L 26 3 Z'; // 마지막 뎁스 
                 }
             });
-
-        // 2025.12.18[mhlim]:
-        // 과정구성 편집모드 > 토글, 맵핑, 드래그 이벤트 호출 시점
-        if (useMyTreeInstanceStore().$state.currentMode === 'edit') {
-            // 업데이트된 트리 노드 그룹에 대한 드래그 핸들링 요소 및 이벤트 추가
-            this.setupEditModeNodes();
-            // 드래그 버튼 고려한 타입 / 제목 위치 조정
-            this.recalculateTypeTagPositions(true);
-        } else {
-            this.recalculateTypeTagPositions();
-        }
     }
 
     /**
@@ -645,22 +658,46 @@ export class TTMTreeRenderer {
         }, this.duration + 50)
     }
     
-    // 2025.12.03[mhlim]: 노드 제목 말줄임 처리
+    // 2025.12.22[mhlim]: 체계 유형 항목 뎁스별 노드 제목 말줄임 처리
     ellipsisNodeName() {
-        // 노드명 요소 전체 조회
-        const title = document.querySelectorAll('.node-name');
+        // 항목명 d3 selection 전체 조회
+        const nameSelection = d3.selectAll('.node-name');
 
-        // 25자 제한
-        const maxLength = 16;
+        // 최대 제목 텍스트 길이 (말줄임 시작점)
+        let maxLength = null;
 
-        // 각 노드명 요소 텍스트 말줄임 처리
-        title.forEach((item) => {
-            const text = item.textContent;
+        if (nameSelection.empty()) return;
 
-            // 텍스트 길이가 25자 이상인 경우 말줄임 처리
+        // 각 항목명 뎁스 값에 따른 최대 길이 설정 및 말줄임 처리
+        nameSelection.each(function() {
+            // 각 항목명 셀렉션 조회 
+            const item = d3.select(this);
+            // 항목명 뎁스 값 조회
+            const currentDepth = item.datum().depth;
+
+            // 항목명 뎁스 값에 따른 최대 길이 설정
+            switch(currentDepth) {
+                case 1:
+                    maxLength = 18;
+                    break;
+                case 2:
+                    maxLength = 16;
+                    break;
+                case 3:
+                    maxLength = 12;
+                    break;
+                case 4:
+                    maxLength = 8;
+                    break;
+            }
+
+            // 항목명 텍스트 조회
+            const text = item.node().textContent;
+
+            // 항목명마다 텍스트 길이가 최대 길이 이상인 경우 말줄임 처리
             if (text.length > maxLength) {
                 const ellipsisTxt = text.substring(0, maxLength - 2) + '...';
-                item.textContent = ellipsisTxt;
+                item.node().textContent = ellipsisTxt;
             }
         })
     }
@@ -670,9 +707,13 @@ export class TTMTreeRenderer {
     * @param {Selection} nodeGroup - Node group selection
     **/
     createKebobRenderer(node, nodeGroup) {
+        d3.select(node).selectAll('.tooltip-btn').remove();
+
+        if (d3.select(node).datum().data.type === 'DETAIL_LEARNING_OBJECT') return;
+        
         // 2025.12.18[mhlim]: 교과목, 학습목표, 교육과정 유형에 따른 케밥(토글) 버튼 추가
         const toggleGroup = d3.select(node).append('g')
-        .attr('class', 'toggle-btn')
+        .attr('class', 'tooltip-btn')
         .attr('transform', 'translate(350, -5)')
         .on('click', (event, d) => {
             this.toggleEditTooltip(event, d);
@@ -737,6 +778,8 @@ export class TTMTreeRenderer {
         d3.select(currentNode).select('.node-bg')
         .attr('width', 'calc(100% - 20px)')
         .attr('x', 0);
+
+        d3.select(currentNode).selectAll('.drag-handle-btn').remove();
         
         // 드래그 핸들링 버튼 추가
         const dragHandleGroup = d3.select(currentNode).append('g')
@@ -1003,6 +1046,7 @@ export class TTMTreeRenderer {
         // 설정 메뉴 목록 배경 그룹
         const tooltipMenuGroupBg = d3.select(nodeElement.parentElement)
         .append('g')
+        .attr('class', 'edit-menu-group')
         .attr('transform', `translate(200, ${30 + y})`);
 
         // 설정 메뉴 목록 텍스트 그룹
@@ -1016,7 +1060,6 @@ export class TTMTreeRenderer {
         const textRects = []; // 메뉴 아이템 텍스트
         const svgRects = []; // 메뉴 아이템 아이콘
 
-        const container = this.containerId;
         // 2025.12.19[mhlim]: 메뉴 목록 배경 요소 추가 및 hover 이벤트 부여
         settingMenuList[node.data.type].forEach((menu, i) => {
             // 각 메뉴 배경 노드 생성 및 저장
@@ -1029,7 +1072,7 @@ export class TTMTreeRenderer {
                 .attr('fill', 'transparent')
                 .attr('class', 'edit-menu-item-bg')
                 .attr('cursor', 'pointer')
-                .data(node)
+                .datum(node)
             );
 
             // ---- 각 메뉴 아이콘 유형에 따른 동적 아이콘 노드 추가 및 저장 ----
@@ -1173,74 +1216,29 @@ export class TTMTreeRenderer {
                 textRects[i].style('fill', '#000');
                 svgRects[i].selectAll('path').attr('fill', '#333');
             })
-            bgRect.on('click', function(e, d) {
+            bgRect.on('click', function(e) {
+                const d = node;
                 // 2025.12.19[mhlim]: 현재 과정 그룹 노드의 교과목그룹 생성 메뉴 클릭
                 // -> 해당 과정 교과목 뎁스의 1번째 교과목 복제
-                if (textRects[i].node().textContent === '교과목그룹 생성') {
-                    // 교과목 그룹 노드 데이터 복제 함수
-                    const cloneNodeData = (nodeData) => {
-                        return {
-                            ...nodeData,
-                            id: `${nodeData.id}_clone_${Date.now()}`,
-                            name: '복사본', // 또는 원하는 이름
-                        };
-                    };
-            
-                    let newNode = null;
-            
-                    // 클릭한 교육과정의 교과목 뎁스가 펼쳐진 경우
-                    if (d.children && d.children.length > 0) {
-                        // 🔥 수정: 첫 번째 노드 데이터를 복사해서 새 노드 생성
-                        const firstChildData = d.children[0].data;
-                        const clonedData = cloneNodeData(firstChildData);
-                        
-                        // 새 노드 생성 (d3.hierarchy 구조)
-                        newNode = {
-                            data: clonedData,
-                            children: d.children[0].children ? d.children[0].children.map(child => {
-                                const cloned = { ...child };
-                                cloned.parent = null; // 나중에 설정
-                                return cloned;
-                            }) : null,
-                            _children: d.children[0]._children ? d.children[0]._children.map(child => {
-                                const cloned = { ...child };
-                                cloned.parent = null;
-                                return cloned;
-                            }) : null,
-                            depth: d.children[0].depth,
-                            parent: d
-                        };
-                        
-                        d.children.unshift(newNode);
-                    }
-                    // 클릭한 교육과정의 교과목 뎁스가 닫힌 경우
-                    else if (d._children && d._children.length > 0) {
-                        // 🔥 수정: 첫 번째 노드 데이터를 복사해서 새 노드 생성
-                        const firstChildData = d._children[0].data;
-                        const clonedData = cloneNodeData(firstChildData);
-                        
-                        newNode = {
-                            data: clonedData,
-                            children: [],
-                            _children: [],
-                            depth: d._children[0].depth,
-                            parent: d._children[0].parent
-                        };
-                        
-                        d._children.unshift(newNode);
-                        
-                        // 펼침 활성화
-                        d.children = [...d._children];
-                    }
-                    
-                    // 🔥 추가: 트리 구조 재계산 (d3.hierarchy 재생성)
-                    // 또는 그냥 루트 노드로 업데이트
-                    useMyTreeInstanceStore().nodeUpdate(d, 'edu-tree');
-
-                    removeTooltip();
-                }
-                if (textRects[i].node().textContent === '항목명 수정') {
-                    handleNodeNameInput();
+                switch (textRects[i].node().textContent) {
+                    case '교과목그룹 생성':
+                        createNewLabelType(d, 'LESSON_GROUP');
+                        break;
+                    case '교과목 생성':
+                        createNewLabelType(d, 'LESSON');
+                        break;
+                    case '학습목표 생성':
+                        createNewLabelType(d, 'LEARNING_OBJECT');
+                        break;
+                    case '세부학습목표 생성':
+                        createNewLabelType(d, 'DETAIL_LEARNING_OBJECT');
+                        break;
+                    case '항목명 수정':
+                        handleNodeNameInput();
+                        break;
+                    case '삭제':
+                        deleteCurrentNode(node);
+                        break;
                 }
             })
         });
@@ -1257,8 +1255,28 @@ export class TTMTreeRenderer {
                 svgRects[i].selectAll('path').attr('fill', '#333');
             })
             textRect.on('click', function() {
-                if (this.textContent === '항목명 수정') {
-                    handleNodeNameInput();
+                const d = node;
+                // 2025.12.19[mhlim]: 현재 과정 그룹 노드의 교과목그룹 생성 메뉴 클릭
+                // -> 해당 과정 교과목 뎁스의 1번째 교과목 복제
+                switch (textRects[i].node().textContent) {
+                    case '교과목그룹 생성':
+                        createNewLabelType(d, 'LESSON_GROUP');
+                        break;
+                    case '교과목 생성':
+                        createNewLabelType(d, 'LESSON');
+                        break;
+                    case '학습목표 생성':
+                        createNewLabelType(d, 'LEARNING_OBJECT');
+                        break;
+                    case '세부학습목표 생성':
+                        createNewLabelType(d, 'DETAIL_LEARNING_OBJECT');
+                        break;
+                    case '항목명 수정':
+                        handleNodeNameInput();
+                        break;
+                    case '삭제':
+                        deleteCurrentNode(node);
+                        break;
                 }
             })
         });
@@ -1276,11 +1294,161 @@ export class TTMTreeRenderer {
             })
 
             svgRect.on('click', function() {
-                if (textRects[i].node().textContent === '항목명 수정') {
-                    handleNodeNameInput();
+                // 2025.12.19[mhlim]: 현재 과정 그룹 노드의 교과목그룹 생성 메뉴 클릭
+                // -> 해당 과정 교과목 뎁스의 1번째 교과목 복제
+                switch (textRects[i].node().textContent) {
+                    case '교과목그룹 생성':
+                        createNewLabelType(node, 'LESSON_GROUP');
+                        break;
+                    case '교과목 생성':
+                        createNewLabelType(node, 'LESSON');
+                        break;
+                    case '학습목표 생성':
+                        createNewLabelType(node, 'LEARNING_OBJECT');
+                        break;
+                    case '세부학습목표 생성':
+                        createNewLabelType(node, 'DETAIL_LEARNING_OBJECT');
+                        break;
+                    case '항목명 수정':
+                        handleNodeNameInput();
+                        break;
+                    case '삭제':
+                        deleteCurrentNode(node);
+                        break;
                 }
             })
         });
+
+        const createNewLabelType = (d, labelType) => { 
+            // 교과목 그룹 노드 데이터 복제 함수
+            const cloneNodeData = (nodeData) => {
+                return {
+                    ...nodeData,
+                    id: nodeData.id + 1,
+                    name: `${this.getTypeDisplayName(labelType, d.data)} 추가본`,
+                    type: labelType,
+                    depth: d.data.type !== labelType ? d.depth + 1: d.depth,
+                };
+            };
+    
+            let newNode = null;
+
+            // 2025.12.22[mhlim]: 현재 추가할 유형 노드가
+            // 클릭한 노드와 동일 뎁스인 경우, 부모 뎁스 기준으로 새 노드 생성
+            if (d.data.type === labelType) {
+                const newChildNode = d.data;
+                const clonedData = cloneNodeData(newChildNode);
+
+                newNode = {
+                    data: clonedData,
+                    children: null,
+                    _children: null,
+                    depth: d.depth, // 현재 노드 뎁스
+                    parent: d.parent,
+                }
+
+                newNode.parent.children = [...newNode.parent.children, newNode];
+
+                // 🔥 추가: 트리 구조 재계산 (d3.hierarchy 재생성)
+                // 또는 그냥 루트 노드로 업데이트
+                useMyTreeInstanceStore().nodeUpdate(d, 'edu-tree');
+                
+                removeTooltip();
+
+                return;
+            }
+                        
+            // 클릭한 교육과정의 교과목 뎁스가 펼쳐진 경우
+            if (d.children && d.children.length > 0) {
+                // 🔥 수정: 첫 번째 노드 데이터를 복사해서 새 노드 생성
+                const firstChildData = d.children[0].data;
+                const clonedData = cloneNodeData(firstChildData);
+                
+                // 새 노드 생성 (d3.hierarchy 구조)
+                newNode = {
+                    data: clonedData,
+                    children: d.children[0].children ? d.children[0].children.map(child => {
+                        const cloned = { ...child };
+                        cloned.parent = null; // 나중에 설정
+                        return cloned;
+                    }) : null,
+                    _children: d.children[0]._children ? d.children[0]._children.map(child => {
+                        const cloned = { ...child };
+                        cloned.parent = null;
+                        return cloned;
+                    }) : null,
+                    depth: d.children[0].depth,
+                    parent: d
+                };
+                
+                d.children.unshift(newNode);
+            }// 클릭한 교육과정의 교과목 뎁스가 닫힌 경우
+            else if (d._children && d._children.length > 0) {
+                // 🔥 수정: 첫 번째 노드 데이터를 복사해서 새 노드 생성
+                const firstChildData = d._children[0].data;
+                const clonedData = cloneNodeData(firstChildData);
+                
+                newNode = {
+                    data: clonedData,
+                    children: [],
+                    _children: [],
+                    depth: d._children[0].depth,
+                    parent: d._children[0].parent
+                };
+                
+                d._children.unshift(newNode);
+                
+                // 펼침 활성화
+                d.children = [...d._children];
+            } else {
+                const newChildNode = d.data;
+                const clonedData = cloneNodeData(newChildNode);
+
+                newNode = {
+                    data: clonedData,
+                    children: null,
+                    _children: null,
+                    depth: d.data.type !== labelType ? d.depth + 1: d.depth, // 현재 노드 뎁스 + 1
+                    parent: d.data.type !== labelType ? d: d.parent,
+                }
+
+                d.children = [];
+    
+                d.children.push(newNode);
+                d.data.children = d.children;
+            }
+
+            // 🔥 추가: 트리 구조 재계산 (d3.hierarchy 재생성)
+            // 또는 그냥 루트 노드로 업데이트
+            useMyTreeInstanceStore().nodeUpdate(d, 'edu-tree');
+            
+            removeTooltip();
+        };
+
+        // 2025.12.22[mhlim]: 교육체계 트리에서 특정 그룹 노드 삭제 선택 시
+        // -> 전체 노드에서 해당 노드 인덱스 찾아 삭제 처리 후 업데이트
+        const deleteCurrentNode = (currentNode) => {
+            const spliceDeleteNodeIndex = (node) => {
+                if (node.children) {
+                    node.children.forEach((children) => {
+                        if (children.data.id === currentNode.data.id) {
+                            node.children.splice(node.children.indexOf(children), 1);
+                        }
+
+                        if (children.children) {
+                           spliceDeleteNodeIndex(children);
+                        }
+                    })
+                }
+                return node;
+            }
+
+            const deletedRootNode = spliceDeleteNodeIndex(useMyTreeInstanceStore().$state.edu.root);
+            
+            useMyTreeInstanceStore().nodeUpdate(deletedRootNode, 'edu-tree');
+
+            removeTooltip();
+        }
     }
 
     // 2025.12.19[mhlim]: 항목명 수정 메뉴 클릭 시,
@@ -1308,7 +1476,9 @@ export class TTMTreeRenderer {
     removeEditTooltip() {
         // 중복 생성 방지를 위한 중복 체크 요소 조회
         // -> 이미 툴팁이 존재하면 제거 후 종료
-        const duplicateEditTooltip = d3.select('.edit-tooltip')
+        const duplicateEditTooltip = d3.select('.edit-tooltip');
+        const duplicateEditMenuGroup = d3.select('.edit-menu-group');
+        const duplicateEditMenu = d3.select('.edit-menu');
         const alreadyMenuList = d3.selectAll('.edit-menu-item');
         const alreadyMenuListBg = d3.selectAll('.edit-menu-item-bg');
         const alreadySvg = d3.selectAll('.edit-menu-item-icon');
@@ -1316,6 +1486,8 @@ export class TTMTreeRenderer {
         // 생성된 툴팁이 이미 존재하는데 재클릭한 경우, 제거 후 종료
         if (duplicateEditTooltip.node() !== null) {
             duplicateEditTooltip.node().remove();
+            duplicateEditMenu.node().remove();
+            duplicateEditMenuGroup.node().remove();
             alreadyMenuList.nodes().forEach(node => node.remove());
             alreadyMenuListBg.nodes().forEach(node => node.remove());
             alreadySvg.nodes().forEach(node => node.remove());

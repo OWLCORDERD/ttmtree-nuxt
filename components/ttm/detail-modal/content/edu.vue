@@ -2,39 +2,25 @@
   <div class="framework-detail" v-if="currentFrameworkDetail">
     <div class="detail-header">
       <div class="framework-index">
-        <div class="framework-icon job">
-          <TTMOfficeBag />
+        <div class="framework-icon edu">
+          <TTMOpenBook /> 
         </div>
         <h2 class="framework-name">{{ currentFrameworkDetail.name }}</h2>
       </div>
 
       <!-- 역량체계 역량 1뎁스 > 하위 행동지표 수 카운트 표시 -->
       <div class="framework-count">
-        <div class="count-txt" v-if="currentFrameworkDetail.itemType === 'JOB_FAMILY'">
+        <div class="count-txt" v-if="currentFrameworkDetail.itemType === 'COURSE'
+        || currentFrameworkDetail.itemType === 'LESSON_GROUP'">
           <TTMPlates />
           <span class="title">
-            직렬 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
+            교과목 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
           </span>
         </div>
-
-        <div class="count-txt" v-else-if="currentFrameworkDetail.itemType === 'JOB_SERIES'">
+        <div class="count-txt" v-if="currentFrameworkDetail.itemType === 'LESSON'">
           <TTMPlates />
           <span class="title">
-            직무 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
-          </span>
-        </div>
-
-        <div class="count-txt" v-else-if="currentFrameworkDetail.itemType === 'JOB'">
-          <TTMPlates />
-          <span class="title">
-            TASK 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
-          </span>
-        </div>
-
-        <div class="count-txt" v-else-if="currentFrameworkDetail.itemType === 'TASK'">
-          <TTMPlates />
-          <span class="title">
-            K/S/T 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
+            학습목표 수: <strong>{{ currentFrameworkDetail.childrenCount }}</strong>개
           </span>
         </div>
       </div>
@@ -108,8 +94,9 @@
           <span class="mapping-name">{{ item.name }}</span>
         </li>
       </ul>
+    </div>
 
-      <table class="etc-table">
+    <table class="etc-table">
         <tbody>
           <tr class="row">
             <td class="index">최초 등록자</td>
@@ -123,14 +110,17 @@
             <td class="index">최종 수정일</td>
             <td class="cont small">{{ currentFrameworkDetail.lastModifiedDate }}</td>
           </tr>
+          <tr class="row">
+            <td class="index" colspan="1">버전</td>
+            <td class="cont large" colspan="3">{{ currentFrameworkDetail.version }}</td>
+          </tr>
         </tbody>
       </table>
-    </div>
   </div>
 </template>
 
 <script setup>
-import TTMOfficeBag from '@/assets/images/svg/ttm-office-bag.svg';
+import TTMOpenBook from '@/assets/images/svg/ttm-open-book.svg';
 import TTMPlates from '@/assets/images/svg/plates.svg';
 import TTMConnect from '@/assets/images/svg/ttm-connect.svg';
 import arrowRight from '@/assets/images/svg/chevron-right.svg';
@@ -156,38 +146,28 @@ const frameworkList = [
 const frameworkItemTypeList = [
   {
     id: 1,
-    name: '직계',
-    value: 'JOB_FAMILY',
+    name: '교육과정',
+    value: 'COURSE',
   },
   {
     id: 2,
-    name: '직렬',
-    value: 'JOB_SERIES',
+    name: '교과목그룹',
+    value: 'LESSON_GROUP',
   },
   {
     id: 3,
-    name: '직무',
-    value: 'JOB',
+    name: '교과목',
+    value: 'LESSON',
   },
   {
     id: 4,
-    name: 'Task',
-    value: 'TASK',
+    name: '학습목표',
+    value: 'LEARNING_OBJECT',
   },
   {
     id: 5,
-    name: 'K',
-    value: 'KST-K',
-  },
-  {
-    id: 6,
-    name: 'S',
-    value: 'KST-S',
-  },
-  {
-    id: 7,
-    name: 'T',
-    value: 'KST-T',
+    name: '세부학습목표',
+    value: 'DETAIL_LEARNING_OBJECT',
   },
 ]
 
@@ -195,45 +175,39 @@ const detailModalStore = useMyDetailModalStore();
 
 const currentFrameworkDetail = computed(() => {
   // 현재 클릭 노드의 체계 카테고리가 직무체계 or 교육체계도 아닌 경우
-  if (detailModalStore.$state.frameworkType !== 'JOB_FAMILY'
-  && detailModalStore.$state.frameworkType !== 'JOB_SERIES'
-  && detailModalStore.$state.frameworkType !== 'JOB'
-  && detailModalStore.$state.frameworkType !== 'TASK'
-  && detailModalStore.$state.frameworkType !== 'KST'
+  if (detailModalStore.$state.frameworkType !== 'COURSE'
+  && detailModalStore.$state.frameworkType !== 'LESSON_GROUP'
+  && detailModalStore.$state.frameworkType !== 'LESSON'
+  && detailModalStore.$state.frameworkType !== 'LEARNING_OBJECT'
+  && detailModalStore.$state.frameworkType !== 'DETAIL_LEARNING_OBJECT'
   ) {
     return null;
   }
 
   const currentDetail = detailModalStore.$state.currentDetail;
 
-  // K/S/T 아이템 타입 식별자 분리
-  if (detailModalStore.$state.frameworkType === 'KST') {
-    return {
-      ...currentDetail,
-      mappedItems: currentDetail.mappedLearningObjects,
-      itemType: 'KST-' + currentDetail.kstType,
-    }
-  }
-
   // TASK 맵핑 목록 > 행동지표 / 과정 두개의 맵핑 목록 병합
-  if (detailModalStore.$state.frameworkType === 'TASK') {
+  if (currentDetail.mappedCompetencies || 
+  currentDetail.mappedTasks ||
+  currentDetail.mappedKsts) {
     const newArray = [];
-    const newChildrenCount = currentDetail.importance + currentDetail.difficulty + currentDetail.frequency;
 
-    // 맵핑 교육과정 목록 저장
-    if (currentDetail.mappedCourses) {
-      newArray.push(...currentDetail.mappedCourses);
+    // 맵핑 역량 목록 저장
+    if (currentDetail.mappedCompetencies) {
+      newArray.push(...currentDetail.mappedCompetencies);
     }
-    // 맵핑 행동역량 목록 저장
-    if (currentDetail.mappedBehavioralIndicators) {
-      newArray.push(...currentDetail.mappedBehavioralIndicators);
+    // 맵핑 과정 목록 저장
+    if (currentDetail.mappedTasks) {
+      newArray.push(...currentDetail.mappedTasks);
+    }
+
+    if (currentDetail.mappedKsts) {
+      newArray.push(...currentDetail.mappedKsts);
     }
 
     return {
       ...currentDetail,
       mappedItems: newArray,
-      hasChildren: true,
-      childrenCount: newChildrenCount,
     }
   }
   return {
@@ -243,12 +217,12 @@ const currentFrameworkDetail = computed(() => {
 })
 
 const displayTypeName = (type) => {
-  if (type === 'COURSE') {
-    return '교육과정';
-  } else if (type === 'BEHAVIORAL_INDICATOR') {
-    return '행동지표';
-  } else if (type === 'LEARNING_OBJECT') {
-    return '학습목표';
+  if (type === 'TASK') {
+    return 'Task';
+  } else if (type === 'COMPETENCY') {
+    return '역량';
+  } else if (type === 'KST') {
+    return 'KST';
   }
 }
 
@@ -256,7 +230,3 @@ const handleDetailChange = (event, currentFrameworkDetail, key) => {
   currentFrameworkDetail[key] = event.target.value;
 } 
 </script>
-
-<style>
-
-</style>

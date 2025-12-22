@@ -19,7 +19,10 @@
     props.type === 'KST') {
       return '직무체계';
     } else if (props.type === 'COURSE' ||
-    props.type === 'LEARNING_OBJECT') {
+    props.type === 'LESSON_GROUP' ||
+    props.type === 'LESSON' ||
+    props.type === 'LEARNING_OBJECT' ||
+    props.type === 'DETAIL_LEARNING_OBJECT') {
       return '교육체계';
     } else if (props.type === 'BEHAVIORAL_INDICATOR' || props.type === 'COMPETENCY') {
       return '역량체계';
@@ -57,7 +60,10 @@
 
       // 교육 체계 관련 라벨
       &.COURSE,
-      &.LEARNING_OBJECT {
+      &.LESSON_GROUP,
+      &.LESSON,
+      &.LEARNING_OBJECT,
+      &.DETAIL_LEARNING_OBJECT {
           background: var(--color-edu);
       }
   }
